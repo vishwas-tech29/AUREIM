@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream-primary text-text-primary font-sans;
+  }
+
+  h1 {
+    @apply font-display text-hero font-normal leading-tight;
+  }
+
+  h2 {
+    @apply font-display text-h2 font-light tracking-tight;
+  }
+
+  h3 {
+    @apply font-display text-h3 font-normal;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+  }
+}
+
+@layer components {
+  .btn-luxury {
+    @apply px-8 py-3 text-button font-sans font-medium tracking-wide border border-text-primary text-text-primary bg-transparent transition-all duration-300 ease-out hover:bg-text-primary hover:text-cream-primary hover:scale-[1.02] hover:shadow-luxury active:scale-95;
+  }
+
+  .btn-luxury-gold {
+    @apply px-8 py-3 text-button font-sans font-medium tracking-wide bg-gold text-cocoa-primary border border-gold transition-all duration-300 ease-out hover:shadow-luxury hover:scale-[1.02] active:scale-95;
+  }
+
+  .section-padding {
+    @apply px-6 py-20 md:px-12 md:py-32;
+  }
+
+  .luxury-card {
+    @apply p-8 bg-cream-blush rounded-lg border border-transparent transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-luxury hover:border-gold;
+  }
+
+  .scroll-fade {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3e2723;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2c1810;
+}
