@@ -31,9 +31,9 @@ const Footer = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.5 }}
-        className="section-padding max-w-7xl mx-auto"
+        className="section-padding max-w-7xl w-full mx-auto"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 w-full mb-16">
           {/* Column 1: Brand */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
             <h3 className="font-display text-2xl font-light tracking-wider">AUREIM</h3>
