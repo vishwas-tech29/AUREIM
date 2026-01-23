@@ -34,7 +34,7 @@ const ContactPage = ({ onBack }) => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      details: "hello@aureim.com",
+      details: "aureim.chocolates@gmail.com",
       description: "We'll respond within 24 hours"
     },
     {
@@ -395,7 +395,7 @@ Looking forward to your response!`
                   </a>
                   
                   <a
-                    href="mailto:hello@aureim.com"
+                    href="mailto:aureim.chocolates@gmail.com"
                     className="flex items-center gap-3 p-4 bg-stone-800 rounded-lg hover:bg-stone-700 transition-colors duration-300"
                   >
                     <Mail className="w-5 h-5 text-amber-800" />

@@ -200,7 +200,7 @@ const PaymentProcessing = ({
 
           <div className="mt-8 pt-6 border-t border-stone-800">
             <p className="text-stone-500 text-xs">
-              Need help? Contact us at hello@aureim.com
+              Need help? Contact us at aureim.chocolates@gmail.com
             </p>
           </div>
         </div>

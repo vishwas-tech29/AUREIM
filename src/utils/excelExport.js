@@ -199,19 +199,195 @@ const generateProductSales = (orders) => {
   return Array.from(productMap.values());
 };
 
-// Export single order to Excel
+// Export single order to Excel with packing sheet format
 export const exportSingleOrder = (orderData) => {
-  const wb = createOrdersWorkbook([orderData]);
-  const fileName = `AUREIM_Order_${orderData.orderId}.xlsx`;
+  const wb = XLSX.utils.book_new();
+
+  // Sheet 1: Order Packing Sheet (Main sheet for fulfillment)
+  const packingData = createPackingSheet(orderData);
+  const packingWS = XLSX.utils.json_to_sheet(packingData);
+  
+  // Set column widths for packing sheet
+  const packingColWidths = [
+    { wch: 20 }, // Field
+    { wch: 50 }  // Details
+  ];
+  packingWS['!cols'] = packingColWidths;
+  
+  // Add title row
+  XLSX.utils.sheet_add_aoa(packingWS, [['AUREIM CHOCOLATE - ORDER PACKING SHEET']], { origin: 'A1' });
+  XLSX.utils.sheet_add_aoa(packingWS, [['Order ID:', orderData.orderId]], { origin: 'A2' });
+  XLSX.utils.sheet_add_aoa(packingWS, [['Date:', new Date(orderData.timestamp).toLocaleDateString('en-IN')]], { origin: 'A3' });
+  XLSX.utils.sheet_add_aoa(packingWS, [['Time:', new Date(orderData.timestamp).toLocaleTimeString('en-IN')]], { origin: 'A4' });
+  XLSX.utils.sheet_add_aoa(packingWS, [[''], ['']], { origin: 'A5' }); // Empty rows
+  
+  XLSX.utils.book_append_sheet(wb, packingWS, 'Packing Sheet');
+
+  // Sheet 2: Customer Details
+  const customerData = createCustomerDetailsSheet(orderData);
+  const customerWS = XLSX.utils.json_to_sheet(customerData);
+  const customerColWidths = [
+    { wch: 20 }, // Field
+    { wch: 50 }  // Details
+  ];
+  customerWS['!cols'] = customerColWidths;
+  XLSX.utils.book_append_sheet(wb, customerWS, 'Customer Details');
+
+  // Sheet 3: Products to Pack
+  const productsData = createProductsPackingSheet(orderData);
+  const productsWS = XLSX.utils.json_to_sheet(productsData);
+  const productsColWidths = [
+    { wch: 15 }, // Product ID
+    { wch: 30 }, // Product Name
+    { wch: 10 }, // Quantity
+    { wch: 15 }, // Unit Price
+    { wch: 15 }, // Total Price
+    { wch: 20 }, // Special Notes
+    { wch: 15 }  // Packed (Checkbox)
+  ];
+  productsWS['!cols'] = productsColWidths;
+  XLSX.utils.book_append_sheet(wb, productsWS, 'Products to Pack');
+
+  const fileName = `AUREIM_PackingSheet_${orderData.orderId}.xlsx`;
   XLSX.writeFile(wb, fileName);
   return fileName;
 };
 
-// Export all orders to Excel
+// Create packing sheet data
+const createPackingSheet = (orderData) => {
+  const { customerInfo, cartItems, totals, paymentInfo } = orderData;
+  
+  return [
+    { 'PACKING INFORMATION': '', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'Customer Name', 'DETAILS': customerInfo.fullName },
+    { 'PACKING INFORMATION': 'Phone Number', 'DETAILS': customerInfo.phone },
+    { 'PACKING INFORMATION': 'Email', 'DETAILS': customerInfo.email },
+    { 'PACKING INFORMATION': '', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'SHIPPING ADDRESS', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'Address Line 1', 'DETAILS': customerInfo.addressLine1 },
+    { 'PACKING INFORMATION': 'Address Line 2', 'DETAILS': customerInfo.addressLine2 || 'N/A' },
+    { 'PACKING INFORMATION': 'Landmark', 'DETAILS': customerInfo.landmark || 'N/A' },
+    { 'PACKING INFORMATION': 'City', 'DETAILS': customerInfo.city },
+    { 'PACKING INFORMATION': 'State', 'DETAILS': customerInfo.state },
+    { 'PACKING INFORMATION': 'PIN Code', 'DETAILS': customerInfo.pinCode },
+    { 'PACKING INFORMATION': '', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'ORDER SUMMARY', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'Total Items', 'DETAILS': cartItems.reduce((sum, item) => sum + item.quantity, 0) },
+    { 'PACKING INFORMATION': 'Total Amount', 'DETAILS': formatCurrency(totals.total) },
+    { 'PACKING INFORMATION': 'Payment Method', 'DETAILS': paymentInfo.method },
+    { 'PACKING INFORMATION': 'Payment Status', 'DETAILS': paymentInfo.status },
+    { 'PACKING INFORMATION': '', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'PACKING CHECKLIST', 'DETAILS': '' },
+    { 'PACKING INFORMATION': '☐ Products Packed', 'DETAILS': 'Check when all items are packed' },
+    { 'PACKING INFORMATION': '☐ Invoice Included', 'DETAILS': 'Include printed invoice' },
+    { 'PACKING INFORMATION': '☐ Thank You Note', 'DETAILS': 'Include AUREIM thank you card' },
+    { 'PACKING INFORMATION': '☐ Fragile Packaging', 'DETAILS': 'Use bubble wrap for chocolates' },
+    { 'PACKING INFORMATION': '☐ Address Label', 'DETAILS': 'Shipping label attached' },
+    { 'PACKING INFORMATION': '☐ Quality Check', 'DETAILS': 'Final quality inspection done' },
+    { 'PACKING INFORMATION': '', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'SPECIAL INSTRUCTIONS', 'DETAILS': '' },
+    { 'PACKING INFORMATION': 'Temperature Control', 'DETAILS': 'Keep chocolates cool during packing' },
+    { 'PACKING INFORMATION': 'Handling', 'DETAILS': 'Handle with care - luxury products' },
+    { 'PACKING INFORMATION': 'Branding', 'DETAILS': 'Ensure AUREIM branding is visible' }
+  ];
+};
+
+// Create customer details sheet
+const createCustomerDetailsSheet = (orderData) => {
+  const { customerInfo } = orderData;
+  
+  return [
+    { 'Field': 'Full Name', 'Value': customerInfo.fullName },
+    { 'Field': 'Email Address', 'Value': customerInfo.email },
+    { 'Field': 'Phone Number', 'Value': customerInfo.phone },
+    { 'Field': 'Address Line 1', 'Value': customerInfo.addressLine1 },
+    { 'Field': 'Address Line 2', 'Value': customerInfo.addressLine2 || '' },
+    { 'Field': 'Landmark', 'Value': customerInfo.landmark || '' },
+    { 'Field': 'City', 'Value': customerInfo.city },
+    { 'Field': 'State', 'Value': customerInfo.state },
+    { 'Field': 'PIN Code', 'Value': customerInfo.pinCode },
+    { 'Field': 'Full Address', 'Value': `${customerInfo.addressLine1}, ${customerInfo.addressLine2 || ''}, ${customerInfo.landmark || ''}, ${customerInfo.city}, ${customerInfo.state} - ${customerInfo.pinCode}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '') }
+  ];
+};
+
+// Create products packing sheet
+const createProductsPackingSheet = (orderData) => {
+  const { cartItems } = orderData;
+  
+  return cartItems.map(item => ({
+    'Product ID': item.id,
+    'Product Name': item.name,
+    'Description': item.description,
+    'Quantity': item.quantity,
+    'Unit Price': formatCurrency(item.price),
+    'Total Price': formatCurrency(item.price * item.quantity),
+    'Special Notes': getPackingNotes(item),
+    'Packed ☐': '☐ Done'
+  }));
+};
+
+// Get special packing notes for products
+const getPackingNotes = (item) => {
+  const notes = [];
+  
+  if (item.name.includes('Truffle')) {
+    notes.push('Handle with extra care - delicate');
+  }
+  if (item.name.includes('Collection') || item.name.includes('Gift')) {
+    notes.push('Use premium gift packaging');
+  }
+  if (item.percentage && item.percentage >= 85) {
+    notes.push('High cocoa content - fragile');
+  }
+  if (item.quantity > 3) {
+    notes.push('Bulk order - use larger box');
+  }
+  
+  return notes.length > 0 ? notes.join('; ') : 'Standard packaging';
+};
+
+// Export all orders to Excel with enhanced packing management
 export const exportAllOrders = (orders) => {
   const wb = createOrdersWorkbook(orders);
+  
+  // Add a packing status sheet
+  const packingStatusData = orders.map(order => ({
+    'Order ID': order.orderId,
+    'Order Date': new Date(order.timestamp).toLocaleDateString('en-IN'),
+    'Customer Name': order.customerInfo.fullName,
+    'Phone': order.customerInfo.phone,
+    'City': order.customerInfo.city,
+    'Total Items': order.cartItems.reduce((sum, item) => sum + item.quantity, 0),
+    'Total Amount': formatCurrency(order.totals.total),
+    'Payment Status': order.paymentInfo.status,
+    'Packing Status': '☐ Pending',
+    'Shipped Status': '☐ Pending',
+    'Tracking Number': '',
+    'Delivery Date': '',
+    'Notes': ''
+  }));
+  
+  const packingStatusWS = XLSX.utils.json_to_sheet(packingStatusData);
+  const packingStatusColWidths = [
+    { wch: 15 }, // Order ID
+    { wch: 12 }, // Order Date
+    { wch: 20 }, // Customer Name
+    { wch: 15 }, // Phone
+    { wch: 15 }, // City
+    { wch: 12 }, // Total Items
+    { wch: 15 }, // Total Amount
+    { wch: 15 }, // Payment Status
+    { wch: 15 }, // Packing Status
+    { wch: 15 }, // Shipped Status
+    { wch: 20 }, // Tracking Number
+    { wch: 12 }, // Delivery Date
+    { wch: 30 }  // Notes
+  ];
+  packingStatusWS['!cols'] = packingStatusColWidths;
+  XLSX.utils.book_append_sheet(wb, packingStatusWS, 'Packing Status');
+  
   const year = new Date().getFullYear();
-  const fileName = `AUREIM_Orders_${year}.xlsx`;
+  const fileName = `AUREIM_OrderManagement_${year}.xlsx`;
   XLSX.writeFile(wb, fileName);
   return fileName;
 };

@@ -105,6 +105,47 @@ const AdminDashboard = ({ onClose }) => {
             </div>
           </div>
 
+          {/* Packing Management Section */}
+          <div className="card-luxury p-6 mb-8">
+            <h2 className="text-h3 font-serif text-beige mb-6">Order Fulfillment</h2>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-stone-900/50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-serif text-amber-200 mb-2">{orders.length}</div>
+                <div className="text-stone-400 text-sm">Orders to Pack</div>
+                <div className="text-xs text-stone-500 mt-1">Packing sheets auto-generated</div>
+              </div>
+              
+              <div className="bg-stone-900/50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-serif text-blue-400 mb-2">
+                  {orders.reduce((sum, order) => sum + order.cartItems.reduce((itemSum, item) => itemSum + item.quantity, 0), 0)}
+                </div>
+                <div className="text-stone-400 text-sm">Total Items</div>
+                <div className="text-xs text-stone-500 mt-1">Across all orders</div>
+              </div>
+              
+              <div className="bg-stone-900/50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-serif text-green-400 mb-2">
+                  {orders.filter(order => order.paymentInfo.status === 'completed').length}
+                </div>
+                <div className="text-stone-400 text-sm">Paid Orders</div>
+                <div className="text-xs text-stone-500 mt-1">Ready for shipping</div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-amber-800/10 border border-amber-800/20 rounded-lg">
+              <div className="flex items-center gap-3 text-amber-200">
+                <Package size={20} />
+                <div>
+                  <div className="font-medium">Automatic Packing Sheets</div>
+                  <div className="text-sm text-stone-400">
+                    Excel packing sheets are automatically generated for each order with customer details, shipping address, and product information for easy fulfillment.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Orders Table */}
           <div className="card-luxury p-6">
             <h2 className="text-h3 font-serif text-beige mb-6">Recent Orders</h2>

@@ -74,6 +74,21 @@ const OrderConfirmation = ({
                 <div className="text-stone-400 text-sm">Placed on {formatOrderDate(orderData.timestamp)}</div>
               </div>
             </div>
+
+            {/* Packing Sheet Generated Notice */}
+            <div className={`mt-6 p-4 bg-green-800/20 border border-green-800/30 rounded-lg transition-all duration-1000 delay-900 ${
+              showAnimation ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}>
+              <div className="flex items-center gap-3 text-green-400">
+                <CheckCircle size={20} />
+                <div>
+                  <div className="font-medium">Packing Sheet Generated</div>
+                  <div className="text-sm text-stone-400">
+                    Your order details have been automatically sent to our fulfillment team for packing and shipping.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Order Details */}
@@ -248,7 +263,7 @@ const OrderConfirmation = ({
                 A confirmation email has been sent to <span className="text-beige">{orderData.customerInfo.email}</span>
               </p>
               <p className="text-stone-500 text-xs mt-2">
-                Need help? Contact us at hello@aureim.com or +91 98765 43210
+                Need help? Contact us at aureim.chocolates@gmail.com or +91 98765 43210
               </p>
             </div>
           </div>

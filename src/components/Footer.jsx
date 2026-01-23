@@ -54,7 +54,7 @@ const Footer = ({ onNavigate }) => {
               <div className="space-y-3 mb-8">
                 <div className="flex items-center gap-3 text-stone-400">
                   <Mail size={16} />
-                  <span>hello@aureim.com</span>
+                  <span>aureim.chocolates@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-stone-400">
                   <Phone size={16} />

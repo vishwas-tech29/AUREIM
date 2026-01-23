@@ -51,7 +51,7 @@
 
 ### 📱 Contact Methods
 - **Phone**: +91 98765 43210
-- **Email**: hello@aureim.com
+- **Email**: aureim.chocolates@gmail.com
 - **WhatsApp**: Direct integration with business number
 - **Address**: Bandra West, Mumbai 400050
 - **Hours**: Monday-Saturday, 9 AM - 7 PM IST

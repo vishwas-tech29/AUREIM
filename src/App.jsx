@@ -145,6 +145,16 @@ function App() {
     // Save order to localStorage (in real app, this would be sent to backend)
     saveOrderToStorage(orderData)
     
+    // Automatically generate Excel sheet for order packing
+    try {
+      const fileName = exportSingleOrder(orderData)
+      showToast(`✅ Order confirmed! Packing sheet: ${fileName}`, 'success')
+      console.log(`Packing sheet generated: ${fileName}`)
+    } catch (error) {
+      console.error('Failed to generate packing sheet:', error)
+      showToast('⚠️ Order confirmed! Packing sheet generation failed.', 'warning')
+    }
+    
     setCurrentOrder(orderData)
     setCurrentView('confirmation')
   }
