@@ -4,7 +4,7 @@ export const products = [
     name: "Dark Velvet",
     description: "Single Origin 72% Madagascar",
     price: 2800,
-    image: "https://images.unsplash.com/photo-1511381939415-e44015466834?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/images/products/aureim-product-1.jpeg",
     rating: 4.9,
     reviews: 127,
     category: "single-origin",
@@ -17,7 +17,7 @@ export const products = [
     name: "Midnight Essence",
     description: "Artisan 85% Ecuador",
     price: 3200,
-    image: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/aureim-product-2.jpeg",
     rating: 4.8,
     reviews: 89,
     category: "artisan",
@@ -30,7 +30,7 @@ export const products = [
     name: "Golden Praline",
     description: "Caramelized Hazelnut 65%",
     price: 3500,
-    image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/aureim-product-3.jpeg",
     rating: 4.9,
     reviews: 156,
     category: "praline",
@@ -43,7 +43,7 @@ export const products = [
     name: "Mystic Truffle",
     description: "Handcrafted Dark Ganache",
     price: 4200,
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/aureim-product-1.jpeg",
     rating: 5.0,
     reviews: 73,
     category: "truffle",
@@ -56,7 +56,7 @@ export const products = [
     name: "Rose Infusion",
     description: "Persian Rose & Dark 70%",
     price: 3800,
-    image: "https://images.unsplash.com/photo-1571197119282-7c4e2b2d7b4a?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/aureim-product-2.jpeg",
     rating: 4.7,
     reviews: 94,
     category: "infusion",
@@ -69,7 +69,7 @@ export const products = [
     name: "Amber Collection",
     description: "Limited Edition Gift Box",
     price: 8500,
-    image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=400&fit=crop&crop=center&q=80",
+    image: "/images/products/aureim-product-3.jpeg",
     rating: 4.9,
     reviews: 45,
     category: "collection",
@@ -110,33 +110,33 @@ export const testimonials = [
 export const galleryImages = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=600&fit=crop&crop=center&q=80",
-    alt: "Cocoa beans in wooden bowl",
-    category: "process"
+    src: "/images/products/aureim-product-1.jpeg",
+    alt: "AUREIM luxury chocolate packaging",
+    category: "products"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&h=600&fit=crop&crop=center&q=80",
-    alt: "Artisan chocolate making",
-    category: "craftsmanship"
+    src: "/images/products/aureim-product-2.jpeg",
+    alt: "AUREIM artisan chocolate collection",
+    category: "products"
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1571197119282-7c4e2b2d7b4a?w=800&h=600&fit=crop&crop=center&q=80",
-    alt: "Premium chocolate bars",
+    src: "/images/products/aureim-product-3.jpeg",
+    alt: "AUREIM premium chocolate bars",
     category: "products"
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=800&h=600&fit=crop&crop=center&q=80",
-    alt: "Dark chocolate pieces",
-    category: "products"
+    src: "/images/aureim-story.jpeg",
+    alt: "AUREIM brand story and craftsmanship",
+    category: "craftsmanship"
   }
 ];
 
 // Hero background images for rotation
 export const heroBackgrounds = [
-  "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=1920&h=1080&fit=crop&crop=center&q=80",
-  "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1920&h=1080&fit=crop&crop=center&q=80",
-  "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=1920&h=1080&fit=crop&crop=center&q=80"
+  "/images/products/aureim-product-1.jpeg",
+  "/images/products/aureim-product-2.jpeg",
+  "/images/products/aureim-product-3.jpeg"
 ];

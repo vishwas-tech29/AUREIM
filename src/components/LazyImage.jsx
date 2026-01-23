@@ -4,7 +4,7 @@ const LazyImage = ({
   src, 
   alt, 
   className = '', 
-  fallbackSrc = 'https://images.unsplash.com/photo-1511381939415-e44015466834?w=400&h=400&fit=crop&crop=center&q=80',
+  fallbackSrc = '/images/products/aureim-product-1.jpeg',
   ...props 
 }) => {
   const [imageSrc, setImageSrc] = useState(src)

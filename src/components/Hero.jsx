@@ -16,8 +16,8 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <LazyImage
-          src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=1920&h=1080&fit=crop&crop=center&q=80"
-          alt="Luxury chocolate background"
+          src="/images/products/aureim-product-1.jpeg"
+          alt="AUREIM luxury chocolate background"
           className="w-full h-full object-cover opacity-10"
         />
       </div>

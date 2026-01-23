@@ -71,8 +71,8 @@ const StorySection = () => {
           <div className="relative">
             <div className="aspect-[4/5] rounded-2xl overflow-hidden">
               <LazyImage
-                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=750&fit=crop&crop=center&q=80"
-                alt="Cocoa beans and chocolate making process"
+                src="/images/aureim-story.jpeg"
+                alt="AUREIM luxury chocolate brand story and craftsmanship"
                 className="w-full h-full object-cover"
               />
             </div>

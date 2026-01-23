@@ -8,42 +8,42 @@ const CraftPage = ({ onBack }) => {
       id: 1,
       title: "Bean Selection",
       description: "We source the finest single-origin cocoa beans from ethical farms across Madagascar, Ecuador, and Venezuela.",
-      image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-1.jpeg",
       details: "Our master chocolatiers travel to origin farms, building relationships with farmers and selecting only the top 5% of beans based on flavor profile, aroma, and ethical farming practices."
     },
     {
       id: 2,
       title: "Roasting Mastery",
       description: "Each batch is carefully roasted using traditional techniques passed down through generations of Indian artisans.",
-      image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-2.jpeg",
       details: "Temperature and timing are precisely controlled to develop the unique flavor notes of each origin. Our roasting process takes 18-24 hours, allowing the beans to develop their full complexity."
     },
     {
       id: 3,
       title: "Grinding & Conching",
       description: "Stone grinding and conching for 72 hours creates the silky smooth texture that defines AUREIM chocolate.",
-      image: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-3.jpeg",
       details: "Our granite stone mills, imported from Switzerland, grind the cocoa to particle sizes smaller than 20 microns, creating an incredibly smooth mouthfeel."
     },
     {
       id: 4,
       title: "Tempering & Molding",
       description: "Precise temperature control during tempering ensures the perfect snap and glossy finish of our chocolates.",
-      image: "https://images.unsplash.com/photo-1571197119282-7c4e2b2d7b4a?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-1.jpeg",
       details: "Using the traditional tempering method, we carefully control crystallization to achieve the perfect texture and appearance that luxury chocolate demands."
     },
     {
       id: 5,
       title: "Aging & Quality",
       description: "Each batch is aged for minimum 30 days, allowing flavors to mature and develop their full complexity.",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-2.jpeg",
       details: "Our climate-controlled aging rooms maintain perfect humidity and temperature, allowing the chocolate to develop its signature depth and character."
     },
     {
       id: 6,
       title: "Mindful Packaging",
       description: "Hand-wrapped in sustainable packaging that preserves freshness while honoring our commitment to the environment.",
-      image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&h=400&fit=crop&crop=center&q=80",
+      image: "/images/products/aureim-product-3.jpeg",
       details: "Each piece is individually wrapped by hand using biodegradable materials, ensuring both product integrity and environmental responsibility."
     }
   ]
@@ -115,7 +115,7 @@ const CraftPage = ({ onBack }) => {
           <div className="relative mb-20">
             <div className="aspect-[21/9] rounded-2xl overflow-hidden">
               <LazyImage
-                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1400&h=600&fit=crop&crop=center&q=80"
+                src="/images/aureim-story.jpeg"
                 alt="Artisan chocolate making process"
                 className="w-full h-full object-cover"
               />
