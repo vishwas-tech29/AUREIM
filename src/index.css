@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,59 +7,40 @@
   html {
     scroll-behavior: smooth;
   }
-
+  
   body {
-    @apply bg-cream-primary text-text-primary font-sans;
+    @apply bg-stone-950 text-beige font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
-
-  h1 {
-    @apply font-display text-hero font-normal leading-tight;
-  }
-
-  h2 {
-    @apply font-display text-h2 font-light tracking-tight;
-  }
-
-  h3 {
-    @apply font-display text-h3 font-normal;
-  }
-
-  p {
-    @apply text-base leading-relaxed;
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
   }
 }
 
 @layer components {
-  .btn-luxury {
-    @apply px-8 py-3 text-button font-sans font-medium tracking-wide border border-text-primary text-text-primary bg-transparent transition-all duration-300 ease-out hover:bg-text-primary hover:text-cream-primary hover:scale-[1.02] hover:shadow-luxury active:scale-95;
+  .btn-primary {
+    @apply bg-amber-800 hover:bg-amber-900 text-stone-950 px-10 py-4 rounded-full font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
   }
-
-  .btn-luxury-gold {
-    @apply px-8 py-3 text-button font-sans font-medium tracking-wide bg-gold text-cocoa-primary border border-gold transition-all duration-300 ease-out hover:shadow-luxury hover:scale-[1.02] active:scale-95;
+  
+  .btn-secondary {
+    @apply border-2 border-beige text-beige hover:bg-beige hover:text-stone-950 px-10 py-4 rounded-full font-medium tracking-wide transition-all duration-400 hover:scale-105;
   }
-
+  
+  .card-luxury {
+    @apply bg-stone-900 rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-beige to-amber-100 bg-clip-text text-transparent;
+  }
+  
   .section-padding {
-    @apply px-6 py-20 md:px-12 md:py-32;
+    @apply px-6 md:px-12 lg:px-24 xl:px-32;
   }
-
-  .luxury-card {
-    @apply p-8 bg-cream-blush rounded-lg border border-transparent transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-luxury hover:border-gold;
-  }
-
-  .scroll-fade {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .section-spacing {
+    @apply py-section md:py-section-lg;
   }
 }
 
@@ -70,14 +50,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1c1917;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3e2723;
+  background: #78350f;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2c1810;
+  background: #92400e;
 }

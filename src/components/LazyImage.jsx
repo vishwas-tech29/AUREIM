@@ -1,0 +1,43 @@
+import React, { useState } from 'react'
+
+const LazyImage = ({ 
+  src, 
+  alt, 
+  className = '', 
+  fallbackSrc = 'https://images.unsplash.com/photo-1511381939415-e44015466834?w=400&h=400&fit=crop&crop=center&q=80',
+  ...props 
+}) => {
+  const [imageSrc, setImageSrc] = useState(src)
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
+
+  const handleLoad = () => {
+    setIsLoading(false)
+  }
+
+  const handleError = () => {
+    setHasError(true)
+    setIsLoading(false)
+    if (imageSrc !== fallbackSrc) {
+      setImageSrc(fallbackSrc)
+    }
+  }
+
+  return (
+    <div className="relative">
+      {isLoading && (
+        <div className={`absolute inset-0 bg-stone-800 animate-pulse rounded-xl ${className}`} />
+      )}
+      <img
+        src={imageSrc}
+        alt={alt}
+        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        onLoad={handleLoad}
+        onError={handleError}
+        {...props}
+      />
+    </div>
+  )
+}
+
+export default LazyImage

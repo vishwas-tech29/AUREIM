@@ -1,62 +1,278 @@
 import React, { useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
-import ValueProposition from './components/ValueProposition'
-import ProductDetails from './components/ProductDetails'
-import Philosophy from './components/Philosophy'
+import FeaturedMessage from './components/FeaturedMessage'
+import ProductGrid from './components/ProductGrid'
+import StorySection from './components/StorySection'
 import Testimonials from './components/Testimonials'
+import Newsletter from './components/Newsletter'
 import Footer from './components/Footer'
-import CheckoutModal from './components/CheckoutModal'
+import Toast from './components/Toast'
+import CartPage from './components/CartPage'
+import CartSidebar from './components/CartSidebar'
+import CheckoutPage from './components/CheckoutPage'
+import PaymentProcessing from './components/PaymentProcessing'
+import OrderConfirmation from './components/OrderConfirmation'
+import AdminDashboard from './components/AdminDashboard'
+import { products } from './data/products'
+import { preloadImages, criticalImages } from './utils/imagePreloader'
+import { 
+  generateOrderId, 
+  saveOrderToStorage, 
+  exportSingleOrder,
+  calculateTax,
+  calculateShipping
+} from './utils/excelExport'
 import './index.css'
 
 function App() {
   const [cartItems, setCartItems] = useState([])
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
-  const [showToast, setShowToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState('')
+  const [favorites, setFavorites] = useState(new Set())
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
+  const [currentView, setCurrentView] = useState('home') // 'home', 'cart', 'checkout', 'processing', 'confirmation', 'admin'
+  const [orderSummary, setOrderSummary] = useState(null)
+  const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false)
+  const [currentOrder, setCurrentOrder] = useState(null)
 
-  const handleAddToCart = (quantity = 1) => {
-    setCartItems([...cartItems, { id: Date.now(), quantity }])
-    setToastMessage('Added to your AUREIM collection')
-    setShowToast(true)
-    setTimeout(() => setShowToast(false), 3000)
+  // Preload critical images on app start
+  useEffect(() => {
+    preloadImages(criticalImages)
+  }, [])
+
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type })
+    setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000)
   }
 
-  const handleBuyNow = () => {
-    setIsCheckoutOpen(true)
+  const handleAddToCart = (product, quantity = 1) => {
+    const existingItem = cartItems.find(item => item.id === product.id)
+    
+    if (existingItem) {
+      setCartItems(cartItems.map(item => 
+        item.id === product.id 
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
+      ))
+    } else {
+      setCartItems([...cartItems, { ...product, quantity }])
+    }
+    
+    console.log('Cart updated:', { product: product.name, quantity, totalItems: cartTotal + quantity })
+    showToast(`${product.name} added to your collection`)
+  }
+
+  const handleToggleFavorite = (productId) => {
+    const newFavorites = new Set(favorites)
+    if (newFavorites.has(productId)) {
+      newFavorites.delete(productId)
+      showToast('Removed from favorites')
+    } else {
+      newFavorites.add(productId)
+      showToast('Added to favorites')
+    }
+    setFavorites(newFavorites)
+  }
+
+  // Cart management functions
+  const handleUpdateQuantity = (itemId, newQuantity) => {
+    if (newQuantity === 0) {
+      handleRemoveItem(itemId)
+      return
+    }
+    
+    setCartItems(cartItems.map(item => 
+      item.id === itemId 
+        ? { ...item, quantity: newQuantity }
+        : item
+    ))
+  }
+
+  const handleRemoveItem = (itemId) => {
+    const item = cartItems.find(item => item.id === itemId)
+    setCartItems(cartItems.filter(item => item.id !== itemId))
+    showToast(`${item?.name} removed from cart`)
+  }
+
+  const handleProceedToCheckout = (summary) => {
+    setOrderSummary(summary)
+    setCurrentView('checkout')
+  }
+
+  const handleContinueShopping = () => {
+    setCurrentView('home')
+  }
+
+  const handleCartClick = () => {
+    setIsCartSidebarOpen(true)
+  }
+
+  const handleViewFullCart = () => {
+    setIsCartSidebarOpen(false)
+    setCurrentView('cart')
+  }
+
+  const handleCartSidebarCheckout = () => {
+    setIsCartSidebarOpen(false)
+    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    const tax = calculateTax(subtotal)
+    const shipping = calculateShipping(subtotal)
+    const total = subtotal + tax + shipping
+    
+    setOrderSummary({ subtotal, tax, shipping, total })
+    setCurrentView('checkout')
+  }
+
+  const handleFavoritesClick = () => {
+    showToast('Favorites feature coming soon!')
+  }
+
+  // Order processing functions
+  const handlePlaceOrder = (orderData) => {
+    const orderId = generateOrderId()
+    const completeOrderData = {
+      ...orderData,
+      orderId,
+      timestamp: Date.now()
+    }
+    
+    setCurrentOrder(completeOrderData)
+    setCurrentView('processing')
+  }
+
+  const handlePaymentSuccess = (orderData) => {
+    // Save order to localStorage (in real app, this would be sent to backend)
+    saveOrderToStorage(orderData)
+    
+    setCurrentOrder(orderData)
+    setCurrentView('confirmation')
+  }
+
+  const handlePaymentFailure = () => {
+    setCurrentView('checkout')
+    showToast('Payment failed. Please try again.', 'error')
+  }
+
+  const handlePaymentRetry = () => {
+    if (currentOrder) {
+      setCurrentView('processing')
+    }
+  }
+
+  const handleOrderComplete = () => {
+    setCartItems([])
+    setCurrentOrder(null)
+    setOrderSummary(null)
+    setCurrentView('home')
+    showToast('Thank you for your order! 🎉')
+  }
+
+  const handleTrackOrder = (orderId) => {
+    showToast(`Tracking order ${orderId}. Feature coming soon!`)
+  }
+
+  const handleDownloadInvoice = (orderData) => {
+    try {
+      exportSingleOrder(orderData)
+      showToast('Invoice downloaded successfully!')
+    } catch (error) {
+      showToast('Failed to download invoice. Please try again.', 'error')
+    }
+  }
+
+  const handleAdminAccess = () => {
+    setCurrentView('admin')
+    showToast('Admin dashboard accessed')
   }
 
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
-    <div className="min-h-screen bg-cream-primary">
+    <div className="min-h-screen bg-stone-950">
       <Navigation 
         cartCount={cartTotal} 
-        onCartClick={() => setIsCheckoutOpen(true)}
+        onCartClick={handleCartClick}
+        onFavoritesClick={handleFavoritesClick}
+        onAdminClick={handleAdminAccess}
       />
+      
+      {currentView === 'home' && (
+        <main>
+          <Hero />
+          <FeaturedMessage />
+          <ProductGrid 
+            products={products}
+            onAddToCart={handleAddToCart}
+            onToggleFavorite={handleToggleFavorite}
+            favorites={favorites}
+          />
+          <StorySection />
+          <Testimonials />
+          <Newsletter />
+        </main>
+      )}
 
-      <Hero />
-      <ValueProposition />
-      <ProductDetails 
-        onAddToCart={handleAddToCart}
-        onBuyNow={handleBuyNow}
-      />
-      <Philosophy />
-      <Testimonials />
-      <Footer />
-
-      {isCheckoutOpen && (
-        <CheckoutModal 
-          isOpen={isCheckoutOpen}
-          onClose={() => setIsCheckoutOpen(false)}
-          cartTotal={cartTotal}
+      {currentView === 'cart' && (
+        <CartPage
+          cartItems={cartItems}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemoveItem={handleRemoveItem}
+          onProceedToCheckout={handleProceedToCheckout}
+          onContinueShopping={handleContinueShopping}
         />
       )}
 
-      {showToast && (
-        <div className="fixed bottom-8 left-8 bg-cocoa-primary text-cream-primary px-6 py-4 rounded-lg shadow-luxury z-50 animate-bounce">
-          <p className="text-sm font-medium tracking-wide">{toastMessage}</p>
-        </div>
+      {currentView === 'checkout' && (
+        <CheckoutPage
+          cartItems={cartItems}
+          totals={orderSummary}
+          onBack={() => setCurrentView('cart')}
+          onPlaceOrder={handlePlaceOrder}
+        />
+      )}
+
+      {currentView === 'processing' && (
+        <PaymentProcessing
+          orderData={currentOrder}
+          onSuccess={handlePaymentSuccess}
+          onFailure={handlePaymentFailure}
+          onRetry={handlePaymentRetry}
+        />
+      )}
+
+      {currentView === 'confirmation' && (
+        <OrderConfirmation
+          orderData={currentOrder}
+          onContinueShopping={handleOrderComplete}
+          onTrackOrder={handleTrackOrder}
+          onDownloadInvoice={handleDownloadInvoice}
+        />
+      )}
+
+      {currentView === 'admin' && (
+        <AdminDashboard
+          onClose={() => setCurrentView('home')}
+        />
+      )}
+      
+      {(currentView === 'home' || currentView === 'confirmation') && <Footer />}
+      
+      {/* Cart Sidebar */}
+      <CartSidebar
+        isOpen={isCartSidebarOpen}
+        onClose={() => setIsCartSidebarOpen(false)}
+        cartItems={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onViewCart={handleViewFullCart}
+        onCheckout={handleCartSidebarCheckout}
+      />
+      
+      {toast.show && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type}
+          onClose={() => setToast({ show: false, message: '', type: 'success' })}
+        />
       )}
     </div>
   )

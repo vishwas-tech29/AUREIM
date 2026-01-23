@@ -1,217 +1,180 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Instagram, Mail, Heart } from 'lucide-react'
+import React from 'react'
+import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 
 const Footer = () => {
-  const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
+  const currentYear = new Date().getFullYear()
 
-  const handleSubscribe = (e) => {
-    e.preventDefault()
-    if (email) {
-      setSubscribed(true)
-      setEmail('')
-      setTimeout(() => setSubscribed(false), 4000)
-    }
+  const footerLinks = {
+    shop: [
+      { name: 'All Products', href: '#collection' },
+      { name: 'Single Origin', href: '#collection' },
+      { name: 'Gift Sets', href: '#collection' },
+      { name: 'Subscriptions', href: '#collection' },
+      { name: 'Limited Editions', href: '#collection' }
+    ],
+    about: [
+      { name: 'Our Story', href: '#story' },
+      { name: 'The Craft', href: '#craft' },
+      { name: 'Sustainability', href: '#sustainability' },
+      { name: 'Press', href: '#press' },
+      { name: 'Careers', href: '#careers' }
+    ],
+    support: [
+      { name: 'Contact Us', href: '#contact' },
+      { name: 'Shipping Info', href: '#shipping' },
+      { name: 'Returns', href: '#returns' },
+      { name: 'Size Guide', href: '#guide' },
+      { name: 'FAQ', href: '#faq' }
+    ]
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  }
-
-  const footerLinks = [
-    {
-      title: 'Explore',
-      links: [
-        { label: 'Our Story', href: '#story' },
-        { label: 'The Chocolate', href: '#chocolate' },
-        { label: 'Philosophy', href: '#philosophy' },
-        { label: 'Contact', href: '#contact' },
-      ],
-    },
-    {
-      title: 'Support',
-      links: [
-        { label: 'FAQ', href: '#' },
-        { label: 'Shipping & Returns', href: '#' },
-        { label: 'Privacy Policy', href: '#' },
-        { label: 'Terms & Conditions', href: '#' },
-      ],
-    },
+  const socialLinks = [
+    { icon: <Instagram size={20} />, href: '#', name: 'Instagram' },
+    { icon: <Facebook size={20} />, href: '#', name: 'Facebook' },
+    { icon: <Twitter size={20} />, href: '#', name: 'Twitter' }
   ]
 
   return (
-    <footer className="relative w-full bg-cocoa-primary text-cream-primary overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cocoa-primary via-cocoa-secondary to-cocoa-primary opacity-50" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-b from-gold/5 to-transparent rounded-full blur-3xl" />
-
-      <div className="relative z-10">
-        {/* Main Footer Content */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16"
-          >
-            {/* Column 1: Brand */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-display font-medium tracking-widest mb-2">
-                  AUREIM
-                </h3>
-                <p className="text-sm text-cream-primary/80 font-light italic">
-                  Indulge Smart. Indulge Pure.
-                </p>
-              </div>
-              <p className="text-cream-primary/70 font-light text-sm leading-relaxed">
-                Crafting moments of refined indulgence through single-origin organic chocolate.
+    <footer className="bg-stone-900 border-t border-stone-800">
+      <div className="section-padding py-16">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Footer Content */}
+          <div className="grid lg:grid-cols-5 gap-12 mb-12">
+            {/* Brand Column */}
+            <div className="lg:col-span-2">
+              <h3 className="text-2xl font-serif text-beige mb-6 tracking-luxury">
+                AUREIM
+              </h3>
+              <p className="text-stone-400 leading-relaxed mb-8 max-w-md">
+                Mindful luxury chocolate crafted in India. Each piece is a ritual of 
+                guilt-free indulgence, designed for those who seek wellness in every moment.
               </p>
-              {/* Social Icons */}
-              <div className="flex items-center gap-4 pt-4">
-                <motion.a
-                  href="https://instagram.com/aureim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="p-3 rounded-full bg-cream-primary/10 hover:bg-cream-primary/20 transition-colors"
-                >
-                  <Instagram size={20} />
-                </motion.a>
-                <motion.a
-                  href="mailto:hello@aureim.com"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="p-3 rounded-full bg-cream-primary/10 hover:bg-cream-primary/20 transition-colors"
-                >
-                  <Mail size={20} />
-                </motion.a>
-              </div>
-            </motion.div>
-
-            {/* Columns 2-3: Links */}
-            {footerLinks.map((column, idx) => (
-              <motion.div key={idx} variants={itemVariants} className="space-y-6">
-                <h4 className="text-sm font-medium tracking-widest uppercase text-cream-primary/90">
-                  {column.title}
-                </h4>
-                <nav className="space-y-3">
-                  {column.links.map((link, linkIdx) => (
-                    <motion.a
-                      key={linkIdx}
-                      href={link.href}
-                      whileHover={{ x: 4 }}
-                      className="text-cream-primary/70 hover:text-cream-primary font-light text-sm transition-colors block"
-                    >
-                      {link.label}
-                    </motion.a>
-                  ))}
-                </nav>
-              </motion.div>
-            ))}
-
-            {/* Column 4: Newsletter */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <h4 className="text-sm font-medium tracking-widest uppercase text-cream-primary/90">
-                Join the Circle
-              </h4>
-              <p className="text-cream-primary/70 font-light text-sm">
-                Receive mindful updates. No noise.
-              </p>
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-3 bg-cream-primary/10 border border-cream-primary/20 rounded-lg text-cream-primary placeholder:text-cream-primary/50 font-light text-sm focus:outline-none focus:border-cream-primary/50 transition-colors"
-                    required
-                  />
+              
+              {/* Contact Info */}
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3 text-stone-400">
+                  <Mail size={16} />
+                  <span>hello@aureim.com</span>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={subscribed}
-                  className="w-full px-4 py-3 bg-gold text-cocoa-primary font-medium text-sm rounded-lg hover:bg-amber-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {subscribed ? (
-                    <>
-                      <Heart size={16} className="fill-current" />
-                      <span>Thank you!</span>
-                    </>
-                  ) : (
-                    'Subscribe'
-                  )}
-                </motion.button>
-              </form>
-            </motion.div>
-          </motion.div>
-
-          {/* Divider */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            viewport={{ once: false }}
-            className="h-px bg-gradient-to-r from-transparent via-cream-primary/20 to-transparent my-12 origin-left"
-          />
-
-          {/* Bottom Section */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="space-y-4 text-center md:text-left"
-          >
-            <motion.p variants={itemVariants} className="text-cream-primary/70 font-light text-sm">
-              Made in India. Designed for the world.
-            </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col md:flex-row items-center md:items-baseline justify-center md:justify-between gap-4 text-cream-primary/60 text-xs font-light"
-            >
-              <span>© 2025 AUREIM. All rights reserved.</span>
-              <div className="flex items-center gap-6">
-                <a href="#" className="hover:text-cream-primary transition-colors">Privacy</a>
-                <a href="#" className="hover:text-cream-primary transition-colors">Terms</a>
-                <a href="#" className="hover:text-cream-primary transition-colors">Cookies</a>
+                <div className="flex items-center gap-3 text-stone-400">
+                  <Phone size={16} />
+                  <span>+91 98765 43210</span>
+                </div>
+                <div className="flex items-center gap-3 text-stone-400">
+                  <MapPin size={16} />
+                  <span>Mumbai, India</span>
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
-        </div>
 
-        {/* Subtle Animation Background */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"
-          animate={{
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+              {/* Social Links */}
+              <div className="flex gap-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className="w-10 h-10 bg-stone-800 hover:bg-amber-800 text-stone-400 hover:text-stone-950 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                    aria-label={social.name}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Shop Links */}
+            <div>
+              <h4 className="text-beige font-medium mb-6 tracking-wide">Shop</h4>
+              <ul className="space-y-3">
+                {footerLinks.shop.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* About Links */}
+            <div>
+              <h4 className="text-beige font-medium mb-6 tracking-wide">About</h4>
+              <ul className="space-y-3">
+                {footerLinks.about.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div>
+              <h4 className="text-beige font-medium mb-6 tracking-wide">Support</h4>
+              <ul className="space-y-3">
+                {footerLinks.support.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href={link.href}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Newsletter Signup */}
+          <div className="border-t border-stone-800 pt-12 mb-12">
+            <div className="max-w-md">
+              <h4 className="text-beige font-medium mb-4 tracking-wide">
+                Stay Connected
+              </h4>
+              <p className="text-stone-400 text-sm mb-6">
+                Subscribe for new releases and mindful living insights
+              </p>
+              <div className="flex gap-3">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="flex-1 px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-beige placeholder-stone-500 focus:outline-none focus:border-amber-800 transition-colors duration-300"
+                />
+                <button className="px-6 py-3 bg-amber-800 hover:bg-amber-900 text-stone-950 rounded-lg font-medium transition-colors duration-300">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-stone-500 text-sm">
+              © {currentYear} AUREIM. All rights reserved.
+            </div>
+            
+            <div className="text-stone-400 text-sm italic">
+              Crafted with love in India 🇮🇳
+            </div>
+            
+            <div className="flex gap-6 text-stone-500 text-sm">
+              <a href="#privacy" className="hover:text-amber-200 transition-colors duration-300">
+                Privacy Policy
+              </a>
+              <a href="#terms" className="hover:text-amber-200 transition-colors duration-300">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   )
