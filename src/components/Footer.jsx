@@ -1,30 +1,30 @@
 import React from 'react'
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 
-const Footer = () => {
+const Footer = ({ onNavigate }) => {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
     shop: [
-      { name: 'All Products', href: '#collection' },
-      { name: 'Single Origin', href: '#collection' },
-      { name: 'Gift Sets', href: '#collection' },
-      { name: 'Subscriptions', href: '#collection' },
-      { name: 'Limited Editions', href: '#collection' }
+      { name: 'All Products', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Single Origin', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Gift Sets', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Subscriptions', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Limited Editions', action: () => onNavigate && onNavigate('home', 'collection') }
     ],
     about: [
-      { name: 'Our Story', href: '#story' },
-      { name: 'The Craft', href: '#craft' },
-      { name: 'Sustainability', href: '#sustainability' },
-      { name: 'Press', href: '#press' },
-      { name: 'Careers', href: '#careers' }
+      { name: 'Our Story', action: () => onNavigate && onNavigate('home', 'story') },
+      { name: 'The Craft', action: () => onNavigate && onNavigate('craft') },
+      { name: 'Sustainability', action: () => onNavigate && onNavigate('home', 'story') },
+      { name: 'Press', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Careers', action: () => onNavigate && onNavigate('contact') }
     ],
     support: [
-      { name: 'Contact Us', href: '#contact' },
-      { name: 'Shipping Info', href: '#shipping' },
-      { name: 'Returns', href: '#returns' },
-      { name: 'Size Guide', href: '#guide' },
-      { name: 'FAQ', href: '#faq' }
+      { name: 'Contact Us', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Shipping Info', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Returns', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Size Guide', action: () => onNavigate && onNavigate('contact') },
+      { name: 'FAQ', action: () => onNavigate && onNavigate('contact') }
     ]
   }
 
@@ -87,12 +87,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.shop.map((link, index) => (
                   <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    <button
+                      onClick={link.action}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
                     >
                       {link.name}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -104,12 +104,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.about.map((link, index) => (
                   <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    <button
+                      onClick={link.action}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
                     >
                       {link.name}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -121,12 +121,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.support.map((link, index) => (
                   <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300"
+                    <button
+                      onClick={link.action}
+                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
                     >
                       {link.name}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>

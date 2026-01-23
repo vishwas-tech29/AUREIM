@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ShoppingBag, Search, Menu, X, Heart } from 'lucide-react'
 
-const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick }) => {
+const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -15,10 +15,10 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
   }, [])
 
   const navItems = [
-    { name: 'Collection', href: '#collection' },
-    { name: 'Our Story', href: '#story' },
-    { name: 'The Craft', href: '#craft' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Collection', href: '#collection', action: () => onNavigate('home', 'collection') },
+    { name: 'Our Story', href: '#story', action: () => onNavigate('home', 'story') },
+    { name: 'The Craft', href: '#craft', action: () => onNavigate('craft') },
+    { name: 'Contact', href: '#contact', action: () => onNavigate('contact') }
   ]
 
   return (
@@ -46,13 +46,13 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-12">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={item.action}
                 className="text-beige hover:text-amber-200 transition-colors duration-300 font-medium tracking-wide"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -95,14 +95,16 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
             <div className="section-padding py-6">
               <div className="flex flex-col space-y-6">
                 {navItems.map((item) => (
-                  <a
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className="text-beige hover:text-amber-200 transition-colors duration-300 font-medium tracking-wide"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      item.action()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="text-beige hover:text-amber-200 transition-colors duration-300 font-medium tracking-wide text-left"
                   >
                     {item.name}
-                  </a>
+                  </button>
                 ))}
                 
                 <div className="flex items-center space-x-6 pt-4 border-t border-stone-800">

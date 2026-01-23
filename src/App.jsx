@@ -14,6 +14,8 @@ import CheckoutPage from './components/CheckoutPage'
 import PaymentProcessing from './components/PaymentProcessing'
 import OrderConfirmation from './components/OrderConfirmation'
 import AdminDashboard from './components/AdminDashboard'
+import CraftPage from './components/CraftPage'
+import ContactPage from './components/ContactPage'
 import { products } from './data/products'
 import { preloadImages, criticalImages } from './utils/imagePreloader'
 import { 
@@ -29,7 +31,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
   const [favorites, setFavorites] = useState(new Set())
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
-  const [currentView, setCurrentView] = useState('home') // 'home', 'cart', 'checkout', 'processing', 'confirmation', 'admin'
+  const [currentView, setCurrentView] = useState('home') // 'home', 'cart', 'checkout', 'processing', 'confirmation', 'admin', 'craft', 'contact'
   const [orderSummary, setOrderSummary] = useState(null)
   const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false)
   const [currentOrder, setCurrentOrder] = useState(null)
@@ -184,6 +186,20 @@ function App() {
     showToast('Admin dashboard accessed')
   }
 
+  const handleNavigate = (page, section = null) => {
+    setCurrentView(page)
+    
+    if (page === 'home' && section) {
+      // Scroll to section after a brief delay to ensure page is rendered
+      setTimeout(() => {
+        const element = document.getElementById(section)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
+  }
+
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -193,6 +209,7 @@ function App() {
         onCartClick={handleCartClick}
         onFavoritesClick={handleFavoritesClick}
         onAdminClick={handleAdminAccess}
+        onNavigate={handleNavigate}
       />
       
       {currentView === 'home' && (
@@ -253,8 +270,20 @@ function App() {
           onClose={() => setCurrentView('home')}
         />
       )}
+
+      {currentView === 'craft' && (
+        <CraftPage
+          onBack={() => setCurrentView('home')}
+        />
+      )}
+
+      {currentView === 'contact' && (
+        <ContactPage
+          onBack={() => setCurrentView('home')}
+        />
+      )}
       
-      {(currentView === 'home' || currentView === 'confirmation') && <Footer />}
+      {(currentView === 'home' || currentView === 'confirmation') && <Footer onNavigate={handleNavigate} />}
       
       {/* Cart Sidebar */}
       <CartSidebar
