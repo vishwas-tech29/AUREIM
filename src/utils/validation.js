@@ -12,10 +12,26 @@ export const validatePhone = (phone) => {
   return phoneRegex.test(phone.replace(/\s+/g, ''));
 };
 
-// PIN code validation (Indian format)
+// PIN code validation (All Hyderabad area PIN codes)
 export const validatePinCode = (pinCode) => {
   const pinRegex = /^\d{6}$/;
-  return pinRegex.test(pinCode);
+  if (!pinRegex.test(pinCode)) {
+    return false;
+  }
+  
+  // Complete Hyderabad PIN codes range
+  const pinNumber = parseInt(pinCode);
+  
+  // Main Hyderabad PIN codes: 500001-500099
+  // Extended Hyderabad and surrounding areas: 501101-501511, 502001-502329, 503001-503307, 504001-504309, 505001-505417
+  return (
+    (pinNumber >= 500001 && pinNumber <= 500099) ||  // Central Hyderabad
+    (pinNumber >= 501101 && pinNumber <= 501511) ||  // Rangareddy district
+    (pinNumber >= 502001 && pinNumber <= 502329) ||  // Medak district  
+    (pinNumber >= 503001 && pinNumber <= 503307) ||  // Nizamabad district
+    (pinNumber >= 504001 && pinNumber <= 504309) ||  // Adilabad district
+    (pinNumber >= 505001 && pinNumber <= 505417)     // Karimnagar district
+  );
 };
 
 // Card number validation (Luhn algorithm)
@@ -131,7 +147,7 @@ export const validateShippingForm = (formData) => {
   if (!validateRequired(formData.pinCode)) {
     errors.pinCode = 'PIN code is required';
   } else if (!validatePinCode(formData.pinCode)) {
-    errors.pinCode = 'Please enter a valid 6-digit PIN code';
+    errors.pinCode = 'We currently deliver in Greater Hyderabad area only (PIN codes: 500001-500099, 501101-501511, 502001-502329, 503001-503307, 504001-504309, 505001-505417)';
   }
   
   return {

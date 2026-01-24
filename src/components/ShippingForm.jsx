@@ -9,8 +9,8 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
     phone: initialData.phone || '',
     addressLine1: initialData.addressLine1 || '',
     addressLine2: initialData.addressLine2 || '',
-    city: initialData.city || '',
-    state: initialData.state || '',
+    city: initialData.city || 'Hyderabad',
+    state: initialData.state || 'Telangana',
     pinCode: initialData.pinCode || '',
     landmark: initialData.landmark || ''
   })
@@ -199,7 +199,8 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                       ? 'border-red-500 focus:border-red-400'
                       : 'border-stone-700 focus:border-amber-800'
                   }`}
-                  placeholder="Enter city"
+                  placeholder="Hyderabad"
+                  readOnly
                 />
                 {getFieldError('city') && (
                   <p className="mt-1 text-sm text-red-400">{errors.city}</p>
@@ -220,13 +221,9 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                       ? 'border-red-500 focus:border-red-400'
                       : 'border-stone-700 focus:border-amber-800'
                   }`}
+                  disabled
                 >
-                  <option value="">Select State</option>
-                  {indianStates.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
+                  <option value="Telangana">Telangana</option>
                 </select>
                 {getFieldError('state') && (
                   <p className="mt-1 text-sm text-red-400">{errors.state}</p>
@@ -248,7 +245,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                       ? 'border-red-500 focus:border-red-400'
                       : 'border-stone-700 focus:border-amber-800'
                   }`}
-                  placeholder="6-digit PIN"
+                  placeholder="Hyderabad area PIN codes"
                   maxLength="6"
                 />
                 {getFieldError('pinCode') && (

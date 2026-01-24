@@ -28,7 +28,7 @@ const ContactPage = ({ onBack }) => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      details: "+91 98765 43210",
+      details: "+91 90004 29689",
       description: "Mon-Sat, 9 AM - 7 PM IST"
     },
     {
@@ -41,7 +41,7 @@ const ContactPage = ({ onBack }) => {
       icon: <MapPin className="w-6 h-6" />,
       title: "Address",
       details: "AUREIM Chocolate Atelier",
-      description: "Bandra West, Mumbai 400050"
+      description: "Hyderabad, Telangana 500001"
     },
     {
       icon: <Clock className="w-6 h-6" />,
@@ -139,7 +139,7 @@ Looking forward to your response!`
     // Generate WhatsApp message
     const message = generateWhatsAppMessage()
     const encodedMessage = encodeURIComponent(message)
-    const whatsappNumber = "919876543210" // Replace with actual WhatsApp business number
+    const whatsappNumber = "919000429689" // Replace with actual WhatsApp business number
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
     
     // Open WhatsApp
@@ -387,7 +387,7 @@ Looking forward to your response!`
                 </h3>
                 <div className="space-y-4">
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+919000429689"
                     className="flex items-center gap-3 p-4 bg-stone-800 rounded-lg hover:bg-stone-700 transition-colors duration-300"
                   >
                     <Phone className="w-5 h-5 text-amber-800" />

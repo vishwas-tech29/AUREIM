@@ -50,10 +50,10 @@
 5. User can send directly to AUREIM business number
 
 ### 📱 Contact Methods
-- **Phone**: +91 98765 43210
+- **Phone**: +91 90004 29689
 - **Email**: aureim.chocolates@gmail.com
 - **WhatsApp**: Direct integration with business number
-- **Address**: Bandra West, Mumbai 400050
+- **Address**: Hyderabad, Telangana 500001
 - **Hours**: Monday-Saturday, 9 AM - 7 PM IST
 
 ### 🎯 Navigation

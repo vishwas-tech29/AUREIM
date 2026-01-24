@@ -154,7 +154,7 @@ const CheckoutModal = ({ isOpen, onClose, cartTotal }) => {
                           value={formData.phone}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 bg-white/60 border border-white/40 rounded-lg text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
-                          placeholder="+91 98765 43210"
+                          placeholder="+91 90004 29689"
                           required
                         />
                       </div>
