@@ -4,7 +4,7 @@ export const products = [
     name: "Dark Velvet",
     description: "Single Origin 72% Madagascar",
     price: 2800,
-    image: "/images/products/images/products/aureim-product-1.jpeg",
+    image: "/images/products/aureim-product-1.jpeg",
     rating: 4.9,
     reviews: 127,
     category: "single-origin",
@@ -24,58 +24,6 @@ export const products = [
     notes: ["Intense dark", "Fruity notes", "Bold character"],
     origin: "Ecuador",
     percentage: 85
-  },
-  {
-    id: 3,
-    name: "Golden Praline",
-    description: "Caramelized Hazelnut 65%",
-    price: 3500,
-    image: "/images/products/aureim-product-3.jpeg",
-    rating: 4.9,
-    reviews: 156,
-    category: "praline",
-    notes: ["Caramel sweetness", "Roasted hazelnuts", "Creamy texture"],
-    origin: "Belgium",
-    percentage: 65
-  },
-  {
-    id: 4,
-    name: "Mystic Truffle",
-    description: "Handcrafted Dark Ganache",
-    price: 4200,
-    image: "/images/products/aureim-product-1.jpeg",
-    rating: 5.0,
-    reviews: 73,
-    category: "truffle",
-    notes: ["Silky ganache", "Dark intensity", "Luxurious mouthfeel"],
-    origin: "France",
-    percentage: 70
-  },
-  {
-    id: 5,
-    name: "Rose Infusion",
-    description: "Persian Rose & Dark 70%",
-    price: 3800,
-    image: "/images/products/aureim-product-2.jpeg",
-    rating: 4.7,
-    reviews: 94,
-    category: "infusion",
-    notes: ["Floral elegance", "Rose petals", "Balanced sweetness"],
-    origin: "Iran",
-    percentage: 70
-  },
-  {
-    id: 6,
-    name: "Amber Collection",
-    description: "Limited Edition Gift Box",
-    price: 8500,
-    image: "/images/products/aureim-product-3.jpeg",
-    rating: 4.9,
-    reviews: 45,
-    category: "collection",
-    notes: ["Curated selection", "Premium packaging", "Perfect gift"],
-    origin: "Global",
-    percentage: "Mixed"
   }
 ];
 
