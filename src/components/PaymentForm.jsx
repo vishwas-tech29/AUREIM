@@ -104,7 +104,7 @@ const PaymentForm = ({ initialData = {}, onSubmit, onBack }) => {
 
   return (
     <div className="card-luxury p-8">
-      <h2 className="text-h2 font-serif text-beige mb-8">
+      <h2 className="text-h2 font-serif text-cocoa-dark mb-8">
         Payment Method
       </h2>
 
@@ -116,8 +116,8 @@ const PaymentForm = ({ initialData = {}, onSubmit, onBack }) => {
               key={method.id}
               className={`border-2 rounded-xl p-4 cursor-pointer transition-all duration-300 ${
                 selectedMethod === method.id
-                  ? 'border-amber-800 bg-amber-800/10'
-                  : 'border-stone-700 hover:border-stone-600'
+                  ? 'border-caramel-gold bg-caramel-gold/10'
+                  : 'border-cream-beige hover:border-cream-soft'
               }`}
               onClick={() => setSelectedMethod(method.id)}
             >
@@ -128,14 +128,14 @@ const PaymentForm = ({ initialData = {}, onSubmit, onBack }) => {
                   value={method.id}
                   checked={selectedMethod === method.id}
                   onChange={() => setSelectedMethod(method.id)}
-                  className="w-4 h-4 text-amber-800 bg-stone-800 border-stone-600 focus:ring-amber-800"
+                  className="w-4 h-4 text-caramel-gold bg-cream-beige border-cream-soft focus:ring-caramel-gold"
                 />
-                <div className="text-amber-800">
+                <div className="text-caramel-gold">
                   {method.icon}
                 </div>
                 <div>
-                  <div className="text-beige font-medium">{method.name}</div>
-                  <div className="text-stone-400 text-sm">{method.description}</div>
+                  <div className="text-cocoa-dark font-medium">{method.name}</div>
+                  <div className="text-text-muted text-sm">{method.description}</div>
                 </div>
               </div>
             </div>
@@ -144,14 +144,14 @@ const PaymentForm = ({ initialData = {}, onSubmit, onBack }) => {
 
         {/* Payment Method Forms */}
         {selectedMethod === 'cod' && (
-          <div className="space-y-6 p-6 bg-stone-900/50 rounded-xl">
-            <h3 className="text-lg font-serif text-beige mb-4">Cash on Delivery</h3>
+          <div className="space-y-6 p-6 bg-cream-beige/50 rounded-xl">
+            <h3 className="text-lg font-serif text-cocoa-dark mb-4">Cash on Delivery</h3>
             
-            <div className="bg-amber-800/10 border border-amber-800/30 rounded-lg p-4">
-              <p className="text-amber-200 text-sm mb-2">
+            <div className="bg-caramel-gold/10 border border-caramel-gold/30 rounded-lg p-4">
+              <p className="text-caramel-gold text-sm mb-2">
                 Additional COD charge: ₹50
               </p>
-              <p className="text-stone-400 text-sm">
+              <p className="text-text-muted text-sm">
                 Available for orders under ₹5,000. Pay when your order is delivered to your doorstep in Greater Hyderabad area.
               </p>
             </div>
@@ -162,9 +162,9 @@ const PaymentForm = ({ initialData = {}, onSubmit, onBack }) => {
                 id="codAccepted"
                 checked={codAccepted}
                 onChange={(e) => setCodAccepted(e.target.checked)}
-                className="mt-1 w-4 h-4 text-amber-800 bg-stone-800 border-stone-600 rounded focus:ring-amber-800"
+                className="mt-1 w-4 h-4 text-caramel-gold bg-cream-beige border-cream-soft rounded focus:ring-caramel-gold"
               />
-              <label htmlFor="codAccepted" className="text-stone-300 text-sm">
+              <label htmlFor="codAccepted" className="text-text-muted text-sm">
                 I confirm that I want to pay cash on delivery and understand that an additional charge of ₹50 will be added to my order total.
               </label>
             </div>

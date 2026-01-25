@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,30 +9,37 @@
   }
   
   body {
-    @apply bg-stone-950 text-beige font-sans antialiased;
+    @apply bg-chocolate-dark text-text-charcoal font-sans antialiased;
+    background-color: #F5EFE8;
+    color: #1A0F0B;
     font-feature-settings: "kern" 1, "liga" 1;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif text-text-charcoal;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-amber-800 hover:bg-amber-900 text-stone-950 px-10 py-4 rounded-full font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
+    @apply bg-cocoa-dark hover:bg-cocoa-medium text-cream-soft px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
+    background: linear-gradient(135deg, #3B1F16 0%, #4A2A1A 100%);
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #4A2A1A 0%, #5A3A2A 100%);
   }
   
   .btn-secondary {
-    @apply border-2 border-beige text-beige hover:bg-beige hover:text-stone-950 px-10 py-4 rounded-full font-medium tracking-wide transition-all duration-400 hover:scale-105;
+    @apply border-2 border-cocoa-dark text-cocoa-dark hover:bg-cocoa-dark hover:text-cream-soft px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105;
   }
   
   .card-luxury {
-    @apply bg-stone-900 rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2;
+    @apply bg-cream-beige rounded-xl shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 border border-cream-soft;
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-beige to-amber-100 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-caramel-gold to-caramel-light bg-clip-text text-transparent;
   }
   
   .section-padding {
@@ -50,14 +57,54 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1c1917;
+  background: #EFE6DB;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #78350f;
+  background: #C8A15A;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #92400e;
+  background: #D4AF6A;
+}
+
+/* Additional Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(200, 161, 90, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(200, 161, 90, 0.8);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }

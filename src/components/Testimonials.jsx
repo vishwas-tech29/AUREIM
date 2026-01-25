@@ -1,7 +1,6 @@
 import React from 'react'
 import { Star, Quote } from 'lucide-react'
 import { testimonials } from '../data/products'
-import LazyImage from './LazyImage'
 
 const Testimonials = () => {
   const renderStars = (rating) => {
@@ -11,8 +10,8 @@ const Testimonials = () => {
         size={16}
         className={`${
           i < rating
-            ? 'text-amber-400 fill-current'
-            : 'text-stone-600'
+            ? 'text-caramel-gold fill-current'
+            : 'text-text-muted'
         }`}
       />
     ))
@@ -23,10 +22,10 @@ const Testimonials = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-h1 font-serif text-beige mb-6">
+          <h2 className="text-h1 font-serif text-cocoa-dark mb-6">
             Moments Shared
           </h2>
-          <p className="text-xl text-stone-300 max-w-2xl mx-auto">
+          <p className="text-xl text-text-muted max-w-2xl mx-auto">
             Stories from our community of mindful chocolate lovers
           </p>
         </div>
@@ -39,7 +38,7 @@ const Testimonials = () => {
               className="card-luxury p-8 text-center relative"
             >
               {/* Quote Icon */}
-              <div className="absolute top-6 left-6 text-amber-800/30">
+              <div className="absolute top-6 left-6 text-caramel-gold/30">
                 <Quote size={32} />
               </div>
 
@@ -49,23 +48,23 @@ const Testimonials = () => {
               </div>
 
               {/* Testimonial Text */}
-              <blockquote className="text-stone-300 text-lg leading-relaxed mb-8 italic">
+              <blockquote className="text-text-muted text-lg leading-relaxed mb-8 italic">
                 "{testimonial.text}"
               </blockquote>
 
               {/* Author */}
-              <div className="border-t border-stone-800 pt-6">
+              <div className="border-t border-cream-beige pt-6">
                 <div className="flex items-center justify-center gap-4 mb-4">
-                  <LazyImage
+                  <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div className="text-center">
-                    <div className="text-beige font-medium mb-1">
+                    <div className="text-text-charcoal font-medium mb-1">
                       {testimonial.name}
                     </div>
-                    <div className="text-stone-400 text-sm">
+                    <div className="text-text-muted text-sm">
                       {testimonial.location}
                     </div>
                   </div>
@@ -77,7 +76,7 @@ const Testimonials = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <p className="text-stone-300 mb-6">
+          <p className="text-text-muted mb-6">
             Join thousands of others in their journey of mindful indulgence
           </p>
           <button className="btn-primary">

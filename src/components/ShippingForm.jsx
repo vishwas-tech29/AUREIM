@@ -64,7 +64,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
 
   return (
     <div className="card-luxury p-8">
-      <h2 className="text-h2 font-serif text-beige mb-8">
+      <h2 className="text-h2 font-serif text-cocoa-dark mb-8">
         Shipping Information
       </h2>
 
@@ -72,7 +72,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
         {/* Personal Information */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+            <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
               Full Name *
             </label>
             <input
@@ -81,10 +81,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
               value={formData.fullName}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+              className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                 getFieldError('fullName')
                   ? 'border-red-500 focus:border-red-400'
-                  : 'border-stone-700 focus:border-amber-800'
+                  : 'border-cream-soft focus:border-caramel-gold'
               }`}
               placeholder="Enter your full name"
             />
@@ -94,7 +94,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+            <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
               Email Address *
             </label>
             <input
@@ -103,10 +103,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+              className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                 getFieldError('email')
                   ? 'border-red-500 focus:border-red-400'
-                  : 'border-stone-700 focus:border-amber-800'
+                  : 'border-cream-soft focus:border-caramel-gold'
               }`}
               placeholder="Enter your email"
             />
@@ -117,7 +117,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+          <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
             Phone Number *
           </label>
           <input
@@ -126,10 +126,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
             value={formData.phone}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+            className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
               getFieldError('phone')
                 ? 'border-red-500 focus:border-red-400'
-                : 'border-stone-700 focus:border-amber-800'
+                : 'border-cream-soft focus:border-caramel-gold'
             }`}
             placeholder="Enter 10-digit phone number"
             maxLength="10"
@@ -140,14 +140,14 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
         </div>
 
         {/* Address Information */}
-        <div className="pt-6 border-t border-stone-700">
-          <h3 className="text-lg font-serif text-beige mb-6">
+        <div className="pt-6 border-t border-cream-beige">
+          <h3 className="text-lg font-serif text-cocoa-dark mb-6">
             Delivery Address
           </h3>
 
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+              <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                 Address Line 1 *
               </label>
               <input
@@ -156,10 +156,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                 value={formData.addressLine1}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                   getFieldError('addressLine1')
                     ? 'border-red-500 focus:border-red-400'
-                    : 'border-stone-700 focus:border-amber-800'
+                    : 'border-cream-soft focus:border-caramel-gold'
                 }`}
                 placeholder="House/Flat number, Building name, Street"
               />
@@ -169,7 +169,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+              <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                 Address Line 2
               </label>
               <input
@@ -178,14 +178,14 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                 value={formData.addressLine2}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-beige placeholder-stone-500 focus:outline-none focus:border-amber-800 transition-colors duration-300"
+                className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                 placeholder="Area, Colony, Sector (Optional)"
               />
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                   City *
                 </label>
                 <input
@@ -194,10 +194,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                   value={formData.city}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                  className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                     getFieldError('city')
                       ? 'border-red-500 focus:border-red-400'
-                      : 'border-stone-700 focus:border-amber-800'
+                      : 'border-cream-soft focus:border-caramel-gold'
                   }`}
                   placeholder="Hyderabad"
                   readOnly
@@ -208,7 +208,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                   State *
                 </label>
                 <select
@@ -216,10 +216,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                   value={formData.state}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige focus:outline-none transition-colors duration-300 ${
+                  className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal focus:outline-none transition-colors duration-300 ${
                     getFieldError('state')
                       ? 'border-red-500 focus:border-red-400'
-                      : 'border-stone-700 focus:border-amber-800'
+                      : 'border-cream-soft focus:border-caramel-gold'
                   }`}
                   disabled
                 >
@@ -231,7 +231,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                   PIN Code *
                 </label>
                 <input
@@ -240,10 +240,10 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                   value={formData.pinCode}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                  className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                     getFieldError('pinCode')
                       ? 'border-red-500 focus:border-red-400'
-                      : 'border-stone-700 focus:border-amber-800'
+                      : 'border-cream-soft focus:border-caramel-gold'
                   }`}
                   placeholder="Hyderabad area PIN codes"
                   maxLength="6"
@@ -255,7 +255,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+              <label className="block text-sm font-medium text-text-muted mb-2 uppercase tracking-wide">
                 Landmark
               </label>
               <input
@@ -264,7 +264,7 @@ const ShippingForm = ({ initialData = {}, onSubmit }) => {
                 value={formData.landmark}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-beige placeholder-stone-500 focus:outline-none focus:border-amber-800 transition-colors duration-300"
+                className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                 placeholder="Nearby landmark (Optional)"
               />
             </div>

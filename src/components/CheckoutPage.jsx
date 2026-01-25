@@ -49,18 +49,18 @@ const CheckoutPage = ({
   }
 
   return (
-    <div className="min-h-screen bg-stone-950 pt-24">
+    <div className="min-h-screen bg-cream-soft pt-24">
       <div className="section-padding section-spacing">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="flex items-center gap-4 mb-12">
             <button 
               onClick={onBack}
-              className="text-stone-400 hover:text-beige transition-colors duration-300"
+              className="text-text-muted hover:text-cocoa-dark transition-colors duration-300"
             >
               <ArrowLeft size={24} />
             </button>
-            <h1 className="text-h1 font-serif text-beige">
+            <h1 className="text-h1 font-serif text-cocoa-dark">
               Checkout
             </h1>
           </div>
@@ -74,10 +74,10 @@ const CheckoutPage = ({
                     onClick={() => goToStep(step.id)}
                     className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
                       currentStep === step.id
-                        ? 'bg-amber-800 border-amber-800 text-stone-950'
+                        ? 'bg-caramel-gold border-caramel-gold text-chocolate-dark'
                         : currentStep > step.id
                         ? 'bg-green-600 border-green-600 text-white'
-                        : 'border-stone-600 text-stone-400 hover:border-stone-500'
+                        : 'border-cream-beige text-text-muted hover:border-cream-soft'
                     }`}
                   >
                     {currentStep > step.id ? (
@@ -89,7 +89,7 @@ const CheckoutPage = ({
                   
                   <div className="ml-3 mr-8">
                     <div className={`text-sm font-medium ${
-                      currentStep >= step.id ? 'text-beige' : 'text-stone-500'
+                      currentStep >= step.id ? 'text-cocoa-dark' : 'text-text-muted'
                     }`}>
                       {step.name}
                     </div>
@@ -97,7 +97,7 @@ const CheckoutPage = ({
                   
                   {index < steps.length - 1 && (
                     <div className={`w-16 h-0.5 mr-8 ${
-                      currentStep > step.id ? 'bg-green-600' : 'bg-stone-700'
+                      currentStep > step.id ? 'bg-green-600' : 'bg-cream-beige'
                     }`} />
                   )}
                 </div>
@@ -140,7 +140,7 @@ const CheckoutPage = ({
             {/* Order Summary Sidebar */}
             <div className="lg:col-span-1">
               <div className="card-luxury p-6 sticky top-32">
-                <h3 className="text-lg font-serif text-beige mb-6">
+                <h3 className="text-lg font-serif text-cocoa-dark mb-6">
                   Order Summary
                 </h3>
 
@@ -154,14 +154,14 @@ const CheckoutPage = ({
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                       <div className="flex-1">
-                        <div className="text-sm text-beige font-medium">
+                        <div className="text-sm text-cocoa-dark font-medium">
                           {item.name}
                         </div>
-                        <div className="text-xs text-stone-400">
+                        <div className="text-xs text-text-muted">
                           Qty: {item.quantity}
                         </div>
                       </div>
-                      <div className="text-sm text-amber-200">
+                      <div className="text-sm text-caramel-gold">
                         {formatCurrency(item.price * item.quantity)}
                       </div>
                     </div>
@@ -169,16 +169,16 @@ const CheckoutPage = ({
                 </div>
 
                 {/* Totals */}
-                <div className="border-t border-stone-700 pt-4 space-y-2">
-                  <div className="flex justify-between text-sm text-stone-300">
+                <div className="border-t border-cream-beige pt-4 space-y-2">
+                  <div className="flex justify-between text-sm text-text-muted">
                     <span>Subtotal</span>
                     <span>{formatCurrency(totals.subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-stone-300">
+                  <div className="flex justify-between text-sm text-text-muted">
                     <span>Tax (GST 18%)</span>
                     <span>{formatCurrency(totals.tax)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-stone-300">
+                  <div className="flex justify-between text-sm text-text-muted">
                     <span>Shipping</span>
                     <span>
                       {totals.shipping === 0 ? (
@@ -188,17 +188,17 @@ const CheckoutPage = ({
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between text-lg font-medium text-beige pt-2 border-t border-stone-700">
+                  <div className="flex justify-between text-lg font-medium text-cocoa-dark pt-2 border-t border-cream-beige">
                     <span>Total</span>
-                    <span className="text-amber-200">
+                    <span className="text-caramel-gold">
                       {formatCurrency(totals.total)}
                     </span>
                   </div>
                 </div>
 
                 {/* Security Badge */}
-                <div className="mt-6 pt-4 border-t border-stone-800">
-                  <div className="flex items-center justify-center gap-2 text-xs text-stone-500">
+                <div className="mt-6 pt-4 border-t border-cream-beige">
+                  <div className="flex items-center justify-center gap-2 text-xs text-text-muted">
                     <Lock size={14} />
                     <span>Secure SSL Encrypted Checkout</span>
                   </div>

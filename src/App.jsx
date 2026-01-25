@@ -16,6 +16,7 @@ import OrderConfirmation from './components/OrderConfirmation'
 import AdminDashboard from './components/AdminDashboard'
 import CraftPage from './components/CraftPage'
 import ContactPage from './components/ContactPage'
+import LazyImage from './components/LazyImage'
 import { products } from './data/products'
 import { preloadImages, criticalImages } from './utils/imagePreloader'
 import { 
@@ -31,15 +32,10 @@ function App() {
   const [cartItems, setCartItems] = useState([])
   const [favorites, setFavorites] = useState(new Set())
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
-  const [currentView, setCurrentView] = useState('home') // 'home', 'cart', 'checkout', 'processing', 'confirmation', 'admin', 'craft', 'contact'
+  const [currentView, setCurrentView] = useState('home')
   const [orderSummary, setOrderSummary] = useState(null)
   const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false)
   const [currentOrder, setCurrentOrder] = useState(null)
-
-  // Preload critical images on app start
-  useEffect(() => {
-    preloadImages(criticalImages)
-  }, [])
 
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type })
@@ -59,7 +55,6 @@ function App() {
       setCartItems([...cartItems, { ...product, quantity }])
     }
     
-    console.log('Cart updated:', { product: product.name, quantity, totalItems: cartTotal + quantity })
     showToast(`${product.name} added to your collection`)
   }
 
@@ -75,7 +70,6 @@ function App() {
     setFavorites(newFavorites)
   }
 
-  // Cart management functions
   const handleUpdateQuantity = (itemId, newQuantity) => {
     if (newQuantity === 0) {
       handleRemoveItem(itemId)
@@ -128,7 +122,6 @@ function App() {
     showToast('Favorites feature coming soon!')
   }
 
-  // Order processing functions
   const handlePlaceOrder = (orderData) => {
     const orderId = generateOrderId()
     const completeOrderData = {
@@ -142,14 +135,11 @@ function App() {
   }
 
   const handlePaymentSuccess = (orderData) => {
-    // Save order to localStorage (in real app, this would be sent to backend)
     saveOrderToStorage(orderData)
     
-    // Automatically generate Excel sheet for order packing
     try {
       const fileName = exportSingleOrder(orderData)
       showToast(`✅ Order confirmed! Packing sheet: ${fileName}`, 'success')
-      console.log(`Packing sheet generated: ${fileName}`)
     } catch (error) {
       console.error('Failed to generate packing sheet:', error)
       showToast('⚠️ Order confirmed! Packing sheet generation failed.', 'warning')
@@ -200,7 +190,6 @@ function App() {
     setCurrentView(page)
     
     if (page === 'home' && section) {
-      // Scroll to section after a brief delay to ensure page is rendered
       setTimeout(() => {
         const element = document.getElementById(section)
         if (element) {
@@ -213,7 +202,7 @@ function App() {
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
-    <div className="min-h-screen bg-stone-950">
+    <div className="min-h-screen bg-cream-soft">
       <Navigation 
         cartCount={cartTotal} 
         onCartClick={handleCartClick}
@@ -295,7 +284,6 @@ function App() {
       
       {(currentView === 'home' || currentView === 'confirmation') && <Footer onNavigate={handleNavigate} />}
       
-      {/* Cart Sidebar */}
       <CartSidebar
         isOpen={isCartSidebarOpen}
         onClose={() => setIsCartSidebarOpen(false)}

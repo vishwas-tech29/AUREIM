@@ -24,11 +24,11 @@ const Toast = ({ message, type = 'success', onClose, duration = 3000 }) => {
   const getStyles = () => {
     switch (type) {
       case 'success':
-        return 'bg-amber-800 text-stone-950 border-amber-700'
+        return 'bg-caramel-gold text-chocolate-dark border-caramel-light'
       case 'error':
-        return 'bg-red-800 text-red-100 border-red-700'
+        return 'bg-red-600 text-red-100 border-red-700'
       default:
-        return 'bg-amber-800 text-stone-950 border-amber-700'
+        return 'bg-caramel-gold text-chocolate-dark border-caramel-light'
     }
   }
 

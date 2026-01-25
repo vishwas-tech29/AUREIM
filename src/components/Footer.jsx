@@ -35,32 +35,32 @@ const Footer = ({ onNavigate }) => {
   ]
 
   return (
-    <footer className="bg-stone-900 border-t border-stone-800">
+    <footer className="bg-chocolate-dark border-t border-chocolate-medium">
       <div className="section-padding py-16">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Content */}
           <div className="grid lg:grid-cols-5 gap-12 mb-12">
             {/* Brand Column */}
             <div className="lg:col-span-2">
-              <h3 className="text-2xl font-serif text-beige mb-6 tracking-luxury">
+              <h3 className="text-2xl font-serif text-cocoa-dark mb-6 tracking-luxury">
                 AUREIM
               </h3>
-              <p className="text-stone-400 leading-relaxed mb-8 max-w-md">
+              <p className="text-text-muted leading-relaxed mb-8 max-w-md">
                 Mindful luxury chocolate crafted in India. Each piece is a ritual of 
                 guilt-free indulgence, designed for those who seek wellness in every moment.
               </p>
               
               {/* Contact Info */}
               <div className="space-y-3 mb-8">
-                <div className="flex items-center gap-3 text-stone-400">
+                <div className="flex items-center gap-3 text-text-muted">
                   <Mail size={16} />
                   <span>aureim.chocolates@gmail.com</span>
                 </div>
-                <div className="flex items-center gap-3 text-stone-400">
+                <div className="flex items-center gap-3 text-text-muted">
                   <Phone size={16} />
                   <span>+91 90004 29689</span>
                 </div>
-                <div className="flex items-center gap-3 text-stone-400">
+                <div className="flex items-center gap-3 text-text-muted">
                   <MapPin size={16} />
                   <span>Hyderabad, India</span>
                 </div>
@@ -72,7 +72,7 @@ const Footer = ({ onNavigate }) => {
                   <a
                     key={index}
                     href={social.href}
-                    className="w-10 h-10 bg-stone-800 hover:bg-amber-800 text-stone-400 hover:text-stone-950 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                    className="w-10 h-10 bg-cream-beige hover:bg-caramel-gold text-text-muted hover:text-chocolate-dark rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                     aria-label={social.name}
                   >
                     {social.icon}
@@ -83,13 +83,13 @@ const Footer = ({ onNavigate }) => {
 
             {/* Shop Links */}
             <div>
-              <h4 className="text-beige font-medium mb-6 tracking-wide">Shop</h4>
+              <h4 className="text-text-charcoal font-medium mb-6 tracking-wide">Shop</h4>
               <ul className="space-y-3">
                 {footerLinks.shop.map((link, index) => (
                   <li key={index}>
                     <button
                       onClick={link.action}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
+                      className="text-text-muted hover:text-caramel-gold transition-colors duration-300 text-left"
                     >
                       {link.name}
                     </button>
@@ -100,13 +100,13 @@ const Footer = ({ onNavigate }) => {
 
             {/* About Links */}
             <div>
-              <h4 className="text-beige font-medium mb-6 tracking-wide">About</h4>
+              <h4 className="text-text-charcoal font-medium mb-6 tracking-wide">About</h4>
               <ul className="space-y-3">
                 {footerLinks.about.map((link, index) => (
                   <li key={index}>
                     <button
                       onClick={link.action}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
+                      className="text-text-muted hover:text-caramel-gold transition-colors duration-300 text-left"
                     >
                       {link.name}
                     </button>
@@ -117,13 +117,13 @@ const Footer = ({ onNavigate }) => {
 
             {/* Support Links */}
             <div>
-              <h4 className="text-beige font-medium mb-6 tracking-wide">Support</h4>
+              <h4 className="text-text-charcoal font-medium mb-6 tracking-wide">Support</h4>
               <ul className="space-y-3">
                 {footerLinks.support.map((link, index) => (
                   <li key={index}>
                     <button
                       onClick={link.action}
-                      className="text-stone-400 hover:text-amber-200 transition-colors duration-300 text-left"
+                      className="text-text-muted hover:text-caramel-gold transition-colors duration-300 text-left"
                     >
                       {link.name}
                     </button>
@@ -134,21 +134,21 @@ const Footer = ({ onNavigate }) => {
           </div>
 
           {/* Newsletter Signup */}
-          <div className="border-t border-stone-800 pt-12 mb-12">
+          <div className="border-t border-chocolate-medium pt-12 mb-12">
             <div className="max-w-md">
-              <h4 className="text-beige font-medium mb-4 tracking-wide">
+              <h4 className="text-text-charcoal font-medium mb-4 tracking-wide">
                 Stay Connected
               </h4>
-              <p className="text-stone-400 text-sm mb-6">
+              <p className="text-text-muted text-sm mb-6">
                 Subscribe for new releases and mindful living insights
               </p>
               <div className="flex gap-3">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-beige placeholder-stone-500 focus:outline-none focus:border-amber-800 transition-colors duration-300"
+                  className="flex-1 px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                 />
-                <button className="px-6 py-3 bg-amber-800 hover:bg-amber-900 text-stone-950 rounded-lg font-medium transition-colors duration-300">
+                <button className="px-6 py-3 bg-caramel-gold hover:bg-caramel-light text-chocolate-dark rounded-lg font-medium transition-colors duration-300">
                   Subscribe
                 </button>
               </div>
@@ -156,20 +156,20 @@ const Footer = ({ onNavigate }) => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-stone-500 text-sm">
+          <div className="border-t border-chocolate-medium pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-text-muted text-sm">
               © {currentYear} AUREIM. All rights reserved.
             </div>
             
-            <div className="text-stone-400 text-sm italic">
+            <div className="text-text-muted text-sm italic">
               Crafted with love in India 🇮🇳
             </div>
             
-            <div className="flex gap-6 text-stone-500 text-sm">
-              <a href="#privacy" className="hover:text-amber-200 transition-colors duration-300">
+            <div className="flex gap-6 text-text-muted text-sm">
+              <a href="#privacy" className="hover:text-caramel-gold transition-colors duration-300">
                 Privacy Policy
               </a>
-              <a href="#terms" className="hover:text-amber-200 transition-colors duration-300">
+              <a href="#terms" className="hover:text-caramel-gold transition-colors duration-300">
                 Terms of Service
               </a>
             </div>

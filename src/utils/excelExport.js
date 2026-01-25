@@ -21,9 +21,43 @@ export const calculateTax = (subtotal) => {
   return Math.round(subtotal * 0.18 * 100) / 100;
 };
 
-// Calculate shipping fee
+// Calculate shipping fee (Free shipping for orders above ₹500)
 export const calculateShipping = (subtotal) => {
-  return subtotal >= 2000 ? 0 : 150;
+  return subtotal >= 500 ? 0 : 150;
+};
+
+// Calculate delivery date (3 working days from order)
+export const calculateDeliveryDate = () => {
+  const today = new Date();
+  let workingDays = 0;
+  let currentDate = new Date(today);
+  
+  // Start from next day
+  currentDate.setDate(currentDate.getDate() + 1);
+  
+  // Count 3 working days (Monday-Friday)
+  while (workingDays < 3) {
+    const dayOfWeek = currentDate.getDay();
+    // 0 = Sunday, 6 = Saturday
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+      workingDays++;
+    }
+    if (workingDays < 3) {
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  }
+  
+  return currentDate;
+};
+
+// Format delivery date
+export const formatDeliveryDate = (date) => {
+  return new Intl.DateTimeFormat('en-IN', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
 };
 
 // Format order data for Excel

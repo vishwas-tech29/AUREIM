@@ -21,8 +21,8 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
         size={14}
         className={`${
           i < Math.floor(rating)
-            ? 'text-amber-400 fill-current'
-            : 'text-stone-600'
+            ? 'text-caramel-gold fill-current'
+            : 'text-text-muted'
         }`}
       />
     ))
@@ -50,15 +50,15 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           }}
           className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-300 ${
             isFavorite
-              ? 'bg-amber-800 text-stone-950'
-              : 'bg-stone-950/70 text-beige hover:bg-amber-800 hover:text-stone-950'
+              ? 'bg-caramel-gold text-chocolate-dark'
+              : 'bg-chocolate-dark/70 text-cream-soft hover:bg-caramel-gold hover:text-chocolate-dark'
           }`}
         >
           <Heart size={18} className={isFavorite ? 'fill-current' : ''} />
         </button>
 
         {/* Hover Overlay */}
-        <div className={`absolute inset-0 bg-stone-950/40 transition-opacity duration-300 ${
+        <div className={`absolute inset-0 bg-chocolate-dark/40 transition-opacity duration-300 ${
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="absolute bottom-4 left-4 right-4">
@@ -83,17 +83,17 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           <div className="flex items-center gap-1">
             {renderStars(product.rating)}
           </div>
-          <span className="text-stone-400 text-sm">
+          <span className="text-text-muted text-sm">
             {product.rating} ({product.reviews})
           </span>
         </div>
 
         {/* Name and Description */}
         <div>
-          <h3 className="text-xl font-serif text-beige mb-1 group-hover:text-amber-200 transition-colors duration-300">
+          <h3 className="text-xl font-serif text-cocoa-dark mb-1 group-hover:text-caramel-gold transition-colors duration-300">
             {product.name}
           </h3>
-          <p className="text-stone-300 text-sm">
+          <p className="text-text-muted text-sm">
             {product.description}
           </p>
         </div>
@@ -103,7 +103,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           {product.notes.slice(0, 2).map((note, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-stone-800 text-stone-300 text-xs rounded-full"
+              className="px-3 py-1 bg-cream-beige text-text-charcoal text-xs rounded-full"
             >
               {note}
             </span>
@@ -111,8 +111,8 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
         </div>
 
         {/* Price and Actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-stone-800">
-          <div className="text-2xl font-serif text-amber-200">
+        <div className="flex items-center justify-between pt-4 border-t border-cream-beige">
+          <div className="text-2xl font-serif text-caramel-gold">
             {formatPrice(product.price)}
           </div>
           
@@ -124,17 +124,17 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
                   e.stopPropagation()
                   setQuantity(Math.max(1, quantity - 1))
                 }}
-                className="w-8 h-8 rounded-full bg-stone-800 text-beige hover:bg-stone-700 transition-colors duration-300 flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-cream-beige text-text-charcoal hover:bg-caramel-gold transition-colors duration-300 flex items-center justify-center"
               >
                 -
               </button>
-              <span className="text-beige w-8 text-center">{quantity}</span>
+              <span className="text-text-charcoal w-8 text-center">{quantity}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   setQuantity(quantity + 1)
                 }}
-                className="w-8 h-8 rounded-full bg-stone-800 text-beige hover:bg-stone-700 transition-colors duration-300 flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-cream-beige text-text-charcoal hover:bg-caramel-gold transition-colors duration-300 flex items-center justify-center"
               >
                 <Plus size={14} />
               </button>

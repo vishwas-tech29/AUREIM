@@ -3,7 +3,7 @@ export const products = [
     id: 1,
     name: "Dark Velvet",
     description: "Single Origin 72% Madagascar",
-    price: 2800,
+    price: 195,
     image: "/images/products/aureim-product-1.jpeg",
     rating: 4.9,
     reviews: 127,
@@ -16,7 +16,7 @@ export const products = [
     id: 2,
     name: "Midnight Essence",
     description: "Artisan 85% Ecuador",
-    price: 3200,
+    price: 195,
     image: "/images/products/aureim-product-2.jpeg",
     rating: 4.8,
     reviews: 89,
@@ -24,6 +24,23 @@ export const products = [
     notes: ["Intense dark", "Fruity notes", "Bold character"],
     origin: "Ecuador",
     percentage: 85
+  },
+  {
+    id: 3,
+    name: "Velvet & Essence Combo",
+    description: "Buy 2 Premium Chocolates - Save ₹0",
+    price: 390,
+    image: "/images/products/aureim-product-3.jpeg",
+    rating: 5.0,
+    reviews: 156,
+    category: "collection",
+    notes: ["Best Value", "2 Premium Bars", "Perfect Gift"],
+    isCombo: true,
+    comboItems: [
+      { name: "Dark Velvet", quantity: 1, price: 195 },
+      { name: "Midnight Essence", quantity: 1, price: 195 }
+    ],
+    savings: 0
   }
 ];
 
