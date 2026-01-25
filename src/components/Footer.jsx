@@ -58,7 +58,7 @@ const Footer = ({ onNavigate }) => {
                 </div>
                 <div className="flex items-center gap-3 text-text-muted">
                   <Phone size={16} />
-                  <span>+91 90004 29689</span>
+                  <span>+91 78945 61230</span>
                 </div>
                 <div className="flex items-center gap-3 text-text-muted">
                   <MapPin size={16} />

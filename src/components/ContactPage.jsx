@@ -28,7 +28,7 @@ const ContactPage = ({ onBack }) => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      details: "+91 90004 29689",
+      details: "+91 78945 61230",
       description: "Mon-Sat, 9 AM - 7 PM IST"
     },
     {
@@ -139,7 +139,7 @@ Looking forward to your response!`
     // Generate WhatsApp message
     const message = generateWhatsAppMessage()
     const encodedMessage = encodeURIComponent(message)
-    const whatsappNumber = "919000429689" // Replace with actual WhatsApp business number
+    const whatsappNumber = "917894561230" // Updated WhatsApp business number
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
     
     // Open WhatsApp
@@ -162,24 +162,24 @@ Looking forward to your response!`
   }
 
   return (
-    <div className="min-h-screen bg-stone-950 pt-24">
+    <div className="min-h-screen bg-cream-soft pt-24">
       <div className="section-padding section-spacing">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
             <button 
               onClick={onBack}
-              className="inline-flex items-center gap-2 text-stone-400 hover:text-beige transition-colors duration-300 mb-8"
+              className="inline-flex items-center gap-2 text-text-muted hover:text-cocoa-dark transition-colors duration-300 mb-8"
             >
               ← Back to Home
             </button>
             
-            <h1 className="text-hero-mobile md:text-hero font-serif text-beige mb-8 leading-tight">
-              Let's Create
-              <span className="block text-gradient">Something Beautiful</span>
+            <h1 className="text-hero-mobile md:text-hero font-serif text-cocoa-dark mb-8 leading-tight">
+              Get in Touch
+              <span className="block text-caramel-gold">We're Here to Help</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-stone-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed">
               Whether you have questions about our chocolates, need support with an order, 
               or want to explore partnership opportunities, we're here to help.
             </p>
@@ -189,8 +189,8 @@ Looking forward to your response!`
             {/* Contact Form */}
             <div className="card-luxury p-8">
               <div className="flex items-center gap-3 mb-8">
-                <MessageCircle className="w-8 h-8 text-amber-800" />
-                <h2 className="text-h2 font-serif text-beige">
+                <MessageCircle className="w-8 h-8 text-caramel-gold" />
+                <h2 className="text-h2 font-serif text-cocoa-dark">
                   Send us a Message
                 </h2>
               </div>
@@ -199,7 +199,7 @@ Looking forward to your response!`
                 {/* Personal Information */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                    <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                       Full Name *
                     </label>
                     <input
@@ -207,10 +207,10 @@ Looking forward to your response!`
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                      className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                         errors.name
                           ? 'border-red-500 focus:border-red-400'
-                          : 'border-stone-700 focus:border-amber-800'
+                          : 'border-cream-soft focus:border-caramel-gold'
                       }`}
                       placeholder="Enter your full name"
                     />
@@ -220,7 +220,7 @@ Looking forward to your response!`
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                    <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                       Phone Number *
                     </label>
                     <input
@@ -228,10 +228,10 @@ Looking forward to your response!`
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                      className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                         errors.phone
                           ? 'border-red-500 focus:border-red-400'
-                          : 'border-stone-700 focus:border-amber-800'
+                          : 'border-cream-soft focus:border-caramel-gold'
                       }`}
                       placeholder="Enter 10-digit phone number"
                       maxLength="10"
@@ -243,7 +243,7 @@ Looking forward to your response!`
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                  <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                     Email Address *
                   </label>
                   <input
@@ -251,10 +251,10 @@ Looking forward to your response!`
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                    className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                       errors.email
                         ? 'border-red-500 focus:border-red-400'
-                        : 'border-stone-700 focus:border-amber-800'
+                        : 'border-cream-soft focus:border-caramel-gold'
                     }`}
                     placeholder="Enter your email address"
                   />
@@ -265,14 +265,14 @@ Looking forward to your response!`
 
                 {/* Inquiry Type */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                  <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                     Inquiry Type
                   </label>
                   <select
                     name="inquiryType"
                     value={formData.inquiryType}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-beige focus:outline-none focus:border-amber-800 transition-colors duration-300"
+                    className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                   >
                     {inquiryTypes.map((type) => (
                       <option key={type.id} value={type.id}>
@@ -284,7 +284,7 @@ Looking forward to your response!`
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                  <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                     Subject *
                   </label>
                   <input
@@ -292,10 +292,10 @@ Looking forward to your response!`
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 ${
+                    className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 ${
                       errors.subject
                         ? 'border-red-500 focus:border-red-400'
-                        : 'border-stone-700 focus:border-amber-800'
+                        : 'border-cream-soft focus:border-caramel-gold'
                     }`}
                     placeholder="Brief subject of your inquiry"
                   />
@@ -306,7 +306,7 @@ Looking forward to your response!`
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-400 mb-2 uppercase tracking-wide">
+                  <label className="block text-sm font-medium text-text-charcoal mb-2 uppercase tracking-wide">
                     Message *
                   </label>
                   <textarea
@@ -314,17 +314,17 @@ Looking forward to your response!`
                     value={formData.message}
                     onChange={handleChange}
                     rows="6"
-                    className={`w-full px-4 py-3 bg-stone-800 border rounded-lg text-beige placeholder-stone-500 focus:outline-none transition-colors duration-300 resize-none ${
+                    className={`w-full px-4 py-3 bg-cream-beige border rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none transition-colors duration-300 resize-none ${
                       errors.message
                         ? 'border-red-500 focus:border-red-400'
-                        : 'border-stone-700 focus:border-amber-800'
+                        : 'border-cream-soft focus:border-caramel-gold'
                     }`}
                     placeholder="Tell us more about your inquiry..."
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-400">{errors.message}</p>
                   )}
-                  <p className="mt-2 text-xs text-stone-500">
+                  <p className="mt-2 text-xs text-text-muted">
                     Minimum 10 characters. Current: {formData.message.length}
                   </p>
                 </div>
@@ -348,7 +348,7 @@ Looking forward to your response!`
                   )}
                 </button>
 
-                <p className="text-xs text-stone-500 text-center">
+                <p className="text-xs text-text-muted text-center">
                   Your message will be prepared and opened in WhatsApp for direct communication with our team.
                 </p>
               </form>
@@ -360,19 +360,19 @@ Looking forward to your response!`
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="card-luxury p-6 flex items-start gap-4">
-                    <div className="w-12 h-12 bg-amber-800/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <div className="text-amber-800">
+                    <div className="w-12 h-12 bg-caramel-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="text-caramel-gold">
                         {info.icon}
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-serif text-beige mb-2">
+                      <h3 className="text-lg font-serif text-cocoa-dark mb-2">
                         {info.title}
                       </h3>
-                      <p className="text-stone-300 font-medium mb-1">
+                      <p className="text-text-charcoal font-medium mb-1">
                         {info.details}
                       </p>
-                      <p className="text-stone-400 text-sm">
+                      <p className="text-text-muted text-sm">
                         {info.description}
                       </p>
                     </div>
@@ -382,31 +382,31 @@ Looking forward to your response!`
 
               {/* Quick Actions */}
               <div className="card-luxury p-8">
-                <h3 className="text-lg font-serif text-beige mb-6">
+                <h3 className="text-lg font-serif text-cocoa-dark mb-6">
                   Quick Actions
                 </h3>
                 <div className="space-y-4">
                   <a
-                    href="tel:+919000429689"
-                    className="flex items-center gap-3 p-4 bg-stone-800 rounded-lg hover:bg-stone-700 transition-colors duration-300"
+                    href="tel:+917894561230"
+                    className="flex items-center gap-3 p-4 bg-cream-beige rounded-lg hover:bg-caramel-light transition-colors duration-300"
                   >
-                    <Phone className="w-5 h-5 text-amber-800" />
-                    <span className="text-beige">Call Us Now</span>
+                    <Phone className="w-5 h-5 text-caramel-gold" />
+                    <span className="text-cocoa-dark">Call Us Now</span>
                   </a>
                   
                   <a
                     href="mailto:aureim.chocolates@gmail.com"
-                    className="flex items-center gap-3 p-4 bg-stone-800 rounded-lg hover:bg-stone-700 transition-colors duration-300"
+                    className="flex items-center gap-3 p-4 bg-cream-beige rounded-lg hover:bg-caramel-light transition-colors duration-300"
                   >
-                    <Mail className="w-5 h-5 text-amber-800" />
-                    <span className="text-beige">Send Email</span>
+                    <Mail className="w-5 h-5 text-caramel-gold" />
+                    <span className="text-cocoa-dark">Send Email</span>
                   </a>
                   
                   <a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/917894561230"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-4 bg-green-800 rounded-lg hover:bg-green-700 transition-colors duration-300"
+                    className="flex items-center gap-3 p-4 bg-green-600 rounded-lg hover:bg-green-700 transition-colors duration-300"
                   >
                     <MessageCircle className="w-5 h-5 text-white" />
                     <span className="text-white">WhatsApp Direct</span>
@@ -416,21 +416,21 @@ Looking forward to your response!`
 
               {/* FAQ */}
               <div className="card-luxury p-8">
-                <h3 className="text-lg font-serif text-beige mb-6">
+                <h3 className="text-lg font-serif text-cocoa-dark mb-6">
                   Frequently Asked
                 </h3>
                 <div className="space-y-4 text-sm">
                   <div>
-                    <p className="text-stone-300 font-medium mb-1">Response Time?</p>
-                    <p className="text-stone-400">We respond to all inquiries within 24 hours during business days.</p>
+                    <p className="text-text-charcoal font-medium mb-1">Response Time?</p>
+                    <p className="text-text-muted">We respond to all inquiries within 24 hours during business days.</p>
                   </div>
                   <div>
-                    <p className="text-stone-300 font-medium mb-1">Order Support?</p>
-                    <p className="text-stone-400">For order-related queries, please have your order ID ready.</p>
+                    <p className="text-text-charcoal font-medium mb-1">Order Support?</p>
+                    <p className="text-text-muted">For order-related queries, please have your order ID ready.</p>
                   </div>
                   <div>
-                    <p className="text-stone-300 font-medium mb-1">Wholesale Inquiries?</p>
-                    <p className="text-stone-400">Minimum order quantities and special pricing available for bulk orders.</p>
+                    <p className="text-text-charcoal font-medium mb-1">Wholesale Inquiries?</p>
+                    <p className="text-text-muted">Minimum order quantities and special pricing available for bulk orders.</p>
                   </div>
                 </div>
               </div>
