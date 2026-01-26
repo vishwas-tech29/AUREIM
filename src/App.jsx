@@ -30,6 +30,7 @@ import {
   calculateShipping
 } from './utils/excelExport'
 import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
+import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import { loadOrdersFromUrl } from './utils/orderSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
@@ -210,16 +211,37 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
-      // Send comprehensive admin notifications
+      // 🚀 AUTOMATED WHATSAPP SYSTEM - Sends order details automatically
+      autoSendOrderToWhatsApp(orderData).then(result => {
+        if (result.success) {
+          console.log('✅ Automated WhatsApp result:', result)
+          showToast(`🚀 Order sent to WhatsApp automatically! Check admin phone.`, 'success')
+          
+          // Also send customer confirmation automatically
+          autoSendCustomerConfirmation(orderData).then(customerResult => {
+            if (customerResult.success) {
+              console.log('✅ Customer confirmation sent automatically')
+              showToast(`📱 Customer confirmation sent automatically`, 'success')
+            }
+          })
+          
+          // Setup order tracking
+          const trackingData = setupOrderTracking(orderData)
+          console.log('📋 Order tracking setup:', trackingData)
+          
+        } else {
+          console.error('❌ Automated WhatsApp failed:', result)
+          showToast('⚠️ Auto-WhatsApp failed, check console for details', 'warning')
+        }
+      }).catch(error => {
+        console.error('❌ Automated WhatsApp error:', error)
+        showToast('⚠️ Auto-WhatsApp error, check console', 'warning')
+      })
+      
+      // Send comprehensive admin notifications (backup system)
       notifyAdminOfOrder(orderData).then(result => {
         if (result.success) {
-          console.log('✅ Admin notification result:', result)
-          
-          // Show detailed success message with admin tips
-          const tips = result.adminTips || []
-          const tipMessage = tips.length > 0 ? '\n\nAdmin Tips:\n' + tips.join('\n') : ''
-          
-          showToast(`✅ Order confirmed! Admin notified via ${result.notifications.length} channels${tipMessage}`, 'success')
+          console.log('✅ Backup admin notification result:', result)
           
           // Log comprehensive order details for admin reference
           console.log('🍫 COMPREHENSIVE ORDER DETAILS FOR ADMIN:')
@@ -231,36 +253,32 @@ function App() {
           console.log('Total:', `₹${orderData.totals.total}`)
           console.log('Items:', orderData.cartItems.map(item => `${item.name} (${item.quantity})`).join(', '))
           console.log('Google Maps:', `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${orderData.customerInfo.addressLine1}, ${orderData.customerInfo.city}, ${orderData.customerInfo.state}`)}`)
-          console.log('Notification Methods:', result.notifications.map(n => `${n.method}: ${n.success ? '✅' : '❌'}`).join(', '))
         } else {
-          console.error('❌ Admin notification failed:', result)
-          showToast('⚠️ Order confirmed! Admin notification had issues - check console', 'warning')
+          console.error('❌ Backup admin notification failed:', result)
         }
       }).catch(error => {
-        console.error('❌ Admin notification error:', error)
-        showToast('⚠️ Order confirmed! Check console for admin details', 'warning')
+        console.error('❌ Backup admin notification error:', error)
       })
-      
-      // Also try to send customer confirmation
-      const customerResult = sendCustomerConfirmation(orderData)
       
       // Send browser notification
       const browserNotification = sendBrowserNotification(orderData)
       
-      // Prepare WhatsApp notification for business (as backup)
+      // Prepare WhatsApp modal as final manual backup
       const message = formatOrderForWhatsApp(orderData)
       const whatsappUrl = `https://wa.me/919000429689?text=${message}`
       
-      // Show WhatsApp modal as final backup
-      setWhatsappModal({
-        isOpen: true,
-        orderData,
-        whatsappUrl,
-        message
-      })
+      // Show WhatsApp modal as final backup (will auto-close if automation works)
+      setTimeout(() => {
+        setWhatsappModal({
+          isOpen: true,
+          orderData,
+          whatsappUrl,
+          message
+        })
+      }, 3000) // Show after 3 seconds as backup
       
     } catch (error) {
-      console.error('Failed to send admin notifications:', error)
+      console.error('Failed to send automated notifications:', error)
       showToast('⚠️ Order confirmed! Check console for details.', 'warning')
       
       // Emergency fallback - log order details

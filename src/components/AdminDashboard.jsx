@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus, Share2, Upload, Bell } from 'lucide-react'
+import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus, Share2, Upload, Bell, MessageCircle } from 'lucide-react'
 import { getOrdersFromStorage, exportAllOrders, formatCurrency } from '../utils/excelExport'
 import { addTestOrdersToStorage, clearAllOrders, getOrderCount } from '../utils/testData'
 import { generateOrderSyncUrl, loadOrdersFromUrl, exportOrdersAsJson } from '../utils/orderSync'
+import { autoSendOrderToWhatsApp } from '../utils/automatedWhatsApp'
 import LazyImage from './LazyImage'
 import OrdersDashboard from './OrdersDashboard'
 import AdminNotificationCenter from './AdminNotificationCenter'
@@ -101,6 +102,29 @@ const AdminDashboard = ({ onClose }) => {
     }
   }
 
+  const handleTestWhatsApp = async () => {
+    if (orders.length === 0) {
+      alert('❌ No orders available to test. Add some test orders first.')
+      return
+    }
+
+    const latestOrder = orders[0] // Get the most recent order
+    
+    try {
+      const result = await autoSendOrderToWhatsApp(latestOrder)
+      if (result.success) {
+        alert(`✅ WhatsApp Test Successful!\n\nOrder ${latestOrder.orderId} sent automatically via ${result.methods.length} methods.\n\nCheck your WhatsApp for the message!`)
+        console.log('WhatsApp Test Result:', result)
+      } else {
+        alert(`❌ WhatsApp Test Failed: ${result.message}`)
+        console.error('WhatsApp Test Error:', result)
+      }
+    } catch (error) {
+      alert(`❌ WhatsApp Test Error: ${error.message}`)
+      console.error('WhatsApp Test Exception:', error)
+    }
+  }
+
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleDateString('en-IN', {
       year: 'numeric',
@@ -133,6 +157,13 @@ const AdminDashboard = ({ onClose }) => {
               >
                 <Bell size={20} />
                 Order Notifications
+              </button>
+              <button
+                onClick={handleTestWhatsApp}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2"
+              >
+                <MessageCircle size={20} />
+                Test WhatsApp
               </button>
               <button
                 onClick={() => setShowOrdersDashboard(true)}
