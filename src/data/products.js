@@ -1,8 +1,8 @@
 export const products = [
   {
     id: 1,
-    name: "Dark Velvet",
-    description: "Single Origin 72% Madagascar",
+    name: "Aurium Dark Chocolate",
+    description: "Premium 70% Single Origin",
     price: 195,
     image: "/images/products/aureim-product-1.jpeg",
     rating: 4.9,
@@ -10,37 +10,25 @@ export const products = [
     category: "single-origin",
     notes: ["Rich cocoa", "Vanilla undertones", "Smooth finish"],
     origin: "Madagascar",
-    percentage: 72
+    percentage: 70
   },
   {
     id: 2,
-    name: "Midnight Essence",
-    description: "Artisan 85% Ecuador",
-    price: 195,
+    name: "Aurium Dark Chocolate Combo",
+    description: "Buy 2 Premium Bars - Save ₹50",
+    price: 340,
+    originalPrice: 390,
     image: "/images/products/aureim-product-2.jpeg",
     rating: 4.8,
     reviews: 89,
-    category: "artisan",
-    notes: ["Intense dark", "Fruity notes", "Bold character"],
-    origin: "Ecuador",
-    percentage: 85
-  },
-  {
-    id: 3,
-    name: "Velvet & Essence Combo",
-    description: "Buy 2 Premium Chocolates - Save ₹0",
-    price: 390,
-    image: "/images/products/aureim-product-3.jpeg",
-    rating: 5.0,
-    reviews: 156,
     category: "collection",
     notes: ["Best Value", "2 Premium Bars", "Perfect Gift"],
     isCombo: true,
     comboItems: [
-      { name: "Dark Velvet", quantity: 1, price: 195 },
-      { name: "Midnight Essence", quantity: 1, price: 195 }
+      { name: "Aurium Dark Chocolate 70%", quantity: 1, price: 195 },
+      { name: "Aurium Dark Chocolate 85%", quantity: 1, price: 195 }
     ],
-    savings: 0
+    savings: 50
   }
 ];
 
