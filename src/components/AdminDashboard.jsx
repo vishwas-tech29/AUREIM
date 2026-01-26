@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Download, Package, TrendingUp, Users, Eye, ShoppingBag } from 'lucide-react'
+import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus } from 'lucide-react'
 import { getOrdersFromStorage, exportAllOrders, formatCurrency } from '../utils/excelExport'
+import { addTestOrdersToStorage, clearAllOrders, getOrderCount } from '../utils/testData'
 import LazyImage from './LazyImage'
 import OrdersDashboard from './OrdersDashboard'
 
@@ -46,6 +47,28 @@ const AdminDashboard = ({ onClose }) => {
     }
   }
 
+  const handleAddTestData = () => {
+    const result = addTestOrdersToStorage()
+    if (result.success) {
+      alert(result.message)
+      loadOrders() // Reload orders to show new test data
+    } else {
+      alert(result.message)
+    }
+  }
+
+  const handleClearAllData = () => {
+    if (window.confirm('Are you sure you want to clear all order data? This cannot be undone.')) {
+      const result = clearAllOrders()
+      if (result.success) {
+        alert(result.message)
+        loadOrders() // Reload orders to show empty state
+      } else {
+        alert(result.message)
+      }
+    }
+  }
+
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleDateString('en-IN', {
       year: 'numeric',
@@ -82,6 +105,23 @@ const AdminDashboard = ({ onClose }) => {
                 <Download size={20} />
                 Export All Orders
               </button>
+              {orders.length === 0 && (
+                <button
+                  onClick={handleAddTestData}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <Plus size={20} />
+                  Add Test Orders
+                </button>
+              )}
+              {orders.length > 0 && (
+                <button
+                  onClick={handleClearAllData}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2"
+                >
+                  Clear All Data
+                </button>
+              )}
               <button
                 onClick={onClose}
                 className="btn-primary"
@@ -166,7 +206,18 @@ const AdminDashboard = ({ onClose }) => {
             {orders.length === 0 ? (
               <div className="text-center py-12">
                 <Package size={48} className="text-text-secondary mx-auto mb-4" />
-                <p className="text-text-secondary">No orders found</p>
+                <h3 className="text-xl font-serif text-text-primary mb-4">No Orders Yet</h3>
+                <p className="text-text-secondary mb-6">
+                  Orders will appear here when customers place them. You can add test data to see how the dashboard works.
+                </p>
+                <div className="space-y-4">
+                  <p className="text-sm text-text-secondary">
+                    <strong>To access admin dashboard:</strong> Click the AUREIM logo 5 times quickly
+                  </p>
+                  <p className="text-sm text-text-secondary">
+                    <strong>Current orders in storage:</strong> {getOrderCount()} orders
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="overflow-x-auto">
