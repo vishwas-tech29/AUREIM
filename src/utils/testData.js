@@ -102,8 +102,8 @@ export const createTestOrders = () => {
       totals: {
         subtotal: 585,
         tax: 0,
-        shipping: 50,
-        total: 635
+        shipping: 69,
+        total: 654
       },
       paymentInfo: {
         method: "cod",

@@ -31,6 +31,8 @@ import {
 } from './utils/excelExport'
 import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
+import { loadOrdersFromUrl } from './utils/orderSync'
+import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
 
 function App() {
@@ -46,6 +48,65 @@ function App() {
   // Initialize notifications on app load
   useEffect(() => {
     initializeNotifications()
+    
+    // Check for synced orders in URL
+    const syncResult = loadOrdersFromUrl()
+    if (syncResult && syncResult.success && syncResult.newCount > 0) {
+      showToast(`✅ Synced ${syncResult.newCount} orders from another device`, 'success')
+    }
+    
+    // Check for new order in URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const newOrderData = urlParams.get('neworder')
+    if (newOrderData) {
+      try {
+        const orderArray = JSON.parse(atob(newOrderData))
+        if (orderArray.length > 0) {
+          const order = orderArray[0]
+          // Save the new order to localStorage
+          const existingOrders = JSON.parse(localStorage.getItem('aureim_orders') || '[]')
+          const orderExists = existingOrders.some(existing => existing.orderId === order.orderId)
+          
+          if (!orderExists) {
+            existingOrders.push(order)
+            localStorage.setItem('aureim_orders', JSON.stringify(existingOrders))
+            showToast(`🍫 New order received: ${order.orderId}`, 'success')
+            
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname)
+          }
+        }
+      } catch (error) {
+        console.error('Failed to process new order from URL:', error)
+      }
+    }
+    
+    // Check for admin access link
+    const adminData = urlParams.get('admin')
+    if (adminData) {
+      try {
+        const adminInfo = JSON.parse(atob(adminData))
+        if (adminInfo.adminAccess && adminInfo.newOrder) {
+          // Save the order and open admin dashboard
+          const existingOrders = JSON.parse(localStorage.getItem('aureim_orders') || '[]')
+          const orderExists = existingOrders.some(existing => existing.orderId === adminInfo.newOrder.orderId)
+          
+          if (!orderExists) {
+            existingOrders.push(adminInfo.newOrder)
+            localStorage.setItem('aureim_orders', JSON.stringify(existingOrders))
+          }
+          
+          // Open admin dashboard directly
+          setCurrentView('admin')
+          showToast(`🔧 Admin access: New order ${adminInfo.newOrder.orderId} loaded`, 'success')
+          
+          // Clean URL
+          window.history.replaceState({}, document.title, window.location.pathname)
+        }
+      } catch (error) {
+        console.error('Failed to process admin access link:', error)
+      }
+    }
   }, [])
 
   const showToast = (message, type = 'success') => {
@@ -149,11 +210,48 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
-      // Prepare WhatsApp notification for business
+      // Send comprehensive admin notifications
+      notifyAdminOfOrder(orderData).then(result => {
+        if (result.success) {
+          console.log('✅ Admin notification result:', result)
+          
+          // Show detailed success message with admin tips
+          const tips = result.adminTips || []
+          const tipMessage = tips.length > 0 ? '\n\nAdmin Tips:\n' + tips.join('\n') : ''
+          
+          showToast(`✅ Order confirmed! Admin notified via ${result.notifications.length} channels${tipMessage}`, 'success')
+          
+          // Log comprehensive order details for admin reference
+          console.log('🍫 COMPREHENSIVE ORDER DETAILS FOR ADMIN:')
+          console.log('Order ID:', orderData.orderId)
+          console.log('Customer:', orderData.customerInfo.fullName)
+          console.log('Phone:', orderData.customerInfo.phone)
+          console.log('Email:', orderData.customerInfo.email)
+          console.log('Address:', `${orderData.customerInfo.addressLine1}, ${orderData.customerInfo.city}`)
+          console.log('Total:', `₹${orderData.totals.total}`)
+          console.log('Items:', orderData.cartItems.map(item => `${item.name} (${item.quantity})`).join(', '))
+          console.log('Google Maps:', `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${orderData.customerInfo.addressLine1}, ${orderData.customerInfo.city}, ${orderData.customerInfo.state}`)}`)
+          console.log('Notification Methods:', result.notifications.map(n => `${n.method}: ${n.success ? '✅' : '❌'}`).join(', '))
+        } else {
+          console.error('❌ Admin notification failed:', result)
+          showToast('⚠️ Order confirmed! Admin notification had issues - check console', 'warning')
+        }
+      }).catch(error => {
+        console.error('❌ Admin notification error:', error)
+        showToast('⚠️ Order confirmed! Check console for admin details', 'warning')
+      })
+      
+      // Also try to send customer confirmation
+      const customerResult = sendCustomerConfirmation(orderData)
+      
+      // Send browser notification
+      const browserNotification = sendBrowserNotification(orderData)
+      
+      // Prepare WhatsApp notification for business (as backup)
       const message = formatOrderForWhatsApp(orderData)
       const whatsappUrl = `https://wa.me/919000429689?text=${message}`
       
-      // ALWAYS show business notification modal first (most important)
+      // Show WhatsApp modal as final backup
       setWhatsappModal({
         isOpen: true,
         orderData,
@@ -161,33 +259,8 @@ function App() {
         message
       })
       
-      // Also try to send customer confirmation
-      const customerResult = sendCustomerConfirmation(orderData)
-      
-      if (customerResult.success) {
-        showToast('✅ Order confirmed! Business & customer notifications ready', 'success')
-      } else {
-        showToast('✅ Order confirmed! Business notification ready', 'success')
-      }
-      
-      // Log order details to console as backup
-      console.log('🍫 NEW ORDER RECEIVED:', {
-        orderId: orderData.orderId,
-        customer: orderData.customerInfo.fullName,
-        phone: orderData.customerInfo.phone,
-        total: orderData.totals.total,
-        items: orderData.cartItems.length,
-        timestamp: new Date(orderData.timestamp).toLocaleString()
-      })
-      
-      // Send browser notification
-      const browserNotification = sendBrowserNotification(orderData)
-      if (browserNotification.success) {
-        console.log('Browser notification sent successfully')
-      }
-      
     } catch (error) {
-      console.error('Failed to prepare WhatsApp notification:', error)
+      console.error('Failed to send admin notifications:', error)
       showToast('⚠️ Order confirmed! Check console for details.', 'warning')
       
       // Emergency fallback - log order details

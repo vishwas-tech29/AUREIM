@@ -321,7 +321,16 @@ const OrdersDashboard = ({ onClose }) => {
                       <div><span className="text-text-secondary">Name:</span> <span className="text-text-primary">{selectedOrder.customerInfo.fullName}</span></div>
                       <div><span className="text-text-secondary">Email:</span> <span className="text-text-primary">{selectedOrder.customerInfo.email}</span></div>
                       <div><span className="text-text-secondary">Phone:</span> <span className="text-text-primary">{selectedOrder.customerInfo.phone}</span></div>
-                      <div><span className="text-text-secondary">Address:</span> <span className="text-text-primary">{selectedOrder.customerInfo.addressLine1}, {selectedOrder.customerInfo.city}, {selectedOrder.customerInfo.state} - {selectedOrder.customerInfo.pinCode}</span></div>
+                      <div><span className="text-text-secondary">Address:</span> 
+                        <a 
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedOrder.customerInfo.addressLine1}, ${selectedOrder.customerInfo.city}, ${selectedOrder.customerInfo.state} - ${selectedOrder.customerInfo.pinCode}`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-caramel-gold hover:text-caramel-light underline"
+                        >
+                          {selectedOrder.customerInfo.addressLine1}, {selectedOrder.customerInfo.city}, {selectedOrder.customerInfo.state} - {selectedOrder.customerInfo.pinCode}
+                        </a>
+                      </div>
                     </div>
                   </div>
 

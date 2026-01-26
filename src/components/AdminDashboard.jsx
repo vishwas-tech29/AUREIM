@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus } from 'lucide-react'
+import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus, Share2, Upload, Bell } from 'lucide-react'
 import { getOrdersFromStorage, exportAllOrders, formatCurrency } from '../utils/excelExport'
 import { addTestOrdersToStorage, clearAllOrders, getOrderCount } from '../utils/testData'
+import { generateOrderSyncUrl, loadOrdersFromUrl, exportOrdersAsJson } from '../utils/orderSync'
 import LazyImage from './LazyImage'
 import OrdersDashboard from './OrdersDashboard'
+import AdminNotificationCenter from './AdminNotificationCenter'
 
 const AdminDashboard = ({ onClose }) => {
   const [orders, setOrders] = useState([])
   const [selectedOrder, setSelectedOrder] = useState(null)
   const [showOrdersDashboard, setShowOrdersDashboard] = useState(false)
+  const [showNotificationCenter, setShowNotificationCenter] = useState(false)
   const [stats, setStats] = useState({
     totalOrders: 0,
     totalRevenue: 0,
@@ -18,6 +21,13 @@ const AdminDashboard = ({ onClose }) => {
 
   useEffect(() => {
     loadOrders()
+    
+    // Check for orders in URL on load
+    const syncResult = loadOrdersFromUrl()
+    if (syncResult && syncResult.success && syncResult.newCount > 0) {
+      alert(syncResult.message)
+      loadOrders() // Reload to show synced orders
+    }
   }, [])
 
   const loadOrders = () => {
@@ -69,6 +79,28 @@ const AdminDashboard = ({ onClose }) => {
     }
   }
 
+  const handleShareOrders = () => {
+    const syncUrl = generateOrderSyncUrl()
+    if (syncUrl) {
+      navigator.clipboard.writeText(syncUrl).then(() => {
+        alert('Sync URL copied to clipboard! Share this URL to access orders on other devices.')
+      }).catch(() => {
+        prompt('Copy this URL to access orders on other devices:', syncUrl)
+      })
+    } else {
+      alert('No orders to share')
+    }
+  }
+
+  const handleExportJson = () => {
+    const result = exportOrdersAsJson()
+    if (result.success) {
+      alert(result.message)
+    } else {
+      alert(result.message)
+    }
+  }
+
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleDateString('en-IN', {
       year: 'numeric',
@@ -77,6 +109,10 @@ const AdminDashboard = ({ onClose }) => {
       hour: '2-digit',
       minute: '2-digit'
     })
+  }
+
+  if (showNotificationCenter) {
+    return <AdminNotificationCenter onClose={() => setShowNotificationCenter(false)} />
   }
 
   if (showOrdersDashboard) {
@@ -90,7 +126,14 @@ const AdminDashboard = ({ onClose }) => {
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-h1 font-serif text-text-primary">Admin Dashboard</h1>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
+              <button
+                onClick={() => setShowNotificationCenter(true)}
+                className="btn-luxury-gold flex items-center gap-2"
+              >
+                <Bell size={20} />
+                Order Notifications
+              </button>
               <button
                 onClick={() => setShowOrdersDashboard(true)}
                 className="btn-secondary flex items-center gap-2"
@@ -103,8 +146,26 @@ const AdminDashboard = ({ onClose }) => {
                 className="btn-secondary flex items-center gap-2"
               >
                 <Download size={20} />
-                Export All Orders
+                Export Excel
               </button>
+              {orders.length > 0 && (
+                <>
+                  <button
+                    onClick={handleShareOrders}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <Share2 size={20} />
+                    Share Orders
+                  </button>
+                  <button
+                    onClick={handleExportJson}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <Upload size={20} />
+                    Export JSON
+                  </button>
+                </>
+              )}
               {orders.length === 0 && (
                 <button
                   onClick={handleAddTestData}
@@ -287,7 +348,16 @@ const AdminDashboard = ({ onClose }) => {
                       <div><span className="text-text-secondary">Name:</span> <span className="text-text-primary">{selectedOrder.customerInfo.fullName}</span></div>
                       <div><span className="text-text-secondary">Email:</span> <span className="text-text-primary">{selectedOrder.customerInfo.email}</span></div>
                       <div><span className="text-text-secondary">Phone:</span> <span className="text-text-primary">{selectedOrder.customerInfo.phone}</span></div>
-                      <div><span className="text-text-secondary">Address:</span> <span className="text-text-primary">{selectedOrder.customerInfo.addressLine1}, {selectedOrder.customerInfo.city}, {selectedOrder.customerInfo.state} - {selectedOrder.customerInfo.pinCode}</span></div>
+                      <div><span className="text-text-secondary">Address:</span> 
+                        <a 
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedOrder.customerInfo.addressLine1}, ${selectedOrder.customerInfo.city}, ${selectedOrder.customerInfo.state} - ${selectedOrder.customerInfo.pinCode}`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-caramel-gold hover:text-caramel-light underline"
+                        >
+                          {selectedOrder.customerInfo.addressLine1}, {selectedOrder.customerInfo.city}, {selectedOrder.customerInfo.state} - {selectedOrder.customerInfo.pinCode}
+                        </a>
+                      </div>
                     </div>
                   </div>
 
