@@ -143,23 +143,39 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
-      // Prepare WhatsApp notification
+      // Prepare WhatsApp notification for business
       const message = formatOrderForWhatsApp(orderData)
-      const whatsappUrl = `https://wa.me/917894561230?text=${message}`
+      const whatsappUrl = `https://wa.me/919000429689?text=${message}`
       
-      // Show WhatsApp modal
-      setWhatsappModal({
-        isOpen: true,
-        orderData,
-        whatsappUrl,
-        message
-      })
+      // Automatically send customer confirmation
+      const customerResult = sendCustomerConfirmation(orderData)
       
-      showToast('✅ Order confirmed! WhatsApp notification ready', 'success')
+      if (customerResult.success) {
+        showToast('✅ Order confirmed! Customer WhatsApp opened automatically', 'success')
+        
+        // Small delay then show business notification
+        setTimeout(() => {
+          setWhatsappModal({
+            isOpen: true,
+            orderData,
+            whatsappUrl,
+            message
+          })
+        }, 2000)
+      } else {
+        // Fallback to manual process
+        setWhatsappModal({
+          isOpen: true,
+          orderData,
+          whatsappUrl,
+          message
+        })
+        showToast('✅ Order confirmed! Please send WhatsApp notifications', 'success')
+      }
       
     } catch (error) {
       console.error('Failed to prepare WhatsApp notification:', error)
-      showToast('⚠️ Order confirmed! Please contact us manually.', 'warning')
+      showToast('⚠️ Order confirmed! Please contact customer manually.', 'warning')
     }
     
     setCurrentOrder(orderData)
@@ -193,7 +209,7 @@ function App() {
     try {
       // Show WhatsApp modal for order details
       const message = formatOrderForWhatsApp(orderData)
-      const whatsappUrl = `https://wa.me/917894561230?text=${message}`
+      const whatsappUrl = `https://wa.me/919000429689?text=${message}`
       
       setWhatsappModal({
         isOpen: true,
@@ -257,7 +273,7 @@ function App() {
             onCheckout={handleCartSidebarCheckout}
           />
           
-          <StorySection />
+          <StorySection onNavigate={handleNavigate} />
           <Testimonials />
           <Newsletter />
           

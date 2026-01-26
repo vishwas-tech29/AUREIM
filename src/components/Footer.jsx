@@ -29,7 +29,7 @@ const Footer = ({ onNavigate }) => {
   }
 
   const socialLinks = [
-    { icon: <Instagram size={20} />, href: 'https://instagram.com/aureim.chocolates', name: 'Instagram' },
+    { icon: <Instagram size={20} />, href: 'https://www.instagram.com/aureim_chocolates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', name: 'Instagram' },
     { icon: <Facebook size={20} />, href: 'https://facebook.com/aureim.chocolates', name: 'Facebook' },
     { icon: <Twitter size={20} />, href: 'https://twitter.com/aureim_choco', name: 'Twitter' }
   ]
@@ -59,7 +59,7 @@ const Footer = ({ onNavigate }) => {
                 </div>
                 <div className="flex items-center gap-3 text-cream-soft">
                   <Phone size={16} />
-                  <span>+91 78945 61230</span>
+                  <span>+91 90004 29689</span>
                 </div>
                 <div className="flex items-center gap-3 text-cream-soft">
                   <MapPin size={16} />

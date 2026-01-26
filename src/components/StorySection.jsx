@@ -1,8 +1,6 @@
-import React from 'react'
 import { Leaf, Heart, Globe } from 'lucide-react'
-import LazyImage from './LazyImage'
 
-const StorySection = () => {
+const StorySection = ({ onNavigate }) => {
   const values = [
     {
       icon: <Leaf className="w-8 h-8" />,
@@ -101,6 +99,24 @@ const StorySection = () => {
             <div className="text-3xl font-serif text-caramel-gold mb-2">5★</div>
             <div className="text-text-muted text-sm tracking-wide">Average Rating</div>
           </div>
+        </div>
+
+        {/* Share Your Story Section */}
+        <div className="mt-20 pt-16 border-t border-cream-beige text-center">
+          <h3 className="text-h2 font-serif text-cocoa-dark mb-6">
+            Share Your Story
+          </h3>
+          <p className="text-lg text-text-muted max-w-2xl mx-auto mb-8 leading-relaxed">
+            We'd love to hear about your AUREIM experience. Share your thoughts, 
+            rate our chocolates, and become part of our growing community of 
+            mindful chocolate lovers.
+          </p>
+          <button 
+            onClick={() => onNavigate && onNavigate('reviews')}
+            className="btn-primary px-8 py-4"
+          >
+            Write a Review
+          </button>
         </div>
       </div>
     </section>

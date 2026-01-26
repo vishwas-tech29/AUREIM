@@ -265,7 +265,7 @@ const OrderConfirmation = ({
                 A confirmation email has been sent to <span className="text-text-primary">{orderData.customerInfo.email}</span>
               </p>
               <p className="text-text-secondary text-xs mt-2">
-                Need help? Contact us at aureim.chocolates@gmail.com or +91 78945 61230
+                Need help? Contact us at aureim.chocolates@gmail.com or +91 90004 29689
               </p>
             </div>
           </div>

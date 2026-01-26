@@ -68,7 +68,7 @@ const WhatsAppModal = ({ isOpen, onClose, orderData, whatsappUrl, message }) => 
           
           <div className="text-center">
             <p className="text-xs text-text-secondary">
-              WhatsApp Business: +91 78945 61230
+              WhatsApp Business: +91 90004 29689
             </p>
           </div>
         </div>

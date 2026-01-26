@@ -1,7 +1,7 @@
 // WhatsApp Business API Integration for Order Notifications
 
 // Business WhatsApp number (replace with actual number)
-const BUSINESS_WHATSAPP = '+917894561230'
+const BUSINESS_WHATSAPP = '+919000429689'
 
 // Format order data for WhatsApp message
 export const formatOrderForWhatsApp = (orderData) => {
@@ -121,7 +121,7 @@ ${customerInfo.addressLine1}, ${customerInfo.city}
 
 We'll start preparing your premium chocolates right away! You'll receive updates as your order progresses.
 
-For any queries, reply to this message or call us at +91 78945 61230.
+For any queries, reply to this message or call us at +91 90004 29689.
 
 Thank you for choosing AUREIM! 🙏
 
@@ -132,20 +132,30 @@ _Handcrafted with love in Hyderabad_ 🇮🇳`
   return encodeURIComponent(message)
 }
 
-// Send confirmation to customer
+// Send confirmation to customer with enhanced auto-copy
 export const sendCustomerConfirmation = (orderData) => {
   try {
     const message = formatCustomerConfirmation(orderData)
     const customerPhone = orderData.customerInfo.phone.replace(/\D/g, '') // Remove non-digits
     const whatsappUrl = `https://wa.me/91${customerPhone}?text=${message}`
     
-    // This would typically be handled by a backend service
-    // For demo, we'll show the business owner what message would be sent
-    console.log('Customer confirmation message:', decodeURIComponent(message))
+    // Auto-copy message to clipboard for easy pasting
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(decodeURIComponent(message))
+        .then(() => {
+          console.log('Customer message copied to clipboard!')
+        })
+        .catch(err => {
+          console.error('Failed to copy message:', err)
+        })
+    }
+    
+    // Open WhatsApp directly to customer
+    window.open(whatsappUrl, '_blank')
     
     return {
       success: true,
-      message: 'Customer confirmation prepared',
+      message: 'WhatsApp opened with customer message (copied to clipboard)',
       whatsappUrl
     }
   } catch (error) {

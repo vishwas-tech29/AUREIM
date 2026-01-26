@@ -28,7 +28,7 @@ const ContactPage = ({ onBack }) => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      details: "+91 78945 61230",
+      details: "+91 90004 29689",
       description: "Mon-Sat, 9 AM - 7 PM IST"
     },
     {
@@ -139,7 +139,7 @@ Looking forward to your response!`
     // Generate WhatsApp message
     const message = generateWhatsAppMessage()
     const encodedMessage = encodeURIComponent(message)
-    const whatsappNumber = "917894561230" // Updated WhatsApp business number
+    const whatsappNumber = "919000429689" // Updated WhatsApp business number
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
     
     // Open WhatsApp
@@ -387,7 +387,7 @@ Looking forward to your response!`
                 </h3>
                 <div className="space-y-4">
                   <a
-                    href="tel:+917894561230"
+                    href="tel:+919000429689"
                     className="flex items-center gap-3 p-4 bg-cream-beige rounded-lg hover:bg-caramel-light transition-colors duration-300"
                   >
                     <Phone className="w-5 h-5 text-caramel-gold" />
@@ -403,7 +403,7 @@ Looking forward to your response!`
                   </a>
                   
                   <a
-                    href="https://wa.me/917894561230"
+                    href="https://wa.me/919000429689"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-4 bg-green-600 rounded-lg hover:bg-green-700 transition-colors duration-300"
