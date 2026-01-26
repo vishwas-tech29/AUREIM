@@ -30,6 +30,7 @@ import {
   calculateShipping
 } from './utils/excelExport'
 import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
+import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import './index.css'
 
 function App() {
@@ -41,6 +42,11 @@ function App() {
   const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false)
   const [currentOrder, setCurrentOrder] = useState(null)
   const [whatsappModal, setWhatsappModal] = useState({ isOpen: false, orderData: null, whatsappUrl: '', message: '' })
+
+  // Initialize notifications on app load
+  useEffect(() => {
+    initializeNotifications()
+  }, [])
 
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type })
@@ -147,35 +153,45 @@ function App() {
       const message = formatOrderForWhatsApp(orderData)
       const whatsappUrl = `https://wa.me/919000429689?text=${message}`
       
-      // Automatically send customer confirmation
+      // ALWAYS show business notification modal first (most important)
+      setWhatsappModal({
+        isOpen: true,
+        orderData,
+        whatsappUrl,
+        message
+      })
+      
+      // Also try to send customer confirmation
       const customerResult = sendCustomerConfirmation(orderData)
       
       if (customerResult.success) {
-        showToast('✅ Order confirmed! Customer WhatsApp opened automatically', 'success')
-        
-        // Small delay then show business notification
-        setTimeout(() => {
-          setWhatsappModal({
-            isOpen: true,
-            orderData,
-            whatsappUrl,
-            message
-          })
-        }, 2000)
+        showToast('✅ Order confirmed! Business & customer notifications ready', 'success')
       } else {
-        // Fallback to manual process
-        setWhatsappModal({
-          isOpen: true,
-          orderData,
-          whatsappUrl,
-          message
-        })
-        showToast('✅ Order confirmed! Please send WhatsApp notifications', 'success')
+        showToast('✅ Order confirmed! Business notification ready', 'success')
+      }
+      
+      // Log order details to console as backup
+      console.log('🍫 NEW ORDER RECEIVED:', {
+        orderId: orderData.orderId,
+        customer: orderData.customerInfo.fullName,
+        phone: orderData.customerInfo.phone,
+        total: orderData.totals.total,
+        items: orderData.cartItems.length,
+        timestamp: new Date(orderData.timestamp).toLocaleString()
+      })
+      
+      // Send browser notification
+      const browserNotification = sendBrowserNotification(orderData)
+      if (browserNotification.success) {
+        console.log('Browser notification sent successfully')
       }
       
     } catch (error) {
       console.error('Failed to prepare WhatsApp notification:', error)
-      showToast('⚠️ Order confirmed! Please contact customer manually.', 'warning')
+      showToast('⚠️ Order confirmed! Check console for details.', 'warning')
+      
+      // Emergency fallback - log order details
+      console.error('EMERGENCY ORDER DETAILS:', orderData)
     }
     
     setCurrentOrder(orderData)

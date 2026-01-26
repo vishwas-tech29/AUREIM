@@ -1,5 +1,6 @@
 import React from 'react'
-import { X, MessageCircle, Copy, ExternalLink } from 'lucide-react'
+import { X, MessageCircle, Copy, Mail } from 'lucide-react'
+import { sendEmailNotification } from '../utils/emailNotification'
 
 const WhatsAppModal = ({ isOpen, onClose, orderData, whatsappUrl, message }) => {
   if (!isOpen) return null
@@ -16,6 +17,15 @@ const WhatsAppModal = ({ isOpen, onClose, orderData, whatsappUrl, message }) => 
   const openWhatsApp = () => {
     window.open(whatsappUrl, '_blank')
     onClose()
+  }
+
+  const openEmail = () => {
+    const result = sendEmailNotification(orderData)
+    if (result.success) {
+      alert('Email notification opened! Check your email client.')
+    } else {
+      alert('Failed to open email. Please copy order details manually.')
+    }
   }
 
   return (
@@ -56,6 +66,14 @@ const WhatsAppModal = ({ isOpen, onClose, orderData, whatsappUrl, message }) => 
           >
             <MessageCircle size={20} />
             Open WhatsApp
+          </button>
+          
+          <button
+            onClick={openEmail}
+            className="w-full btn-secondary py-3 flex items-center justify-center gap-2"
+          >
+            <Mail size={20} />
+            Send Email Alert
           </button>
           
           <button
