@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Bell, Package, Refresh, ExternalLink } from 'lucide-react'
+import { Bell, Package, RotateCcw, ExternalLink } from 'lucide-react'
 import { getOrdersFromStorage, formatCurrency } from '../utils/excelExport'
 
 const AdminNotificationCenter = ({ onClose }) => {
@@ -101,7 +101,7 @@ Ready to pack and deliver! 📦`
                 onClick={checkForNewOrders}
                 className="btn-secondary flex items-center gap-2"
               >
-                <Refresh size={20} />
+                <RotateCcw size={20} />
                 Refresh
               </button>
               <button
