@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Heart, Star, ShoppingCart, Plus } from 'lucide-react'
 import LazyImage from './LazyImage'
 
@@ -112,8 +112,20 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
 
         {/* Price and Actions */}
         <div className="flex items-center justify-between pt-4 border-t border-cream-beige">
-          <div className="text-2xl font-serif text-caramel-gold">
-            {formatPrice(product.price)}
+          <div className="flex flex-col">
+            {product.originalPrice && (
+              <div className="text-sm text-text-secondary line-through">
+                {formatPrice(product.originalPrice)}
+              </div>
+            )}
+            <div className="text-2xl font-serif text-caramel-gold">
+              {formatPrice(product.price)}
+            </div>
+            {product.savings && (
+              <div className="text-xs text-green-600 font-medium">
+                Save ₹{product.savings}
+              </div>
+            )}
           </div>
           
           <div className="flex items-center gap-3">
