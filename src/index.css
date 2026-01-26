@@ -9,33 +9,60 @@
   }
   
   body {
-    @apply bg-chocolate-dark text-text-charcoal font-sans antialiased;
-    background-color: #F5EFE8;
-    color: #1A0F0B;
+    @apply bg-cream-primary text-text-primary font-sans antialiased;
+    background-color: #FDF9F4;
+    color: #0F0A07;
     font-feature-settings: "kern" 1, "liga" 1;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif text-text-charcoal;
+    @apply font-serif text-text-primary;
+    color: #0F0A07;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-cocoa-dark hover:bg-cocoa-medium text-cream-soft px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
-    background: linear-gradient(135deg, #3B1F16 0%, #4A2A1A 100%);
+    @apply bg-cocoa-dark hover:bg-cocoa-medium text-cream-primary px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
+    background: linear-gradient(135deg, #2B1810 0%, #3B2218 100%);
+    color: #FDF9F4;
   }
   
   .btn-primary:hover {
-    background: linear-gradient(135deg, #4A2A1A 0%, #5A3A2A 100%);
+    background: linear-gradient(135deg, #3B2218 0%, #4B2A20 100%);
+    color: #FDF9F4;
   }
   
   .btn-secondary {
-    @apply border-2 border-cocoa-dark text-cocoa-dark hover:bg-cocoa-dark hover:text-cream-soft px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105;
+    @apply border-2 border-cocoa-dark text-cocoa-dark hover:bg-cocoa-dark hover:text-cream-primary px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105;
+    color: #2B1810;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #2B1810;
+    color: #FDF9F4;
+  }
+  
+  .btn-luxury {
+    @apply bg-gradient-to-r from-caramel-gold to-caramel-light text-chocolate-dark hover:from-caramel-light hover:to-caramel-gold px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
+    color: #1A0E08;
+  }
+  
+  .btn-luxury-gold {
+    @apply bg-caramel-gold hover:bg-caramel-light text-chocolate-dark px-10 py-4 rounded-lg font-medium tracking-wide transition-all duration-400 hover:scale-105 hover:shadow-luxury;
+    background-color: #D4A574;
+    color: #1A0E08;
+  }
+  
+  .btn-luxury-gold:hover {
+    background-color: #E2B885;
+    color: #1A0E08;
   }
   
   .card-luxury {
-    @apply bg-cream-beige rounded-xl shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 border border-cream-soft;
+    @apply bg-cream-soft rounded-xl shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 border border-cream-beige;
+    background-color: #FAF7F2;
+    border-color: #F2EDE6;
   }
   
   .text-gradient {

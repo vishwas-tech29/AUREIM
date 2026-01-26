@@ -124,18 +124,18 @@ const ReviewPage = ({ onBack, products }) => {
   const ratingDistribution = getRatingDistribution()
 
   return (
-    <div className="min-h-screen bg-cream-soft pt-24">
+    <div className="min-h-screen bg-cream-primary pt-24">
       <div className="section-padding section-spacing">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="flex items-center gap-4 mb-12">
             <button 
               onClick={onBack}
-              className="text-text-muted hover:text-cocoa-dark transition-colors duration-300"
+              className="text-text-secondary hover:text-text-primary transition-colors duration-300"
             >
               <ArrowLeft size={24} />
             </button>
-            <h1 className="text-h1 font-serif text-cocoa-dark">
+            <h1 className="text-h1 font-serif text-text-primary">
               Customer Reviews
             </h1>
           </div>
@@ -151,7 +151,7 @@ const ReviewPage = ({ onBack, products }) => {
                   <div className="flex justify-center mb-2">
                     {renderStars(Math.round(getAverageRating()))}
                   </div>
-                  <p className="text-text-muted">
+                  <p className="text-text-secondary">
                     Based on {reviews.length} reviews
                   </p>
                 </div>
@@ -160,7 +160,7 @@ const ReviewPage = ({ onBack, products }) => {
                 <div className="space-y-3 mb-8">
                   {[5, 4, 3, 2, 1].map((rating) => (
                     <div key={rating} className="flex items-center gap-3">
-                      <span className="text-sm text-text-muted w-6">
+                      <span className="text-sm text-text-secondary w-6">
                         {rating}★
                       </span>
                       <div className="flex-1 bg-cream-beige rounded-full h-2">
@@ -171,7 +171,7 @@ const ReviewPage = ({ onBack, products }) => {
                           }}
                         />
                       </div>
-                      <span className="text-sm text-text-muted w-8">
+                      <span className="text-sm text-text-secondary w-8">
                         {ratingDistribution[rating]}
                       </span>
                     </div>
@@ -185,7 +185,7 @@ const ReviewPage = ({ onBack, products }) => {
                   Write a Review
                 </button>
 
-                <p className="text-xs text-text-muted text-center">
+                <p className="text-xs text-text-secondary text-center">
                   Share your experience with AUREIM chocolates
                 </p>
               </div>
@@ -196,33 +196,33 @@ const ReviewPage = ({ onBack, products }) => {
               {/* Review Form */}
               {showReviewForm && (
                 <div className="card-luxury p-8 mb-8">
-                  <h3 className="text-xl font-serif text-cocoa-dark mb-6">
+                  <h3 className="text-xl font-serif text-text-primary mb-6">
                     Write Your Review
                   </h3>
 
                   <form onSubmit={handleSubmitReview} className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-text-muted mb-2">
+                      <label className="block text-sm font-medium text-text-secondary mb-2">
                         Your Name
                       </label>
                       <input
                         type="text"
                         value={newReview.customerName}
                         onChange={(e) => setNewReview({...newReview, customerName: e.target.value})}
-                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
+                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                         placeholder="Enter your name"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-text-muted mb-2">
+                      <label className="block text-sm font-medium text-text-secondary mb-2">
                         Product
                       </label>
                       <select
                         value={newReview.productId}
                         onChange={(e) => setNewReview({...newReview, productId: parseInt(e.target.value)})}
-                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal focus:outline-none focus:border-caramel-gold transition-colors duration-300"
+                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-primary focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                       >
                         {products.map((product) => (
                           <option key={product.id} value={product.id}>
@@ -233,7 +233,7 @@ const ReviewPage = ({ onBack, products }) => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-text-muted mb-2">
+                      <label className="block text-sm font-medium text-text-secondary mb-2">
                         Rating
                       </label>
                       {renderStars(newReview.rating, true, (rating) => 
@@ -242,28 +242,28 @@ const ReviewPage = ({ onBack, products }) => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-text-muted mb-2">
+                      <label className="block text-sm font-medium text-text-secondary mb-2">
                         Review Title
                       </label>
                       <input
                         type="text"
                         value={newReview.title}
                         onChange={(e) => setNewReview({...newReview, title: e.target.value})}
-                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
+                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                         placeholder="Summarize your experience"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-text-muted mb-2">
+                      <label className="block text-sm font-medium text-text-secondary mb-2">
                         Your Review
                       </label>
                       <textarea
                         value={newReview.comment}
                         onChange={(e) => setNewReview({...newReview, comment: e.target.value})}
                         rows={4}
-                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300 resize-none"
+                        className="w-full px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-caramel-gold transition-colors duration-300 resize-none"
                         placeholder="Tell us about your experience with this product..."
                         required
                       />
@@ -301,7 +301,7 @@ const ReviewPage = ({ onBack, products }) => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h4 className="font-medium text-cocoa-dark">
+                            <h4 className="font-medium text-text-primary">
                               {review.customerName}
                             </h4>
                             {review.verified && (
@@ -312,30 +312,30 @@ const ReviewPage = ({ onBack, products }) => {
                           </div>
                           <div className="flex items-center gap-3 mb-2">
                             {renderStars(review.rating)}
-                            <span className="text-sm text-text-muted">
+                            <span className="text-sm text-text-secondary">
                               {new Date(review.date).toLocaleDateString('en-IN')}
                             </span>
                           </div>
                           {product && (
-                            <p className="text-sm text-text-muted">
+                            <p className="text-sm text-text-secondary">
                               Reviewed: {product.name}
                             </p>
                           )}
                         </div>
                       </div>
 
-                      <h5 className="font-medium text-cocoa-dark mb-3">
+                      <h5 className="font-medium text-text-primary mb-3">
                         {review.title}
                       </h5>
 
-                      <p className="text-text-muted leading-relaxed mb-4">
+                      <p className="text-text-secondary leading-relaxed mb-4">
                         {review.comment}
                       </p>
 
                       <div className="flex items-center justify-between pt-4 border-t border-cream-beige">
                         <button
                           onClick={() => handleHelpful(review.id)}
-                          className="flex items-center gap-2 text-text-muted hover:text-caramel-gold transition-colors duration-300"
+                          className="flex items-center gap-2 text-text-secondary hover:text-caramel-gold transition-colors duration-300"
                         >
                           <ThumbsUp size={16} />
                           <span className="text-sm">
@@ -344,7 +344,7 @@ const ReviewPage = ({ onBack, products }) => {
                         </button>
 
                         <div className="flex items-center gap-4">
-                          <button className="text-text-muted hover:text-red-400 transition-colors duration-300">
+                          <button className="text-text-secondary hover:text-red-400 transition-colors duration-300">
                             <Heart size={16} />
                           </button>
                         </div>
@@ -357,10 +357,10 @@ const ReviewPage = ({ onBack, products }) => {
               {reviews.length === 0 && (
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">⭐</div>
-                  <h3 className="text-xl font-serif text-cocoa-dark mb-2">
+                  <h3 className="text-xl font-serif text-text-primary mb-2">
                     No Reviews Yet
                   </h3>
-                  <p className="text-text-muted mb-6">
+                  <p className="text-text-secondary mb-6">
                     Be the first to share your experience with AUREIM chocolates
                   </p>
                   <button

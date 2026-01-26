@@ -44,10 +44,10 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-h1 font-serif text-cocoa-dark mb-6">
+          <h2 className="text-h1 font-serif text-text-primary mb-6">
             Our Collection
           </h2>
-          <p className="text-xl text-text-muted max-w-2xl mx-auto">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
             Each piece tells a story of origin, craft, and mindful indulgence
           </p>
         </div>
@@ -63,7 +63,7 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
                 className={`px-6 py-3 rounded-lg text-sm font-medium tracking-wide transition-all duration-300 ${
                   filter === category.id
                     ? 'bg-caramel-gold text-chocolate-dark'
-                    : 'bg-cream-beige text-text-charcoal hover:bg-caramel-light'
+                    : 'bg-cream-beige text-text-primary hover:bg-caramel-light hover:text-chocolate-dark'
                 }`}
               >
                 {category.name}
@@ -73,11 +73,11 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
 
           {/* Sort Dropdown */}
           <div className="flex items-center gap-3 justify-center lg:justify-end w-full lg:w-auto">
-            <span className="text-text-muted text-sm">Sort by:</span>
+            <span className="text-text-secondary text-sm">Sort by:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-cream-beige text-text-charcoal border border-cream-soft rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-caramel-gold"
+              className="bg-cream-beige text-text-primary border border-cream-soft rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-caramel-gold"
             >
               {sortOptions.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -104,7 +104,7 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
         {/* Empty State */}
         {sortedProducts.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-text-muted text-lg">
+            <p className="text-text-secondary text-lg">
               No products found in this category.
             </p>
           </div>

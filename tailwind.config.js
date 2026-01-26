@@ -6,35 +6,39 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Premium Dark Chocolate Palette
-        'cocoa-dark': '#3B1F16',
-        'cocoa-medium': '#4A2A1A',
-        'chocolate-dark': '#1F0F0A',
-        'chocolate-medium': '#2A1410',
-        'caramel-gold': '#C8A15A',
-        'caramel-light': '#D4AF6A',
-        'cream-soft': '#F5EFE8',
-        'cream-beige': '#EFE6DB',
-        'text-charcoal': '#1A0F0B',
-        'text-muted': '#4A3429',
+        // Premium Dark Chocolate Palette - Enhanced Contrast
+        'cocoa-dark': '#2B1810',        // Darker for better contrast
+        'cocoa-medium': '#3B2218',      // Medium brown
+        'chocolate-dark': '#1A0E08',    // Very dark chocolate
+        'chocolate-medium': '#241612',  // Dark chocolate medium
+        'caramel-gold': '#D4A574',      // Brighter gold
+        'caramel-light': '#E2B885',     // Lighter caramel
+        'cream-soft': '#FAF7F2',        // Softer cream
+        'cream-beige': '#F2EDE6',       // Warmer beige
+        'cream-blush': '#F8F4EF',       // Light blush
+        'cream-primary': '#FDF9F4',     // Primary cream
+        'text-charcoal': '#0F0A07',     // Much darker text
+        'text-muted': '#3D2B20',        // Better contrast muted
+        'text-secondary': '#5A4136',    // Secondary text
+        'text-primary': '#1A0F0B',      // Primary text
         
         // Legacy colors for compatibility
         stone: {
-          950: '#1F0F0A',
-          900: '#2A1410',
-          300: '#EFE6DB',
+          950: '#1A0E08',
+          900: '#241612',
+          300: '#F2EDE6',
         },
         amber: {
-          900: '#C8A15A',
-          800: '#D4AF6A',
-          200: '#F5EFE8',
-          100: '#EFE6DB',
+          900: '#D4A574',
+          800: '#E2B885',
+          200: '#FAF7F2',
+          100: '#F2EDE6',
         },
-        charcoal: '#2B1A15',
-        'matte-brown': '#2A1410',
-        cocoa: '#3B1F16',
-        beige: '#F5EFE8',
-        gold: '#D4AF6A',
+        charcoal: '#2B1810',
+        'matte-brown': '#241612',
+        cocoa: '#2B1810',
+        beige: '#FAF7F2',
+        gold: '#E2B885',
       },
       fontFamily: {
         serif: ['Cormorant Garamond', 'Playfair Display', 'serif'],

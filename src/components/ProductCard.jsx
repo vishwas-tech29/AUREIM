@@ -22,7 +22,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
         className={`${
           i < Math.floor(rating)
             ? 'text-caramel-gold fill-current'
-            : 'text-text-muted'
+            : 'text-text-secondary'
         }`}
       />
     ))
@@ -51,7 +51,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-300 ${
             isFavorite
               ? 'bg-caramel-gold text-chocolate-dark'
-              : 'bg-chocolate-dark/70 text-cream-soft hover:bg-caramel-gold hover:text-chocolate-dark'
+              : 'bg-chocolate-dark/70 text-cream-primary hover:bg-caramel-gold hover:text-chocolate-dark'
           }`}
         >
           <Heart size={18} className={isFavorite ? 'fill-current' : ''} />
@@ -83,17 +83,17 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           <div className="flex items-center gap-1">
             {renderStars(product.rating)}
           </div>
-          <span className="text-text-muted text-sm">
+          <span className="text-text-secondary text-sm">
             {product.rating} ({product.reviews})
           </span>
         </div>
 
         {/* Name and Description */}
         <div>
-          <h3 className="text-xl font-serif text-cocoa-dark mb-1 group-hover:text-caramel-gold transition-colors duration-300">
+          <h3 className="text-xl font-serif text-text-primary mb-1 group-hover:text-caramel-gold transition-colors duration-300">
             {product.name}
           </h3>
-          <p className="text-text-muted text-sm">
+          <p className="text-text-secondary text-sm">
             {product.description}
           </p>
         </div>
@@ -103,7 +103,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           {product.notes.slice(0, 2).map((note, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-cream-beige text-text-charcoal text-xs rounded-full"
+              className="px-3 py-1 bg-cream-beige text-text-primary text-xs rounded-full"
             >
               {note}
             </span>
@@ -124,17 +124,17 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
                   e.stopPropagation()
                   setQuantity(Math.max(1, quantity - 1))
                 }}
-                className="w-8 h-8 rounded-full bg-cream-beige text-text-charcoal hover:bg-caramel-gold transition-colors duration-300 flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-cream-beige text-text-primary hover:bg-caramel-gold hover:text-chocolate-dark transition-colors duration-300 flex items-center justify-center"
               >
                 -
               </button>
-              <span className="text-text-charcoal w-8 text-center">{quantity}</span>
+              <span className="text-text-primary w-8 text-center">{quantity}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   setQuantity(quantity + 1)
                 }}
-                className="w-8 h-8 rounded-full bg-cream-beige text-text-charcoal hover:bg-caramel-gold transition-colors duration-300 flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-cream-beige text-text-primary hover:bg-caramel-gold hover:text-chocolate-dark transition-colors duration-300 flex items-center justify-center"
               >
                 <Plus size={14} />
               </button>

@@ -17,16 +17,19 @@ import AdminDashboard from './components/AdminDashboard'
 import CraftPage from './components/CraftPage'
 import ContactPage from './components/ContactPage'
 import ReviewPage from './components/ReviewPage'
+import WhatsAppModal from './components/WhatsAppModal'
+import FloatingCartButton from './components/FloatingCartButton'
+import HomeCartSection from './components/HomeCartSection'
 import LazyImage from './components/LazyImage'
 import { products } from './data/products'
 import { preloadImages, criticalImages } from './utils/imagePreloader'
 import { 
   generateOrderId, 
   saveOrderToStorage, 
-  exportSingleOrder,
   calculateTax,
   calculateShipping
 } from './utils/excelExport'
+import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
 import './index.css'
 
 function App() {
@@ -37,6 +40,7 @@ function App() {
   const [orderSummary, setOrderSummary] = useState(null)
   const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false)
   const [currentOrder, setCurrentOrder] = useState(null)
+  const [whatsappModal, setWhatsappModal] = useState({ isOpen: false, orderData: null, whatsappUrl: '', message: '' })
 
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type })
@@ -139,11 +143,23 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
-      const fileName = exportSingleOrder(orderData)
-      showToast(`✅ Order confirmed! Packing sheet: ${fileName}`, 'success')
+      // Prepare WhatsApp notification
+      const message = formatOrderForWhatsApp(orderData)
+      const whatsappUrl = `https://wa.me/917894561230?text=${message}`
+      
+      // Show WhatsApp modal
+      setWhatsappModal({
+        isOpen: true,
+        orderData,
+        whatsappUrl,
+        message
+      })
+      
+      showToast('✅ Order confirmed! WhatsApp notification ready', 'success')
+      
     } catch (error) {
-      console.error('Failed to generate packing sheet:', error)
-      showToast('⚠️ Order confirmed! Packing sheet generation failed.', 'warning')
+      console.error('Failed to prepare WhatsApp notification:', error)
+      showToast('⚠️ Order confirmed! Please contact us manually.', 'warning')
     }
     
     setCurrentOrder(orderData)
@@ -175,10 +191,19 @@ function App() {
 
   const handleDownloadInvoice = (orderData) => {
     try {
-      exportSingleOrder(orderData)
-      showToast('Invoice downloaded successfully!')
+      // Show WhatsApp modal for order details
+      const message = formatOrderForWhatsApp(orderData)
+      const whatsappUrl = `https://wa.me/917894561230?text=${message}`
+      
+      setWhatsappModal({
+        isOpen: true,
+        orderData,
+        whatsappUrl,
+        message
+      })
+      
     } catch (error) {
-      showToast('Failed to download invoice. Please try again.', 'error')
+      showToast('Failed to prepare order details. Please try again.', 'error')
     }
   }
 
@@ -222,9 +247,26 @@ function App() {
             onToggleFavorite={handleToggleFavorite}
             favorites={favorites}
           />
+          
+          {/* Home Cart Section - Shows when items are in cart */}
+          <HomeCartSection
+            cartItems={cartItems}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveItem}
+            onViewCart={handleViewFullCart}
+            onCheckout={handleCartSidebarCheckout}
+          />
+          
           <StorySection />
           <Testimonials />
           <Newsletter />
+          
+          {/* Floating Cart Button - Only on Home Page */}
+          <FloatingCartButton
+            cartCount={cartTotal}
+            onCartClick={handleCartClick}
+            onViewCart={handleViewFullCart}
+          />
         </main>
       )}
 
@@ -300,6 +342,14 @@ function App() {
         onRemoveItem={handleRemoveItem}
         onViewCart={handleViewFullCart}
         onCheckout={handleCartSidebarCheckout}
+      />
+      
+      <WhatsAppModal
+        isOpen={whatsappModal.isOpen}
+        onClose={() => setWhatsappModal({ isOpen: false, orderData: null, whatsappUrl: '', message: '' })}
+        orderData={whatsappModal.orderData}
+        whatsappUrl={whatsappModal.whatsappUrl}
+        message={whatsappModal.message}
       />
       
       {toast.show && (

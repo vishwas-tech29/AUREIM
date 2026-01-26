@@ -179,8 +179,14 @@ const CheckoutPage = ({
                     <span>{formatCurrency(totals.tax)}</span>
                   </div>
                   <div className="flex justify-between text-sm text-text-muted">
-                    <span>Shipping</span>
-                    <span className="text-green-400">Free</span>
+                    <span>Delivery</span>
+                    <span>
+                      {totals.shipping === 0 ? (
+                        <span className="text-green-600">Free</span>
+                      ) : (
+                        formatCurrency(totals.shipping)
+                      )}
+                    </span>
                   </div>
                   <div className="flex justify-between text-lg font-medium text-cocoa-dark pt-2 border-t border-cream-beige">
                     <span>Total</span>

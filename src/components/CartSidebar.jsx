@@ -167,7 +167,7 @@ const CartSidebar = ({
             </div>
             
             <p className="text-xs text-text-muted text-center">
-              Free shipping on all orders across Hyderabad
+              Free shipping on orders over ₹1000
             </p>
           </div>
         )}

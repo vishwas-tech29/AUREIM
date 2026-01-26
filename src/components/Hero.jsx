@@ -23,9 +23,9 @@ const Hero = () => {
       </div>
       
       {/* Background Gradient with Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cream-soft via-cream-beige to-cream-soft z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(58,31,22,0.15),transparent_50%)] animate-pulse" style={{animationDuration: '4s'}} />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(200,161,90,0.1),transparent_50%)] animate-pulse" style={{animationDuration: '6s'}} />
+      <div className="absolute inset-0 bg-gradient-to-br from-cream-primary via-cream-soft to-cream-blush z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(43,24,16,0.15),transparent_50%)] animate-pulse" style={{animationDuration: '4s'}} />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(212,165,116,0.1),transparent_50%)] animate-pulse" style={{animationDuration: '6s'}} />
       </div>
 
       {/* Content */}
@@ -37,12 +37,12 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className="text-hero-mobile md:text-hero font-serif text-cocoa-dark mb-8 leading-tight animate-slide-up">
+          <h1 className="text-hero-mobile md:text-hero font-serif text-text-primary mb-8 leading-tight animate-slide-up">
             Moments of
             <span className="block text-gradient">Pure Bliss</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-text-muted mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-slide-up" style={{animationDelay: '0.2s'}}>
+          <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-slide-up" style={{animationDelay: '0.2s'}}>
             Mindful luxury crafted in India. Each piece is a ritual of 
             <span className="text-caramel-gold font-medium"> guilt-free indulgence</span>, 
             designed for those who seek wellness in every moment.

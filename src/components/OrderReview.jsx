@@ -55,26 +55,26 @@ const OrderReview = ({
 
   return (
     <div className="card-luxury p-8">
-      <h2 className="text-h2 font-serif text-beige mb-8">
+      <h2 className="text-h2 font-serif text-text-primary mb-8">
         Review Your Order
       </h2>
 
       <div className="space-y-8">
         {/* Shipping Information */}
-        <div className="border border-stone-700 rounded-xl p-6">
+        <div className="border border-cream-beige rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-serif text-beige">Shipping Address</h3>
+            <h3 className="text-lg font-serif text-text-primary">Shipping Address</h3>
             <button
               onClick={onEditShipping}
-              className="text-amber-800 hover:text-amber-700 transition-colors duration-300 flex items-center gap-2"
+              className="text-caramel-gold hover:text-caramel-light transition-colors duration-300 flex items-center gap-2"
             >
               <Edit size={16} />
               Edit
             </button>
           </div>
           
-          <div className="text-stone-300 space-y-1">
-            <div className="font-medium">{shippingInfo.fullName}</div>
+          <div className="text-text-secondary space-y-1">
+            <div className="font-medium text-text-primary">{shippingInfo.fullName}</div>
             <div>{shippingInfo.email}</div>
             <div>{shippingInfo.phone}</div>
             <div className="pt-2">
@@ -87,30 +87,30 @@ const OrderReview = ({
         </div>
 
         {/* Payment Information */}
-        <div className="border border-stone-700 rounded-xl p-6">
+        <div className="border border-cream-beige rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-serif text-beige">Payment Method</h3>
+            <h3 className="text-lg font-serif text-text-primary">Payment Method</h3>
             <button
               onClick={onEditPayment}
-              className="text-amber-800 hover:text-amber-700 transition-colors duration-300 flex items-center gap-2"
+              className="text-caramel-gold hover:text-caramel-light transition-colors duration-300 flex items-center gap-2"
             >
               <Edit size={16} />
               Edit
             </button>
           </div>
           
-          <div className="text-stone-300">
+          <div className="text-text-secondary font-medium">
             {getPaymentMethodDisplay()}
           </div>
         </div>
 
         {/* Order Items */}
-        <div className="border border-stone-700 rounded-xl p-6">
-          <h3 className="text-lg font-serif text-beige mb-6">Order Items</h3>
+        <div className="border border-cream-beige rounded-xl p-6">
+          <h3 className="text-lg font-serif text-text-primary mb-6">Order Items</h3>
           
           <div className="space-y-4">
             {cartItems.map((item) => (
-              <div key={item.id} className="flex gap-4 py-4 border-b border-stone-800 last:border-b-0">
+              <div key={item.id} className="flex gap-4 py-4 border-b border-cream-beige last:border-b-0">
                 <LazyImage
                   src={item.image}
                   alt={item.name}
@@ -120,13 +120,13 @@ const OrderReview = ({
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h4 className="text-beige font-medium">{item.name}</h4>
-                      <p className="text-stone-400 text-sm">{item.description}</p>
+                      <h4 className="text-text-primary font-medium">{item.name}</h4>
+                      <p className="text-text-secondary text-sm">{item.description}</p>
                       <div className="flex gap-2 mt-2">
                         {item.notes?.slice(0, 2).map((note, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-stone-800 text-stone-300 text-xs rounded-full"
+                            className="px-2 py-1 bg-cream-beige text-text-secondary text-xs rounded-full"
                           >
                             {note}
                           </span>
@@ -135,8 +135,8 @@ const OrderReview = ({
                     </div>
                     
                     <div className="text-right">
-                      <div className="text-stone-400 text-sm">Qty: {item.quantity}</div>
-                      <div className="text-amber-200 font-medium">
+                      <div className="text-text-secondary text-sm">Qty: {item.quantity}</div>
+                      <div className="text-caramel-gold font-medium">
                         {formatCurrency(item.price * item.quantity)}
                       </div>
                     </div>
@@ -148,25 +148,25 @@ const OrderReview = ({
         </div>
 
         {/* Order Total */}
-        <div className="border border-stone-700 rounded-xl p-6">
-          <h3 className="text-lg font-serif text-beige mb-6">Order Total</h3>
+        <div className="border border-cream-beige rounded-xl p-6">
+          <h3 className="text-lg font-serif text-text-primary mb-6">Order Total</h3>
           
           <div className="space-y-3">
-            <div className="flex justify-between text-stone-300">
+            <div className="flex justify-between text-text-secondary">
               <span>Subtotal ({cartItems.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
               <span>{formatCurrency(totals.subtotal)}</span>
             </div>
             
-            <div className="flex justify-between text-stone-300">
+            <div className="flex justify-between text-text-secondary">
               <span>Tax (GST 18%)</span>
               <span>{formatCurrency(totals.tax)}</span>
             </div>
             
-            <div className="flex justify-between text-stone-300">
-              <span>Shipping</span>
+            <div className="flex justify-between text-text-secondary">
+              <span>Delivery</span>
               <span>
                 {totals.shipping === 0 ? (
-                  <span className="text-green-400">Free</span>
+                  <span className="text-green-600">Free</span>
                 ) : (
                   formatCurrency(totals.shipping)
                 )}
@@ -174,16 +174,16 @@ const OrderReview = ({
             </div>
             
             {paymentInfo.method === 'cod' && (
-              <div className="flex justify-between text-stone-300">
+              <div className="flex justify-between text-text-secondary">
                 <span>COD Charges</span>
                 <span>{formatCurrency(50)}</span>
               </div>
             )}
             
-            <div className="border-t border-stone-700 pt-3">
+            <div className="border-t border-cream-beige pt-3">
               <div className="flex justify-between items-center">
-                <span className="text-xl font-medium text-beige">Total</span>
-                <span className="text-2xl font-serif text-amber-200">
+                <span className="text-xl font-medium text-text-primary">Total</span>
+                <span className="text-2xl font-serif text-caramel-gold">
                   {formatCurrency(totals.total + (paymentInfo.method === 'cod' ? 50 : 0))}
                 </span>
               </div>
@@ -204,18 +204,18 @@ const OrderReview = ({
                   setErrors(prev => ({ ...prev, terms: '' }))
                 }
               }}
-              className="mt-1 w-4 h-4 text-amber-800 bg-stone-800 border-stone-600 rounded focus:ring-amber-800"
+              className="mt-1 w-4 h-4 text-caramel-gold bg-cream-beige border-cream-soft rounded focus:ring-caramel-gold"
             />
-            <label htmlFor="terms" className="text-stone-300 text-sm">
+            <label htmlFor="terms" className="text-text-secondary text-sm">
               I agree to the{' '}
-              <a href="#terms" className="text-amber-800 hover:text-amber-700 underline">
+              <a href="#terms" className="text-caramel-gold hover:text-caramel-light underline">
                 Terms & Conditions
               </a>{' '}
               and understand the return policy.
             </label>
           </div>
           {errors.terms && (
-            <p className="text-sm text-red-400 ml-7">{errors.terms}</p>
+            <p className="text-sm text-red-500 ml-7">{errors.terms}</p>
           )}
 
           <div className="flex items-start gap-3">
@@ -229,18 +229,18 @@ const OrderReview = ({
                   setErrors(prev => ({ ...prev, privacy: '' }))
                 }
               }}
-              className="mt-1 w-4 h-4 text-amber-800 bg-stone-800 border-stone-600 rounded focus:ring-amber-800"
+              className="mt-1 w-4 h-4 text-caramel-gold bg-cream-beige border-cream-soft rounded focus:ring-caramel-gold"
             />
-            <label htmlFor="privacy" className="text-stone-300 text-sm">
+            <label htmlFor="privacy" className="text-text-secondary text-sm">
               I agree to the{' '}
-              <a href="#privacy" className="text-amber-800 hover:text-amber-700 underline">
+              <a href="#privacy" className="text-caramel-gold hover:text-caramel-light underline">
                 Privacy Policy
               </a>{' '}
               and consent to data processing.
             </label>
           </div>
           {errors.privacy && (
-            <p className="text-sm text-red-400 ml-7">{errors.privacy}</p>
+            <p className="text-sm text-red-500 ml-7">{errors.privacy}</p>
           )}
         </div>
 
@@ -265,18 +265,18 @@ const OrderReview = ({
         </form>
 
         {/* Trust Badges */}
-        <div className="flex justify-center gap-8 pt-6 border-t border-stone-800">
+        <div className="flex justify-center gap-8 pt-6 border-t border-cream-beige">
           <div className="text-center">
-            <div className="text-green-400 text-sm font-medium">🔒 Secure Checkout</div>
-            <div className="text-stone-500 text-xs">SSL Encrypted</div>
+            <div className="text-green-600 text-sm font-medium">🔒 Secure Checkout</div>
+            <div className="text-text-secondary text-xs">SSL Encrypted</div>
           </div>
           <div className="text-center">
-            <div className="text-green-400 text-sm font-medium">💰 Money-back Guarantee</div>
-            <div className="text-stone-500 text-xs">30-day return</div>
+            <div className="text-green-600 text-sm font-medium">💰 Money-back Guarantee</div>
+            <div className="text-text-secondary text-xs">30-day return</div>
           </div>
           <div className="text-center">
-            <div className="text-green-400 text-sm font-medium">🚚 Fast Delivery</div>
-            <div className="text-stone-500 text-xs">2-5 business days</div>
+            <div className="text-green-600 text-sm font-medium">🚚 Fast Delivery</div>
+            <div className="text-text-secondary text-xs">2-5 business days</div>
           </div>
         </div>
       </div>

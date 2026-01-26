@@ -21,9 +21,9 @@ export const calculateTax = (subtotal) => {
   return Math.round(subtotal * 0.18 * 100) / 100;
 };
 
-// Calculate shipping fee (Free shipping for all orders)
+// Calculate shipping fee (₹50 for orders under ₹1000, free above)
 export const calculateShipping = (subtotal) => {
-  return 0; // Free shipping for all orders
+  return subtotal >= 1000 ? 0 : 50;
 };
 
 // Calculate delivery date (3 working days from order)

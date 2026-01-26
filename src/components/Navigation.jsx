@@ -25,8 +25,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-cocoa-dark/95 backdrop-blur-nav shadow-luxury' 
-        : 'bg-cocoa-dark/80'
+        ? 'bg-chocolate-dark/95 backdrop-blur-nav shadow-luxury' 
+        : 'bg-chocolate-dark/90'
     }`}>
       <div className="section-padding">
         <div className="flex items-center justify-between h-20">
@@ -34,7 +34,7 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           <div className="flex-shrink-0">
             <h1 
               className={`text-2xl font-serif tracking-luxury cursor-pointer transition-colors duration-300 ${
-                isScrolled ? 'text-cream-soft' : 'text-cream-soft'
+                isScrolled ? 'text-cream-primary' : 'text-cream-primary'
               }`}
               onClick={(e) => {
                 if (e.detail === 5) { // 5 clicks to access admin
@@ -54,8 +54,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
                 onClick={item.action}
                 className={`transition-colors duration-300 font-medium tracking-wide ${
                   isScrolled 
-                    ? 'text-cream-soft hover:text-caramel-light' 
-                    : 'text-cream-soft hover:text-caramel-light'
+                    ? 'text-cream-primary hover:text-caramel-light' 
+                    : 'text-cream-primary hover:text-caramel-light'
                 }`}
               >
                 {item.name}
@@ -67,8 +67,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           <div className="hidden md:flex items-center space-x-6">
             <button className={`transition-colors duration-300 ${
               isScrolled 
-                ? 'text-cream-soft hover:text-caramel-light' 
-                : 'text-cream-soft hover:text-caramel-light'
+                ? 'text-cream-primary hover:text-caramel-light' 
+                : 'text-cream-primary hover:text-caramel-light'
             }`}>
               <Search size={20} />
             </button>
@@ -76,18 +76,18 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
               onClick={onFavoritesClick}
               className={`transition-colors duration-300 ${
                 isScrolled 
-                  ? 'text-cream-soft hover:text-caramel-light' 
-                  : 'text-cream-soft hover:text-caramel-light'
+                  ? 'text-cream-primary hover:text-caramel-light' 
+                  : 'text-cream-primary hover:text-caramel-light'
               }`}
             >
               <Heart size={20} />
             </button>
             <button 
               onClick={() => onNavigate('cart')}
-              className={`px-4 py-2 border border-cream-soft hover:border-caramel-light rounded-full transition-all duration-300 ${
+              className={`px-4 py-2 border border-cream-primary hover:border-caramel-light rounded-full transition-all duration-300 ${
                 isScrolled 
-                  ? 'text-cream-soft hover:text-caramel-light' 
-                  : 'text-cream-soft hover:text-caramel-light'
+                  ? 'text-cream-primary hover:text-caramel-light' 
+                  : 'text-cream-primary hover:text-caramel-light'
               }`}
             >
               <span className="text-sm font-medium tracking-wide">View Cart</span>
@@ -96,8 +96,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
               onClick={onCartClick}
               className={`relative transition-colors duration-300 group ${
                 isScrolled 
-                  ? 'text-cream-soft hover:text-caramel-light' 
-                  : 'text-cream-soft hover:text-caramel-light'
+                  ? 'text-cream-primary hover:text-caramel-light' 
+                  : 'text-cream-primary hover:text-caramel-light'
               }`}
             >
               <ShoppingBag size={20} />
@@ -113,8 +113,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           <button
             className={`md:hidden transition-colors duration-300 ${
               isScrolled 
-                ? 'text-cream-soft hover:text-caramel-light' 
-                : 'text-cream-soft hover:text-caramel-light'
+                ? 'text-cream-primary hover:text-caramel-light' 
+                : 'text-cream-primary hover:text-caramel-light'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -124,7 +124,7 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-cocoa-dark/95 backdrop-blur-nav border-t border-cocoa-medium">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-chocolate-dark/95 backdrop-blur-nav border-t border-chocolate-medium">
             <div className="section-padding py-6">
               <div className="flex flex-col space-y-6">
                 {navItems.map((item) => (
@@ -134,19 +134,19 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
                       item.action()
                       setIsMobileMenuOpen(false)
                     }}
-                    className="text-cream-soft hover:text-caramel-light transition-colors duration-300 font-medium tracking-wide text-left"
+                    className="text-cream-primary hover:text-caramel-light transition-colors duration-300 font-medium tracking-wide text-left"
                   >
                     {item.name}
                   </button>
                 ))}
                 
-                <div className="flex items-center space-x-6 pt-4 border-t border-cocoa-medium">
-                  <button className="text-cream-soft hover:text-caramel-light transition-colors duration-300">
+                <div className="flex items-center space-x-6 pt-4 border-t border-chocolate-medium">
+                  <button className="text-cream-primary hover:text-caramel-light transition-colors duration-300">
                     <Search size={20} />
                   </button>
                   <button 
                     onClick={onFavoritesClick}
-                    className="text-cream-soft hover:text-caramel-light transition-colors duration-300"
+                    className="text-cream-primary hover:text-caramel-light transition-colors duration-300"
                   >
                     <Heart size={20} />
                   </button>
@@ -155,13 +155,13 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
                       onNavigate('cart')
                       setIsMobileMenuOpen(false)
                     }}
-                    className="px-3 py-1 border border-cream-soft hover:border-caramel-light rounded-full text-cream-soft hover:text-caramel-light transition-all duration-300"
+                    className="px-3 py-1 border border-cream-primary hover:border-caramel-light rounded-full text-cream-primary hover:text-caramel-light transition-all duration-300"
                   >
                     <span className="text-sm">Cart</span>
                   </button>
                   <button 
                     onClick={onCartClick}
-                    className="relative text-cream-soft hover:text-caramel-light transition-colors duration-300 group"
+                    className="relative text-cream-primary hover:text-caramel-light transition-colors duration-300 group"
                   >
                     <ShoppingBag size={20} />
                     {cartCount > 0 && (

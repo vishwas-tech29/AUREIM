@@ -26,7 +26,7 @@ const LazyImage = ({
   return (
     <div className="relative">
       {isLoading && (
-        <div className={`absolute inset-0 bg-stone-800 animate-pulse rounded-xl ${className}`} />
+        <div className={`absolute inset-0 bg-cream-beige animate-pulse rounded-xl ${className}`} />
       )}
       <img
         src={imageSrc}
