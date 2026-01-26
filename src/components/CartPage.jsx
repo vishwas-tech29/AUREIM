@@ -239,13 +239,15 @@ const CartPage = ({
                     </div>
                   )}
                   
-                  <div className="flex justify-between text-text-muted">
-                    <span>Tax (GST 18%)</span>
-                    <span>{formatCurrency(tax)}</span>
-                  </div>
+                  {tax > 0 && (
+                    <div className="flex justify-between text-text-muted">
+                      <span>Tax</span>
+                      <span>{formatCurrency(tax)}</span>
+                    </div>
+                  )}
                   
                   <div className="flex justify-between text-text-muted">
-                    <span>Shipping</span>
+                    <span>Delivery</span>
                     <span>
                       {shipping === 0 ? (
                         <span className="text-green-600 font-medium">Free</span>

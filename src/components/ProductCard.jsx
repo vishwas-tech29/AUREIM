@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { Heart, Star, ShoppingCart, Plus } from 'lucide-react'
+import { Heart, Star, ShoppingCart } from 'lucide-react'
 import LazyImage from './LazyImage'
 
 const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [quantity, setQuantity] = useState(1)
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
@@ -65,7 +64,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                onAddToCart(product, quantity)
+                onAddToCart(product, 1)
               }}
               className="w-full btn-primary py-3 text-sm"
             >
@@ -128,30 +127,16 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
             )}
           </div>
           
-          <div className="flex items-center gap-3">
-            {/* Quantity Selector */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setQuantity(Math.max(1, quantity - 1))
-                }}
-                className="w-8 h-8 rounded-full bg-cream-beige text-text-primary hover:bg-caramel-gold hover:text-chocolate-dark transition-colors duration-300 flex items-center justify-center"
-              >
-                -
-              </button>
-              <span className="text-text-primary w-8 text-center">{quantity}</span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setQuantity(quantity + 1)
-                }}
-                className="w-8 h-8 rounded-full bg-cream-beige text-text-primary hover:bg-caramel-gold hover:text-chocolate-dark transition-colors duration-300 flex items-center justify-center"
-              >
-                <Plus size={14} />
-              </button>
-            </div>
-          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onAddToCart(product, 1)
+            }}
+            className="btn-primary px-6 py-3 flex items-center gap-2"
+          >
+            <ShoppingCart size={16} />
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

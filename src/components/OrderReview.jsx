@@ -157,10 +157,12 @@ const OrderReview = ({
               <span>{formatCurrency(totals.subtotal)}</span>
             </div>
             
-            <div className="flex justify-between text-text-secondary">
-              <span>Tax (GST 18%)</span>
-              <span>{formatCurrency(totals.tax)}</span>
-            </div>
+            {totals.tax > 0 && (
+              <div className="flex justify-between text-text-secondary">
+                <span>Tax</span>
+                <span>{formatCurrency(totals.tax)}</span>
+              </div>
+            )}
             
             <div className="flex justify-between text-text-secondary">
               <span>Delivery</span>

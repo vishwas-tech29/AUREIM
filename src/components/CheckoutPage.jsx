@@ -174,10 +174,12 @@ const CheckoutPage = ({
                     <span>Subtotal</span>
                     <span>{formatCurrency(totals.subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-text-muted">
-                    <span>Tax (GST 18%)</span>
-                    <span>{formatCurrency(totals.tax)}</span>
-                  </div>
+                  {totals.tax > 0 && (
+                    <div className="flex justify-between text-sm text-text-muted">
+                      <span>Tax</span>
+                      <span>{formatCurrency(totals.tax)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-sm text-text-muted">
                     <span>Delivery</span>
                     <span>

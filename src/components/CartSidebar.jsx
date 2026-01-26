@@ -123,14 +123,16 @@ const CartSidebar = ({
                   {formatCurrency(subtotal)}
                 </span>
               </div>
+              {tax > 0 && (
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-text-muted">Tax:</span>
+                  <span className="text-text-charcoal font-medium">
+                    {formatCurrency(tax)}
+                  </span>
+                </div>
+              )}
               <div className="flex justify-between items-center text-sm">
-                <span className="text-text-muted">Tax (18%):</span>
-                <span className="text-text-charcoal font-medium">
-                  {formatCurrency(tax)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-text-muted">Shipping:</span>
+                <span className="text-text-muted">Delivery:</span>
                 <span className="text-text-charcoal font-medium">
                   {shipping === 0 ? <span className="text-green-600">Free</span> : formatCurrency(shipping)}
                 </span>

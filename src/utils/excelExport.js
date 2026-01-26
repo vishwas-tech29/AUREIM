@@ -16,9 +16,9 @@ export const formatCurrency = (amount) => {
   }).format(amount);
 };
 
-// Calculate tax (GST 18% for India)
+// Calculate tax (removed - no tax applied)
 export const calculateTax = (subtotal) => {
-  return Math.round(subtotal * 0.18 * 100) / 100;
+  return 0;
 };
 
 // Calculate shipping fee (₹50 for orders under ₹1000, free above)
@@ -89,7 +89,6 @@ export const formatOrderForExcel = (orderData) => {
     'PIN Code': customerInfo.pinCode,
     'Product Details': productDetails,
     'Subtotal (₹)': totals.subtotal,
-    'Tax (GST 18%) (₹)': totals.tax,
     'Shipping Fee (₹)': totals.shipping,
     'Total Amount (₹)': totals.total,
     'Payment Method': paymentInfo.method,

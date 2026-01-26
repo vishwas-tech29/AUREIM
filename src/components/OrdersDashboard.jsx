@@ -355,10 +355,12 @@ const OrdersDashboard = ({ onClose }) => {
                         <span>Subtotal:</span>
                         <span>{formatCurrency(selectedOrder.totals.subtotal)}</span>
                       </div>
-                      <div className="flex justify-between text-text-secondary">
-                        <span>Tax:</span>
-                        <span>{formatCurrency(selectedOrder.totals.tax)}</span>
-                      </div>
+                      {selectedOrder.totals.tax > 0 && (
+                        <div className="flex justify-between text-text-secondary">
+                          <span>Tax:</span>
+                          <span>{formatCurrency(selectedOrder.totals.tax)}</span>
+                        </div>
+                      )}
                       <div className="flex justify-between text-text-secondary">
                         <span>Delivery:</span>
                         <span>{selectedOrder.totals.shipping === 0 ? 'Free' : formatCurrency(selectedOrder.totals.shipping)}</span>

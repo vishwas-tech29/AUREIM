@@ -2,18 +2,7 @@ import React, { useState } from 'react'
 import ProductCard from './ProductCard'
 
 const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => {
-  const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('name')
-
-  const categories = [
-    { id: 'all', name: 'All Products' },
-    { id: 'single-origin', name: 'Single Origin' },
-    { id: 'artisan', name: 'Artisan' },
-    { id: 'praline', name: 'Praline' },
-    { id: 'truffle', name: 'Truffle' },
-    { id: 'infusion', name: 'Infusion' },
-    { id: 'collection', name: 'Collections' }
-  ]
 
   const sortOptions = [
     { id: 'name', name: 'Name' },
@@ -22,11 +11,7 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
     { id: 'rating', name: 'Rating' }
   ]
 
-  const filteredProducts = products.filter(product => 
-    filter === 'all' || product.category === filter
-  )
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
       case 'price-low':
         return a.price - b.price
@@ -52,27 +37,9 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
           </p>
         </div>
 
-        {/* Filters and Sort */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-3 justify-center lg:justify-start w-full lg:w-auto">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setFilter(category.id)}
-                className={`px-6 py-3 rounded-lg text-sm font-medium tracking-wide transition-all duration-300 ${
-                  filter === category.id
-                    ? 'bg-caramel-gold text-chocolate-dark'
-                    : 'bg-cream-beige text-text-primary hover:bg-caramel-light hover:text-chocolate-dark'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Sort Dropdown */}
-          <div className="flex items-center gap-3 justify-center lg:justify-end w-full lg:w-auto">
+        {/* Sort Only */}
+        <div className="flex justify-center lg:justify-end items-center mb-12">
+          <div className="flex items-center gap-3">
             <span className="text-text-secondary text-sm">Sort by:</span>
             <select
               value={sortBy}
@@ -100,15 +67,6 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
             />
           ))}
         </div>
-
-        {/* Empty State */}
-        {sortedProducts.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-text-secondary text-lg">
-              No products found in this category.
-            </p>
-          </div>
-        )}
       </div>
     </section>
   )
