@@ -274,7 +274,7 @@ function App() {
           />
           
           <StorySection onNavigate={handleNavigate} />
-          <Testimonials />
+          <Testimonials onNavigate={handleNavigate} />
           <Newsletter />
           
           {/* Floating Cart Button - Only on Home Page */}

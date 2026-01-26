@@ -139,7 +139,7 @@ Looking forward to your response!`
     // Generate WhatsApp message
     const message = generateWhatsAppMessage()
     const encodedMessage = encodeURIComponent(message)
-    const whatsappNumber = "919000429689" // Updated WhatsApp business number
+    const whatsappNumber = "+91 90004 29689" // Updated WhatsApp business number
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
     
     // Open WhatsApp

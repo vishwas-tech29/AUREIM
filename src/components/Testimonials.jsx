@@ -2,7 +2,7 @@ import React from 'react'
 import { Star, Quote } from 'lucide-react'
 import { testimonials } from '../data/products'
 
-const Testimonials = () => {
+const Testimonials = ({ onNavigate }) => {
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
@@ -79,7 +79,10 @@ const Testimonials = () => {
           <p className="text-text-muted mb-6">
             Join thousands of others in their journey of mindful indulgence
           </p>
-          <button className="btn-primary">
+          <button 
+            onClick={() => onNavigate && onNavigate('reviews')}
+            className="btn-primary"
+          >
             Share Your Story
           </button>
         </div>
