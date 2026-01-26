@@ -7,31 +7,31 @@ const Footer = ({ onNavigate }) => {
   const footerLinks = {
     shop: [
       { name: 'All Products', action: () => onNavigate && onNavigate('home', 'collection') },
-      { name: 'Single Origin', action: () => onNavigate && onNavigate('home', 'collection') },
-      { name: 'Gift Sets', action: () => onNavigate && onNavigate('home', 'collection') },
-      { name: 'Subscriptions', action: () => onNavigate && onNavigate('home', 'collection') },
-      { name: 'Limited Editions', action: () => onNavigate && onNavigate('home', 'collection') }
+      { name: 'Dark Chocolate', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Gift Collections', action: () => onNavigate && onNavigate('home', 'collection') },
+      { name: 'Customer Reviews', action: () => onNavigate && onNavigate('reviews') },
+      { name: 'New Arrivals', action: () => onNavigate && onNavigate('home', 'collection') }
     ],
     about: [
       { name: 'Our Story', action: () => onNavigate && onNavigate('home', 'story') },
       { name: 'The Craft', action: () => onNavigate && onNavigate('craft') },
       { name: 'Sustainability', action: () => onNavigate && onNavigate('home', 'story') },
-      { name: 'Press', action: () => onNavigate && onNavigate('contact') },
-      { name: 'Careers', action: () => onNavigate && onNavigate('contact') }
+      { name: 'Quality Promise', action: () => onNavigate && onNavigate('home', 'story') },
+      { name: 'Blog', action: () => onNavigate && onNavigate('contact') }
     ],
     support: [
       { name: 'Contact Us', action: () => onNavigate && onNavigate('contact') },
-      { name: 'Shipping Info', action: () => onNavigate && onNavigate('contact') },
-      { name: 'Returns', action: () => onNavigate && onNavigate('contact') },
-      { name: 'Size Guide', action: () => onNavigate && onNavigate('contact') },
-      { name: 'FAQ', action: () => onNavigate && onNavigate('contact') }
+      { name: 'Shipping & Delivery', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Returns & Refunds', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Track Your Order', action: () => onNavigate && onNavigate('contact') },
+      { name: 'Help Center', action: () => onNavigate && onNavigate('contact') }
     ]
   }
 
   const socialLinks = [
-    { icon: <Instagram size={20} />, href: '#', name: 'Instagram' },
-    { icon: <Facebook size={20} />, href: '#', name: 'Facebook' },
-    { icon: <Twitter size={20} />, href: '#', name: 'Twitter' }
+    { icon: <Instagram size={20} />, href: 'https://instagram.com/aureim.chocolates', name: 'Instagram' },
+    { icon: <Facebook size={20} />, href: 'https://facebook.com/aureim.chocolates', name: 'Facebook' },
+    { icon: <Twitter size={20} />, href: 'https://twitter.com/aureim_choco', name: 'Twitter' }
   ]
 
   return (
@@ -46,8 +46,9 @@ const Footer = ({ onNavigate }) => {
                 AUREIM
               </h3>
               <p className="text-text-muted leading-relaxed mb-8 max-w-md">
-                Mindful luxury chocolate crafted in India. Each piece is a ritual of 
-                guilt-free indulgence, designed for those who seek wellness in every moment.
+                Premium handcrafted chocolates made with love in Hyderabad. 
+                Experience guilt-free indulgence with our monk fruit sweetened, 
+                high-cocoa content chocolates. Free shipping across Hyderabad.
               </p>
               
               {/* Contact Info */}
@@ -140,18 +141,21 @@ const Footer = ({ onNavigate }) => {
                 Stay Connected
               </h4>
               <p className="text-text-muted text-sm mb-6">
-                Subscribe for new releases and mindful living insights
+                Get exclusive offers, new product launches, and wellness tips
               </p>
               <div className="flex gap-3">
                 <input
                   type="email"
-                  placeholder="Your email"
+                  placeholder="Enter your email address"
                   className="flex-1 px-4 py-3 bg-cream-beige border border-cream-soft rounded-lg text-text-charcoal placeholder-text-muted focus:outline-none focus:border-caramel-gold transition-colors duration-300"
                 />
                 <button className="px-6 py-3 bg-caramel-gold hover:bg-caramel-light text-chocolate-dark rounded-lg font-medium transition-colors duration-300">
                   Subscribe
                 </button>
               </div>
+              <p className="text-xs text-text-muted mt-2">
+                We respect your privacy. Unsubscribe anytime.
+              </p>
             </div>
           </div>
 
@@ -166,12 +170,24 @@ const Footer = ({ onNavigate }) => {
             </div>
             
             <div className="flex gap-6 text-text-muted text-sm">
-              <a href="#privacy" className="hover:text-caramel-gold transition-colors duration-300">
+              <button 
+                onClick={() => onNavigate && onNavigate('contact')}
+                className="hover:text-caramel-gold transition-colors duration-300"
+              >
                 Privacy Policy
-              </a>
-              <a href="#terms" className="hover:text-caramel-gold transition-colors duration-300">
+              </button>
+              <button 
+                onClick={() => onNavigate && onNavigate('contact')}
+                className="hover:text-caramel-gold transition-colors duration-300"
+              >
                 Terms of Service
-              </a>
+              </button>
+              <button 
+                onClick={() => onNavigate && onNavigate('contact')}
+                className="hover:text-caramel-gold transition-colors duration-300"
+              >
+                Refund Policy
+              </button>
             </div>
           </div>
         </div>

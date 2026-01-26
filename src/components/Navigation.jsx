@@ -18,6 +18,7 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
     { name: 'Collection', href: '#collection', action: () => onNavigate('home', 'collection') },
     { name: 'Our Story', href: '#story', action: () => onNavigate('home', 'story') },
     { name: 'The Craft', href: '#craft', action: () => onNavigate('craft') },
+    { name: 'Reviews', href: '#reviews', action: () => onNavigate('reviews') },
     { name: 'Contact', href: '#contact', action: () => onNavigate('contact') }
   ]
 
@@ -82,6 +83,16 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
               <Heart size={20} />
             </button>
             <button 
+              onClick={() => onNavigate('cart')}
+              className={`px-4 py-2 border border-cream-soft hover:border-caramel-light rounded-full transition-all duration-300 ${
+                isScrolled 
+                  ? 'text-cream-soft hover:text-caramel-light' 
+                  : 'text-cream-soft hover:text-caramel-light'
+              }`}
+            >
+              <span className="text-sm font-medium tracking-wide">View Cart</span>
+            </button>
+            <button 
               onClick={onCartClick}
               className={`relative transition-colors duration-300 group ${
                 isScrolled 
@@ -138,6 +149,15 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
                     className="text-cream-soft hover:text-caramel-light transition-colors duration-300"
                   >
                     <Heart size={20} />
+                  </button>
+                  <button 
+                    onClick={() => {
+                      onNavigate('cart')
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="px-3 py-1 border border-cream-soft hover:border-caramel-light rounded-full text-cream-soft hover:text-caramel-light transition-all duration-300"
+                  >
+                    <span className="text-sm">Cart</span>
                   </button>
                   <button 
                     onClick={onCartClick}

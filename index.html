@@ -3,32 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AUREIM - Mindful luxury chocolate crafted in India. Experience guilt-free indulgence with our artisan single-origin chocolates. Moments of pure bliss, delivered." />
-    <meta name="keywords" content="luxury chocolate, artisan chocolate, single origin, mindful indulgence, wellness chocolate, Indian chocolate, premium chocolate, guilt-free chocolate" />
+    <meta name="description" content="AUREIM - Premium handcrafted chocolates from Hyderabad. Guilt-free indulgence with monk fruit sweetened, high-cocoa content chocolates. Free shipping across Hyderabad." />
+    <meta name="keywords" content="chocolate Hyderabad, premium chocolate, handcrafted chocolate, monk fruit chocolate, sugar-free chocolate, dark chocolate, luxury chocolate India, AUREIM chocolate" />
     <meta name="author" content="AUREIM" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#8B4513" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="AUREIM - Moments of Pure Bliss" />
-    <meta property="og:description" content="Mindful luxury chocolate crafted in India. Each piece is a ritual of guilt-free indulgence." />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:title" content="AUREIM - Premium Handcrafted Chocolates | Hyderabad" />
+    <meta property="og:description" content="Experience guilt-free indulgence with our monk fruit sweetened, high-cocoa content chocolates. Free shipping across Hyderabad." />
+    <meta property="og:image" content="/images/aureim-og-image.jpg" />
+    <meta property="og:url" content="https://aureim.com" />
+    <meta property="og:site_name" content="AUREIM" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="AUREIM - Moments of Pure Bliss" />
-    <meta property="twitter:description" content="Mindful luxury chocolate crafted in India. Each piece is a ritual of guilt-free indulgence." />
+    <meta property="twitter:title" content="AUREIM - Premium Handcrafted Chocolates" />
+    <meta property="twitter:description" content="Guilt-free indulgence with monk fruit sweetened chocolates from Hyderabad" />
+    <meta property="twitter:image" content="/images/aureim-twitter-image.jpg" />
+    <meta property="twitter:site" content="@aureim_choco" />
     
-    <title>AUREIM - Moments of Pure Bliss | Luxury Chocolate</title>
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "AUREIM",
+      "description": "Premium handcrafted chocolates from Hyderabad",
+      "url": "https://aureim.com",
+      "telephone": "+91-78945-61230",
+      "email": "aureim.chocolates@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 09:00-21:00",
+      "priceRange": "₹₹",
+      "servesCuisine": "Chocolate",
+      "areaServed": "Hyderabad"
+    }
+    </script>
     
-    <!-- Preload fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <title>AUREIM - Premium Handcrafted Chocolates | Free Delivery Hyderabad</title>
     
-    <!-- Favicon -->
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
+    
+    <!-- Favicon and app icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/images/aureim-story.jpeg" as="image" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>AUREIM - Premium Handcrafted Chocolates</h1>
+        <p>This website requires JavaScript to function properly.</p>
+        <p>Please enable JavaScript in your browser settings.</p>
+        <p>Contact us: aureim.chocolates@gmail.com | +91 78945 61230</p>
+      </div>
+    </noscript>
   </body>
 </html>

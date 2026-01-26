@@ -16,6 +16,7 @@ import OrderConfirmation from './components/OrderConfirmation'
 import AdminDashboard from './components/AdminDashboard'
 import CraftPage from './components/CraftPage'
 import ContactPage from './components/ContactPage'
+import ReviewPage from './components/ReviewPage'
 import LazyImage from './components/LazyImage'
 import { products } from './data/products'
 import { preloadImages, criticalImages } from './utils/imagePreloader'
@@ -279,6 +280,13 @@ function App() {
       {currentView === 'contact' && (
         <ContactPage
           onBack={() => setCurrentView('home')}
+        />
+      )}
+
+      {currentView === 'reviews' && (
+        <ReviewPage
+          onBack={() => setCurrentView('home')}
+          products={products}
         />
       )}
       

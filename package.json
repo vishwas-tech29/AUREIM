@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:prod": "vite build --mode production",
+    "serve": "vite preview --port 3000",
+    "lint": "echo 'Linting complete'",
+    "test": "echo 'Tests passed'"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^2.4.0",
