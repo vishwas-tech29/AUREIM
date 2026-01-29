@@ -34,6 +34,7 @@ import { sendBrowserNotification, initializeNotifications } from './utils/browse
 import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { createTestOrder, testWhatsAppAutomation } from './utils/testOrder'
 import { loadOrdersFromUrl } from './utils/orderSync'
+import { autoSyncNewOrder, loadSyncedOrders, showSyncInstructions } from './utils/crossDeviceSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
 
@@ -51,13 +52,27 @@ function App() {
   useEffect(() => {
     initializeNotifications()
     
-    // Check for synced orders in URL
-    const syncResult = loadOrdersFromUrl()
+    // 🔄 Check for cross-device synced orders first
+    const syncResult = loadSyncedOrders()
     if (syncResult && syncResult.success && syncResult.newCount > 0) {
-      showToast(`✅ Synced ${syncResult.newCount} orders from another device`, 'success')
+      showToast(`📱➡️💻 ${syncResult.message}`, 'success')
+      
+      // If it's an admin sync, open admin dashboard automatically
+      if (syncResult.openAdmin) {
+        setTimeout(() => {
+          setCurrentView('admin')
+          showToast(`🔧 Admin dashboard opened with mobile order`, 'success')
+        }, 1000)
+      }
     }
     
-    // Check for new order in URL
+    // Check for legacy order sync in URL
+    const legacySyncResult = loadOrdersFromUrl()
+    if (legacySyncResult && legacySyncResult.success && legacySyncResult.newCount > 0) {
+      showToast(`✅ Synced ${legacySyncResult.newCount} orders from another device`, 'success')
+    }
+    
+    // Check for new order in URL (legacy support)
     const urlParams = new URLSearchParams(window.location.search)
     const newOrderData = urlParams.get('neworder')
     if (newOrderData) {
@@ -80,33 +95,6 @@ function App() {
         }
       } catch (error) {
         console.error('Failed to process new order from URL:', error)
-      }
-    }
-    
-    // Check for admin access link
-    const adminData = urlParams.get('admin')
-    if (adminData) {
-      try {
-        const adminInfo = JSON.parse(atob(adminData))
-        if (adminInfo.adminAccess && adminInfo.newOrder) {
-          // Save the order and open admin dashboard
-          const existingOrders = JSON.parse(localStorage.getItem('aureim_orders') || '[]')
-          const orderExists = existingOrders.some(existing => existing.orderId === adminInfo.newOrder.orderId)
-          
-          if (!orderExists) {
-            existingOrders.push(adminInfo.newOrder)
-            localStorage.setItem('aureim_orders', JSON.stringify(existingOrders))
-          }
-          
-          // Open admin dashboard directly
-          setCurrentView('admin')
-          showToast(`🔧 Admin access: New order ${adminInfo.newOrder.orderId} loaded`, 'success')
-          
-          // Clean URL
-          window.history.replaceState({}, document.title, window.location.pathname)
-        }
-      } catch (error) {
-        console.error('Failed to process admin access link:', error)
       }
     }
   }, [])
@@ -213,6 +201,30 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
+      // � CROSS-DEVICE SYNC - Sync order to all devices automatically
+      console.log('� Starting cross-device sync...')
+      autoSyncNewOrder(orderData).then(syncResult => {
+        console.log('📱➡️💻 Cross-device sync result:', syncResult)
+        if (syncResult.success) {
+          showToast(`📱➡️💻 Order synced across devices! Check desktop admin.`, 'success')
+          
+          // Show sync instructions on mobile
+          if (window.innerWidth <= 768) { // Mobile device
+            setTimeout(() => {
+              showSyncInstructions(orderData, {
+                adminUrl: syncResult.adminUrl,
+                syncUrl: syncResult.syncUrl,
+                whatsappUrl: `https://wa.me/919000429689?text=${encodeURIComponent('� Admin link copied! Open on desktop to see order.')}`
+              })
+            }, 2000)
+          }
+        } else {
+          console.error('❌ Cross-device sync failed:', syncResult)
+        }
+      }).catch(error => {
+        console.error('❌ Cross-device sync error:', error)
+      })
+      
       // 🚀 AUTOMATED WHATSAPP SYSTEM - Sends order details automatically
       console.log('🚀 Starting automated WhatsApp system...')
       autoSendOrderToWhatsApp(orderData).then(result => {
@@ -223,7 +235,7 @@ function App() {
           
           // Also send customer confirmation automatically
           autoSendCustomerConfirmation(orderData).then(customerResult => {
-            console.log('👤 Customer confirmation result:', customerResult)
+            console.log('� Customer confirmation result:', customerResult)
             if (customerResult.success) {
               console.log('✅ Customer confirmation sent automatically')
               showToast(`📱 Customer confirmation sent automatically`, 'success')
@@ -246,9 +258,9 @@ function App() {
       })
       
       // Send comprehensive admin notifications (backup system)
-      console.log('🔄 Starting backup notification system...')
+      console.log('� Starting backup notification system...')
       notifyAdminOfOrder(orderData).then(result => {
-        console.log('📧 Backup notification result:', result)
+        console.log('� Backup notification result:', result)
         if (result.success) {
           console.log('✅ Backup admin notification result:', result)
           
