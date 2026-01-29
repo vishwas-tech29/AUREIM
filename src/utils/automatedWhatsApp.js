@@ -14,33 +14,47 @@ const WHATSAPP_API_URL = 'https://api.whatsapp.com/send'
  * This function creates multiple automated pathways to ensure delivery
  */
 export const autoSendOrderToWhatsApp = async (orderData) => {
+  console.log('🚀 autoSendOrderToWhatsApp called with:', orderData)
   const results = []
   
   try {
+    console.log('📱 Starting WhatsApp automation methods...')
+    
     // Method 1: Direct WhatsApp Web API (most reliable)
+    console.log('📱 Method 1: WhatsApp Web...')
     const webResult = await sendViaWhatsAppWeb(orderData)
     results.push(webResult)
+    console.log('📱 Method 1 result:', webResult)
     
     // Method 2: WhatsApp Business API (if available)
+    console.log('📱 Method 2: WhatsApp Business...')
     const businessResult = await sendViaWhatsAppBusiness(orderData)
     results.push(businessResult)
+    console.log('📱 Method 2 result:', businessResult)
     
     // Method 3: URL-based auto-redirect (fallback)
+    console.log('📱 Method 3: Auto-redirect...')
     const urlResult = await sendViaAutoRedirect(orderData)
     results.push(urlResult)
+    console.log('📱 Method 3 result:', urlResult)
     
     // Method 4: Auto-copy and notify (manual backup)
+    console.log('📱 Method 4: Auto-copy...')
     const copyResult = await autoCopyAndNotify(orderData)
     results.push(copyResult)
+    console.log('📱 Method 4 result:', copyResult)
     
-    return {
+    const finalResult = {
       success: true,
       message: 'Order automatically sent to WhatsApp via multiple methods',
       methods: results,
       orderData
     }
+    
+    console.log('✅ Final WhatsApp automation result:', finalResult)
+    return finalResult
   } catch (error) {
-    console.error('Auto WhatsApp send failed:', error)
+    console.error('❌ Auto WhatsApp send failed:', error)
     return {
       success: false,
       message: 'Failed to auto-send to WhatsApp',
@@ -54,28 +68,36 @@ export const autoSendOrderToWhatsApp = async (orderData) => {
  */
 const sendViaWhatsAppWeb = async (orderData) => {
   try {
+    console.log('📱 Attempting WhatsApp Web method...')
     const message = formatOrderMessage(orderData)
     const whatsappUrl = `${WHATSAPP_WEB_URL}?phone=${ADMIN_WHATSAPP}&text=${message}`
     
-    // Auto-open WhatsApp Web in new window
-    const whatsappWindow = window.open(whatsappUrl, 'whatsapp', 'width=800,height=600')
+    console.log('📱 WhatsApp URL created, opening...')
     
-    // Auto-focus the window
-    if (whatsappWindow) {
-      whatsappWindow.focus()
-    }
+    // Create a temporary link and click it (more reliable than window.open)
+    const link = document.createElement('a')
+    link.href = whatsappUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
+    console.log('📱 WhatsApp Web link clicked successfully')
     
     return {
       method: 'WhatsApp Web',
       success: true,
-      message: 'Opened WhatsApp Web automatically',
+      message: 'WhatsApp Web opened successfully',
       url: whatsappUrl
     }
   } catch (error) {
+    console.error('📱 WhatsApp Web method failed:', error)
     return {
       method: 'WhatsApp Web',
       success: false,
-      message: 'Failed to open WhatsApp Web'
+      message: 'Failed to open WhatsApp Web',
+      error: error.message
     }
   }
 }
@@ -85,17 +107,25 @@ const sendViaWhatsAppWeb = async (orderData) => {
  */
 const sendViaWhatsAppBusiness = async (orderData) => {
   try {
-    // This would require WhatsApp Business API setup
-    // For now, we'll use the mobile app approach
+    console.log('📱 Attempting WhatsApp Mobile/API method...')
     const message = formatOrderMessage(orderData)
     const mobileUrl = `whatsapp://send?phone=${ADMIN_WHATSAPP}&text=${message}`
+    const webUrl = `${WHATSAPP_API_URL}?phone=${ADMIN_WHATSAPP}&text=${message}`
     
-    // Try to open mobile WhatsApp app
-    window.location.href = mobileUrl
+    console.log('📱 Mobile URL:', mobileUrl)
+    console.log('📱 Web URL:', webUrl)
+    
+    // Try to open mobile WhatsApp app first
+    const mobileLink = document.createElement('a')
+    mobileLink.href = mobileUrl
+    mobileLink.target = '_blank'
+    document.body.appendChild(mobileLink)
+    mobileLink.click()
+    document.body.removeChild(mobileLink)
     
     // Fallback to web after 2 seconds if mobile app doesn't open
     setTimeout(() => {
-      const webUrl = `${WHATSAPP_API_URL}?phone=${ADMIN_WHATSAPP}&text=${message}`
+      console.log('📱 Opening web fallback...')
       window.open(webUrl, '_blank')
     }, 2000)
     
@@ -103,13 +133,15 @@ const sendViaWhatsAppBusiness = async (orderData) => {
       method: 'WhatsApp Mobile/API',
       success: true,
       message: 'Attempted mobile app, fallback to web',
-      url: mobileUrl
+      urls: { mobile: mobileUrl, web: webUrl }
     }
   } catch (error) {
+    console.error('📱 WhatsApp Mobile/API method failed:', error)
     return {
       method: 'WhatsApp Mobile/API',
       success: false,
-      message: 'Failed to send via mobile/API'
+      message: 'Failed to send via mobile/API',
+      error: error.message
     }
   }
 }

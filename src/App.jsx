@@ -30,8 +30,9 @@ import {
   calculateShipping
 } from './utils/excelExport'
 import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
-import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
+import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
+import { createTestOrder, testWhatsAppAutomation } from './utils/testOrder'
 import { loadOrdersFromUrl } from './utils/orderSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
@@ -208,21 +209,27 @@ function App() {
   }
 
   const handlePaymentSuccess = (orderData) => {
+    console.log('🔥 PAYMENT SUCCESS TRIGGERED:', orderData)
     saveOrderToStorage(orderData)
     
     try {
       // 🚀 AUTOMATED WHATSAPP SYSTEM - Sends order details automatically
+      console.log('🚀 Starting automated WhatsApp system...')
       autoSendOrderToWhatsApp(orderData).then(result => {
+        console.log('📱 Automated WhatsApp result:', result)
         if (result.success) {
           console.log('✅ Automated WhatsApp result:', result)
           showToast(`🚀 Order sent to WhatsApp automatically! Check admin phone.`, 'success')
           
           // Also send customer confirmation automatically
           autoSendCustomerConfirmation(orderData).then(customerResult => {
+            console.log('👤 Customer confirmation result:', customerResult)
             if (customerResult.success) {
               console.log('✅ Customer confirmation sent automatically')
               showToast(`📱 Customer confirmation sent automatically`, 'success')
             }
+          }).catch(error => {
+            console.error('❌ Customer confirmation error:', error)
           })
           
           // Setup order tracking
@@ -239,7 +246,9 @@ function App() {
       })
       
       // Send comprehensive admin notifications (backup system)
+      console.log('🔄 Starting backup notification system...')
       notifyAdminOfOrder(orderData).then(result => {
+        console.log('📧 Backup notification result:', result)
         if (result.success) {
           console.log('✅ Backup admin notification result:', result)
           
@@ -261,7 +270,9 @@ function App() {
       })
       
       // Send browser notification
+      console.log('🔔 Sending browser notification...')
       const browserNotification = sendBrowserNotification(orderData)
+      console.log('🔔 Browser notification result:', browserNotification)
       
       // Prepare WhatsApp modal as final manual backup
       const message = formatOrderForWhatsApp(orderData)
@@ -269,6 +280,7 @@ function App() {
       
       // Show WhatsApp modal as final backup (will auto-close if automation works)
       setTimeout(() => {
+        console.log('📱 Showing WhatsApp modal as backup...')
         setWhatsappModal({
           isOpen: true,
           orderData,
@@ -345,6 +357,25 @@ function App() {
           element.scrollIntoView({ behavior: 'smooth' })
         }
       }, 100)
+    }
+  }
+
+  const handleTestWhatsApp = async () => {
+    console.log('🧪 Testing WhatsApp automation...')
+    showToast('🧪 Testing WhatsApp automation...', 'info')
+    
+    try {
+      const result = await testWhatsAppAutomation(autoSendOrderToWhatsApp)
+      if (result.success) {
+        showToast('✅ WhatsApp test successful! Check your WhatsApp.', 'success')
+        console.log('✅ WhatsApp test successful:', result)
+      } else {
+        showToast('❌ WhatsApp test failed. Check console.', 'error')
+        console.error('❌ WhatsApp test failed:', result)
+      }
+    } catch (error) {
+      showToast('❌ WhatsApp test error. Check console.', 'error')
+      console.error('❌ WhatsApp test error:', error)
     }
   }
 
@@ -481,6 +512,17 @@ function App() {
           type={toast.type}
           onClose={() => setToast({ show: false, message: '', type: 'success' })}
         />
+      )}
+      
+      {/* Development Test Button - Only show in development */}
+      {window.location.hostname === 'localhost' && (
+        <button
+          onClick={handleTestWhatsApp}
+          className="fixed bottom-4 left-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full shadow-lg z-50 text-sm font-medium transition-all duration-300 hover:scale-105"
+          title="Test WhatsApp Automation"
+        >
+          🧪 Test WhatsApp
+        </button>
       )}
     </div>
   )
