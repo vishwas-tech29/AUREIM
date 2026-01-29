@@ -12,7 +12,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative hero-container pt-16 sm:pt-20">
       {/* Background Image - Chocolate */}
       <div className="absolute inset-0 z-0">
         <LazyImage
@@ -29,35 +29,35 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center section-padding max-w-6xl mx-auto">
+      <div className="relative z-10 hero-content">
         <div className="animate-fade-in">
-          <div className="mb-6 inline-block">
-            <span className="text-sm font-medium tracking-widest text-caramel-gold uppercase animate-bounce" style={{animationDuration: '2s'}}>
+          <div className="mb-4 sm:mb-6">
+            <span className="text-xs sm:text-sm font-medium tracking-widest text-caramel-gold uppercase animate-bounce" style={{animationDuration: '2s'}}>
               ✨ Premium Luxury Chocolate
             </span>
           </div>
 
-          <h1 className="text-hero-mobile md:text-hero font-serif text-text-primary mb-8 leading-tight animate-slide-up">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif text-text-primary mb-6 sm:mb-8 leading-tight animate-slide-up">
             Moments of
             <span className="block text-gradient">Pure Bliss</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-slide-up" style={{animationDelay: '0.2s'}}>
+          <p className="text-lg sm:text-xl md:text-2xl text-text-secondary mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-slide-up" style={{animationDelay: '0.2s'}}>
             Mindful luxury crafted in India. Each piece is a ritual of 
             <span className="text-caramel-gold font-medium"> guilt-free indulgence</span>, 
             designed for those who seek wellness in every moment.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up" style={{animationDelay: '0.4s'}}>
+          <div className="btn-group animate-slide-up" style={{animationDelay: '0.4s'}}>
             <button 
               onClick={scrollToCollection}
-              className="btn-primary text-lg px-12 py-5 hover:shadow-luxury transform hover:scale-105 transition-all duration-300"
+              className="btn-primary text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 hover:shadow-luxury transform hover:scale-105 transition-all duration-300"
             >
               Shop Now
             </button>
             <button 
               onClick={scrollToStory}
-              className="btn-secondary text-lg px-12 py-5 hover:scale-105 transition-all duration-300"
+              className="btn-secondary text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 hover:scale-105 transition-all duration-300"
             >
               Our Philosophy
             </button>

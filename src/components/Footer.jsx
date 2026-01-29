@@ -36,18 +36,17 @@ const Footer = ({ onNavigate }) => {
 
   return (
     <footer className="bg-chocolate-dark border-t border-chocolate-medium">
-      <div className="section-padding py-16">
-        <div className="max-w-7xl mx-auto">
-          {/* Main Footer Content */}
-          <div className="grid lg:grid-cols-5 gap-12 mb-12">
-            {/* Brand Column */}
-            <div className="lg:col-span-2">
-              <h3 className="text-2xl font-serif text-cream-primary mb-6 tracking-luxury">
-                AUREIM
-              </h3>
-              <p className="text-cream-soft leading-relaxed mb-8 max-w-md">
-                Premium handcrafted chocolates made with love in Hyderabad. 
-                Experience guilt-free indulgence with our monk fruit sweetened, 
+      <div className="footer-container">
+        {/* Main Footer Content */}
+        <div className="footer-grid mb-8 sm:mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-2 text-center sm:text-left">
+            <h3 className="text-xl sm:text-2xl font-serif text-cream-primary mb-4 sm:mb-6 tracking-luxury">
+              AUREIM
+            </h3>
+            <p className="text-cream-soft leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto sm:mx-0">
+              Premium handcrafted chocolates made with love in Hyderabad. 
+              Experience guilt-free indulgence with our monk fruit sweetened, 
                 high-cocoa content chocolates. Free shipping on orders over ₹1000.
               </p>
               

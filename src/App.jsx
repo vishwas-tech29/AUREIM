@@ -391,6 +391,31 @@ function App() {
     }
   }
 
+  const handleCreateTestOrder = () => {
+    console.log('🧪 Creating test order...')
+    
+    // Create a test order
+    const testOrder = createTestOrder()
+    console.log('📋 Test order created:', testOrder)
+    
+    // Save it to localStorage
+    const saveResult = saveOrderToStorage(testOrder)
+    console.log('💾 Save result:', saveResult)
+    
+    // Verify it was saved
+    const savedOrders = JSON.parse(localStorage.getItem('aureim_orders') || '[]')
+    console.log('🔍 Orders in localStorage:', savedOrders.length)
+    
+    if (saveResult) {
+      showToast(`✅ Test order ${testOrder.orderId} created successfully!`, 'success')
+      
+      // Trigger the payment success flow
+      handlePaymentSuccess(testOrder)
+    } else {
+      showToast('❌ Failed to create test order', 'error')
+    }
+  }
+
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -526,15 +551,24 @@ function App() {
         />
       )}
       
-      {/* Development Test Button - Only show in development */}
-      {window.location.hostname === 'localhost' && (
-        <button
-          onClick={handleTestWhatsApp}
-          className="fixed bottom-4 left-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full shadow-lg z-50 text-sm font-medium transition-all duration-300 hover:scale-105"
-          title="Test WhatsApp Automation"
-        >
-          🧪 Test WhatsApp
-        </button>
+      {/* Development Test Buttons - Only show in development */}
+      {(window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) && (
+        <div className="fixed bottom-4 left-4 flex flex-col gap-2 z-50">
+          <button
+            onClick={handleTestWhatsApp}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+            title="Test WhatsApp Automation"
+          >
+            🧪 Test WhatsApp
+          </button>
+          <button
+            onClick={handleCreateTestOrder}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+            title="Create Test Order"
+          >
+            📋 Create Test Order
+          </button>
+        </div>
       )}
     </div>
   )

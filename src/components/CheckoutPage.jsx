@@ -49,55 +49,54 @@ const CheckoutPage = ({
   }
 
   return (
-    <div className="min-h-screen bg-cream-soft pt-24">
-      <div className="section-padding section-spacing">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="flex items-center gap-4 mb-12">
-            <button 
-              onClick={onBack}
-              className="text-text-muted hover:text-cocoa-dark transition-colors duration-300"
-            >
-              <ArrowLeft size={24} />
-            </button>
-            <h1 className="text-h1 font-serif text-cocoa-dark">
-              Checkout
-            </h1>
-          </div>
+    <div className="min-h-screen bg-cream-soft pt-16 sm:pt-20 lg:pt-24">
+      <div className="container-center section-spacing">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-8 sm:mb-12">
+          <button 
+            onClick={onBack}
+            className="text-text-muted hover:text-cocoa-dark transition-colors duration-300 p-2"
+          >
+            <ArrowLeft size={20} className="sm:w-6 sm:h-6" />
+          </button>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-cocoa-dark">
+            Checkout
+          </h1>
+        </div>
 
-          {/* Progress Steps */}
-          <div className="mb-12">
-            <div className="flex items-center justify-center">
-              {steps.map((step, index) => (
-                <div key={step.id} className="flex items-center">
-                  <button
-                    onClick={() => goToStep(step.id)}
-                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-                      currentStep === step.id
-                        ? 'bg-caramel-gold border-caramel-gold text-chocolate-dark'
-                        : currentStep > step.id
-                        ? 'bg-green-600 border-green-600 text-white'
-                        : 'border-cream-beige text-text-muted hover:border-cream-soft'
-                    }`}
-                  >
-                    {currentStep > step.id ? (
-                      <Check size={20} />
-                    ) : (
-                      <span className="font-medium">{step.id}</span>
-                    )}
-                  </button>
-                  
-                  <div className="ml-3 mr-8">
-                    <div className={`text-sm font-medium ${
-                      currentStep >= step.id ? 'text-cocoa-dark' : 'text-text-muted'
-                    }`}>
-                      {step.name}
-                    </div>
+        {/* Progress Steps */}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-center justify-center overflow-x-auto pb-4">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex items-center flex-shrink-0">
+                <button
+                  onClick={() => goToStep(step.id)}
+                  className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 transition-all duration-300 ${
+                    currentStep === step.id
+                      ? 'bg-caramel-gold border-caramel-gold text-chocolate-dark'
+                      : currentStep > step.id
+                      ? 'bg-green-600 border-green-600 text-white'
+                      : 'border-cream-beige text-text-muted hover:border-cream-soft'
+                  }`}
+                >
+                  {currentStep > step.id ? (
+                    <Check size={16} className="sm:w-5 sm:h-5" />
+                  ) : (
+                    <span className="font-medium text-sm sm:text-base">{step.id}</span>
+                  )}
+                </button>
+                
+                <div className="ml-2 sm:ml-3 mr-4 sm:mr-8">
+                  <div className={`text-xs sm:text-sm font-medium ${
+                    currentStep >= step.id ? 'text-cocoa-dark' : 'text-text-muted'
+                  }`}>
+                    {step.name}
                   </div>
-                  
-                  {index < steps.length - 1 && (
-                    <div className={`w-16 h-0.5 mr-8 ${
-                      currentStep > step.id ? 'bg-green-600' : 'bg-cream-beige'
+                </div>
+                
+                {index < steps.length - 1 && (
+                  <div className={`w-8 sm:w-16 h-0.5 mr-4 sm:mr-8 ${
+                    currentStep > step.id ? 'bg-green-600' : 'bg-cream-beige'
                     }`} />
                   )}
                 </div>

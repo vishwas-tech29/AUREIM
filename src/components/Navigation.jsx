@@ -28,14 +28,12 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
         ? 'bg-chocolate-dark/95 backdrop-blur-nav shadow-luxury' 
         : 'bg-chocolate-dark/90'
     }`}>
-      <div className="section-padding">
-        <div className="flex items-center justify-between h-20">
+      <div className="nav-container">
+        <div className="nav-content">
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1 
-              className={`text-2xl font-serif tracking-luxury cursor-pointer transition-colors duration-300 ${
-                isScrolled ? 'text-cream-primary' : 'text-cream-primary'
-              }`}
+              className={`text-xl sm:text-2xl font-serif tracking-luxury cursor-pointer transition-colors duration-300 text-cream-primary`}
               onClick={(e) => {
                 if (e.detail === 5) { // 5 clicks to access admin
                   onAdminClick && onAdminClick()
@@ -47,7 +45,7 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden lg:flex items-center space-x-8 xl:space-x-12">
             {navItems.map((item) => (
               <button
                 key={item.name}
