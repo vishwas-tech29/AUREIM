@@ -33,6 +33,7 @@ import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhats
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { createTestOrder, testWhatsAppAutomation } from './utils/testOrder'
+import { debugOrderSystem, addMultipleTestOrders, clearAllOrders as clearDebugOrders, getOrderStats } from './utils/debugOrders'
 import { loadOrdersFromUrl } from './utils/orderSync'
 import { autoSyncNewOrder, loadSyncedOrders, showSyncInstructions } from './utils/crossDeviceSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
@@ -416,6 +417,31 @@ function App() {
     }
   }
 
+  const handleDebugOrders = () => {
+    console.log('🔍 Starting order system debug...')
+    debugOrderSystem()
+    
+    const stats = getOrderStats()
+    if (stats) {
+      showToast(`📊 Debug: ${stats.totalOrders} orders, ₹${stats.totalRevenue} revenue`, 'info')
+    } else {
+      showToast('❌ Debug: No order data found', 'error')
+    }
+  }
+
+  const handleAddTestOrders = () => {
+    console.log('📦 Adding multiple test orders...')
+    const orders = addMultipleTestOrders(5)
+    showToast(`✅ Added ${orders.length} test orders to dashboard`, 'success')
+  }
+
+  const handleClearOrders = () => {
+    if (window.confirm('⚠️ This will delete ALL orders. Are you sure?')) {
+      clearDebugOrders()
+      showToast('🗑️ All orders cleared', 'success')
+    }
+  }
+
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -556,17 +582,38 @@ function App() {
         <div className="fixed bottom-4 left-4 flex flex-col gap-2 z-50">
           <button
             onClick={handleTestWhatsApp}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+            className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
             title="Test WhatsApp Automation"
           >
             🧪 Test WhatsApp
           </button>
           <button
             onClick={handleCreateTestOrder}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
             title="Create Test Order"
           >
-            📋 Create Test Order
+            📋 Create Order
+          </button>
+          <button
+            onClick={handleDebugOrders}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
+            title="Debug Order System"
+          >
+            🔍 Debug Orders
+          </button>
+          <button
+            onClick={handleAddTestOrders}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
+            title="Add 5 Test Orders"
+          >
+            📦 Add 5 Orders
+          </button>
+          <button
+            onClick={handleClearOrders}
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
+            title="Clear All Orders"
+          >
+            🗑️ Clear All
           </button>
         </div>
       )}

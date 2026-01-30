@@ -32,7 +32,11 @@ const AdminDashboard = ({ onClose }) => {
   }, [])
 
   const loadOrders = () => {
+    console.log('🔄 AdminDashboard: Loading orders...')
     const orderData = getOrdersFromStorage()
+    console.log('📦 AdminDashboard: Raw order data:', orderData)
+    console.log('📊 AdminDashboard: Number of orders:', orderData.length)
+    
     setOrders(orderData)
     
     // Calculate stats
@@ -41,12 +45,15 @@ const AdminDashboard = ({ onClose }) => {
     const uniqueCustomers = new Set(orderData.map(order => order.customerInfo.email)).size
     const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0
     
-    setStats({
+    const calculatedStats = {
       totalOrders,
       totalRevenue,
       totalCustomers: uniqueCustomers,
       avgOrderValue
-    })
+    }
+    
+    console.log('📈 AdminDashboard: Calculated stats:', calculatedStats)
+    setStats(calculatedStats)
   }
 
   const handleExportAll = () => {
@@ -157,6 +164,13 @@ const AdminDashboard = ({ onClose }) => {
               >
                 <Bell size={20} />
                 Order Notifications
+              </button>
+              <button
+                onClick={loadOrders}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2"
+              >
+                <RotateCcw size={20} />
+                Refresh Orders
               </button>
               <button
                 onClick={handleTestWhatsApp}
