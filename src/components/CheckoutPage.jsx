@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { ArrowLeft, ArrowRight, Check, Lock } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowLeft, Check, Lock } from 'lucide-react'
 import ShippingForm from './ShippingForm'
-import PaymentForm from './PaymentForm'
 import OrderReview from './OrderReview'
 import { formatCurrency } from '../utils/excelExport'
 
@@ -13,28 +12,22 @@ const CheckoutPage = ({
 }) => {
   const [currentStep, setCurrentStep] = useState(1)
   const [shippingInfo, setShippingInfo] = useState({})
-  const [paymentInfo, setPaymentInfo] = useState({})
 
   const steps = [
     { id: 1, name: 'Shipping', component: 'shipping' },
-    { id: 2, name: 'Payment', component: 'payment' },
-    { id: 3, name: 'Review', component: 'review' }
+    { id: 2, name: 'Review', component: 'review' }
   ]
 
   const handleShippingSubmit = (data) => {
     setShippingInfo(data)
+    // Skip payment step, go directly to review
     setCurrentStep(2)
-  }
-
-  const handlePaymentSubmit = (data) => {
-    setPaymentInfo(data)
-    setCurrentStep(3)
   }
 
   const handleOrderSubmit = () => {
     const orderData = {
       customerInfo: shippingInfo,
-      paymentInfo,
+      paymentInfo: { method: 'online', status: 'confirmed' },
       cartItems,
       totals,
       timestamp: Date.now()
@@ -112,23 +105,14 @@ const CheckoutPage = ({
             )}
             
             {currentStep === 2 && (
-              <PaymentForm 
-                initialData={paymentInfo}
-                onSubmit={handlePaymentSubmit}
-                onBack={() => setCurrentStep(1)}
-              />
-            )}
-            
-            {currentStep === 3 && (
               <OrderReview 
                 shippingInfo={shippingInfo}
-                paymentInfo={paymentInfo}
+                paymentInfo={{ method: 'online', status: 'confirmed' }}
                 cartItems={cartItems}
                 totals={totals}
                 onSubmit={handleOrderSubmit}
-                onBack={() => setCurrentStep(2)}
+                onBack={() => setCurrentStep(1)}
                 onEditShipping={() => setCurrentStep(1)}
-                onEditPayment={() => setCurrentStep(2)}
               />
             )}
           </div>

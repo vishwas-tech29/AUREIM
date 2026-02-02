@@ -184,13 +184,13 @@ const OrderConfirmation = ({
                       {orderData.paymentInfo.method === 'upi' && `UPI: ${orderData.paymentInfo.upiId}`}
                       {orderData.paymentInfo.method === 'netbanking' && `Net Banking: ${orderData.paymentInfo.bank}`}
                       {orderData.paymentInfo.method === 'wallet' && `Digital Wallet: ${orderData.paymentInfo.wallet}`}
-                      {orderData.paymentInfo.method === 'cod' && 'Cash on Delivery'}
+                      {orderData.paymentInfo.method === 'razorpay' && 'Razorpay Payment Gateway'}
                     </div>
                   </div>
                   <div>
                     <div className="text-sm text-text-secondary uppercase tracking-wide">Payment Status</div>
                     <div className="font-medium text-green-600">
-                      {orderData.paymentInfo.method === 'cod' ? 'Pending (COD)' : 'Paid'}
+                      Paid
                     </div>
                   </div>
                 </div>

@@ -81,26 +81,6 @@ const StorySection = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-16 border-t border-cream-beige">
-          <div className="text-center">
-            <div className="text-3xl font-serif text-caramel-gold mb-2">15+</div>
-            <div className="text-text-muted text-sm tracking-wide">Origin Countries</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-serif text-caramel-gold mb-2">100%</div>
-            <div className="text-text-muted text-sm tracking-wide">Ethical Sourcing</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-serif text-caramel-gold mb-2">50K+</div>
-            <div className="text-text-muted text-sm tracking-wide">Happy Customers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-serif text-caramel-gold mb-2">5★</div>
-            <div className="text-text-muted text-sm tracking-wide">Average Rating</div>
-          </div>
-        </div>
-
         {/* Share Your Story Section */}
         <div className="mt-20 pt-16 border-t border-cream-beige text-center">
           <h3 className="text-h2 font-serif text-cocoa-dark mb-6">

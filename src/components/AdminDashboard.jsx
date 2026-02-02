@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus, Share2, Upload, Bell, MessageCircle } from 'lucide-react'
+import { Download, Package, TrendingUp, Users, Eye, ShoppingBag, Plus, Share2, Upload, Bell, MessageCircle, RotateCcw } from 'lucide-react'
 import { getOrdersFromStorage, exportAllOrders, formatCurrency } from '../utils/excelExport'
 import { addTestOrdersToStorage, clearAllOrders, getOrderCount } from '../utils/testData'
 import { generateOrderSyncUrl, loadOrdersFromUrl, exportOrdersAsJson } from '../utils/orderSync'
@@ -29,6 +29,14 @@ const AdminDashboard = ({ onClose }) => {
       alert(syncResult.message)
       loadOrders() // Reload to show synced orders
     }
+    
+    // Auto-refresh orders every 10 seconds
+    const interval = setInterval(() => {
+      console.log('🔄 Auto-refreshing orders...')
+      loadOrders()
+    }, 10000)
+    
+    return () => clearInterval(interval)
   }, [])
 
   const loadOrders = () => {
@@ -287,8 +295,8 @@ const AdminDashboard = ({ onClose }) => {
                 <div className="text-2xl font-serif text-green-600 mb-2">
                   {orders.length}
                 </div>
-                <div className="text-text-secondary text-sm">COD Orders</div>
-                <div className="text-xs text-text-secondary mt-1">Ready for delivery</div>
+                <div className="text-text-secondary text-sm">Total Orders</div>
+                <div className="text-xs text-text-secondary mt-1">All payment methods</div>
               </div>
             </div>
 
@@ -351,8 +359,8 @@ const AdminDashboard = ({ onClose }) => {
                         <td className="py-3 px-4 text-text-secondary">{order.cartItems.length} items</td>
                         <td className="py-3 px-4 text-caramel-gold font-medium">{formatCurrency(order.totals.total)}</td>
                         <td className="py-3 px-4">
-                          <span className="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800">
-                            COD
+                          <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                            Paid
                           </span>
                         </td>
                         <td className="py-3 px-4">
