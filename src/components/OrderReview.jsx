@@ -205,8 +205,7 @@ const OrderReview = ({
               I agree to the{' '}
               <a href="#terms" className="text-caramel-gold hover:text-caramel-light underline">
                 Terms & Conditions
-              </a>{' '}
-              and understand the return policy.
+              </a>.
             </label>
           </div>
           {errors.terms && (
@@ -264,10 +263,6 @@ const OrderReview = ({
           <div className="text-center">
             <div className="text-green-600 text-sm font-medium">🔒 Secure Checkout</div>
             <div className="text-text-secondary text-xs">SSL Encrypted</div>
-          </div>
-          <div className="text-center">
-            <div className="text-green-600 text-sm font-medium">💰 Money-back Guarantee</div>
-            <div className="text-text-secondary text-xs">30-day return</div>
           </div>
           <div className="text-center">
             <div className="text-green-600 text-sm font-medium">🚚 Fast Delivery</div>

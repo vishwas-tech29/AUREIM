@@ -21,7 +21,7 @@ export const createTestOrders = () => {
         {
           id: 1,
           name: "Aurium Dark Chocolate",
-          description: "Premium 70% Single Origin",
+          description: "Premium 80% Single Origin",
           price: 195,
           quantity: 2,
           image: "/images/products/aureim-product-1.jpeg"
@@ -93,7 +93,7 @@ export const createTestOrders = () => {
         {
           id: 1,
           name: "Aurium Dark Chocolate",
-          description: "Premium 70% Single Origin",
+          description: "Premium 80% Single Origin",
           price: 195,
           quantity: 3,
           image: "/images/products/aureim-product-1.jpeg"

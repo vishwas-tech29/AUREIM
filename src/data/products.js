@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Aurium Dark Chocolate",
-    description: "Premium 70% Single Origin",
+    description: "Premium 80% Single Origin",
     price: 195,
     image: "/images/products/aureim-product-1.jpeg",
     rating: 4.9,
@@ -10,7 +10,7 @@ export const products = [
     category: "single-origin",
     notes: ["Rich cocoa", "Vanilla undertones", "Smooth finish"],
     origin: "Madagascar",
-    percentage: 70
+    percentage: 80
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const products = [
     notes: ["Best Value", "2 Premium Bars", "Perfect Gift"],
     isCombo: true,
     comboItems: [
-      { name: "Aurium Dark Chocolate 70%", quantity: 1, price: 195 },
+      { name: "Aurium Dark Chocolate 80%", quantity: 1, price: 195 },
       { name: "Aurium Dark Chocolate 85%", quantity: 1, price: 195 }
     ],
     savings: 50
