@@ -25,15 +25,15 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-chocolate-dark/95 backdrop-blur-nav shadow-luxury' 
-        : 'bg-chocolate-dark/90'
+        ? 'bg-white/95 backdrop-blur-nav shadow-luxury border-b border-gray-200' 
+        : 'bg-white/90 border-b border-gray-100'
     }`}>
       <div className="nav-container">
         <div className="nav-content">
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1 
-              className={`text-xl sm:text-2xl font-serif tracking-luxury cursor-pointer transition-colors duration-300 text-cream-primary`}
+              className={`text-xl sm:text-2xl font-serif tracking-luxury cursor-pointer transition-colors duration-300 text-chocolate-dark`}
               onClick={(e) => {
                 if (e.detail === 5) { // 5 clicks to access admin
                   onAdminClick && onAdminClick()
@@ -52,8 +52,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
                 onClick={item.action}
                 className={`transition-colors duration-300 font-medium tracking-wide ${
                   isScrolled 
-                    ? 'text-cream-primary hover:text-caramel-light' 
-                    : 'text-cream-primary hover:text-caramel-light'
+                    ? 'text-chocolate-dark hover:text-caramel-gold' 
+                    : 'text-chocolate-dark hover:text-caramel-gold'
                 }`}
               >
                 {item.name}
@@ -65,8 +65,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
           <div className="hidden md:flex items-center space-x-6">
             <button className={`transition-colors duration-300 ${
               isScrolled 
-                ? 'text-cream-primary hover:text-caramel-light' 
-                : 'text-cream-primary hover:text-caramel-light'
+                ? 'text-chocolate-dark hover:text-caramel-gold' 
+                : 'text-chocolate-dark hover:text-caramel-gold'
             }`}>
               <Search size={20} />
             </button>
@@ -74,18 +74,18 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
               onClick={onFavoritesClick}
               className={`transition-colors duration-300 ${
                 isScrolled 
-                  ? 'text-cream-primary hover:text-caramel-light' 
-                  : 'text-cream-primary hover:text-caramel-light'
+                  ? 'text-chocolate-dark hover:text-caramel-gold' 
+                  : 'text-chocolate-dark hover:text-caramel-gold'
               }`}
             >
               <Heart size={20} />
             </button>
             <button 
               onClick={() => onNavigate('cart')}
-              className={`px-4 py-2 border border-cream-primary hover:border-caramel-light rounded-full transition-all duration-300 ${
+              className={`px-4 py-2 border border-chocolate-dark hover:border-caramel-gold rounded-full transition-all duration-300 ${
                 isScrolled 
-                  ? 'text-cream-primary hover:text-caramel-light' 
-                  : 'text-cream-primary hover:text-caramel-light'
+                  ? 'text-chocolate-dark hover:text-caramel-gold' 
+                  : 'text-chocolate-dark hover:text-caramel-gold'
               }`}
             >
               <span className="text-sm font-medium tracking-wide">View Cart</span>
@@ -94,8 +94,8 @@ const Navigation = ({ cartCount = 0, onCartClick, onFavoritesClick, onAdminClick
               onClick={onCartClick}
               className={`relative transition-colors duration-300 group ${
                 isScrolled 
-                  ? 'text-cream-primary hover:text-caramel-light' 
-                  : 'text-cream-primary hover:text-caramel-light'
+                  ? 'text-chocolate-dark hover:text-caramel-gold' 
+                  : 'text-chocolate-dark hover:text-caramel-gold'
               }`}
             >
               <ShoppingBag size={20} />

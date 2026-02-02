@@ -46,8 +46,8 @@ const OrderReview = ({
         return `Net Banking: ${paymentInfo.bank}`
       case 'wallet':
         return `Digital Wallet: ${paymentInfo.wallet}`
-      case 'cod':
-        return 'Cash on Delivery'
+      case 'razorpay':
+        return 'Razorpay Payment Gateway'
       default:
         return 'Payment Method'
     }
@@ -175,18 +175,11 @@ const OrderReview = ({
               </span>
             </div>
             
-            {paymentInfo.method === 'cod' && (
-              <div className="flex justify-between text-text-secondary">
-                <span>COD Charges</span>
-                <span>{formatCurrency(50)}</span>
-              </div>
-            )}
-            
             <div className="border-t border-cream-beige pt-3">
               <div className="flex justify-between items-center">
                 <span className="text-xl font-medium text-text-primary">Total</span>
                 <span className="text-2xl font-serif text-caramel-gold">
-                  {formatCurrency(totals.total + (paymentInfo.method === 'cod' ? 50 : 0))}
+                  {formatCurrency(totals.total)}
                 </span>
               </div>
             </div>

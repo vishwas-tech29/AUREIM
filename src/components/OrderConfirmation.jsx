@@ -141,16 +141,11 @@ const OrderConfirmation = ({
                     )}
                   </span>
                 </div>
-                {orderData.paymentInfo.method === 'cod' && (
-                  <div className="flex justify-between text-text-secondary">
-                    <span>COD Charges</span>
-                    <span>{formatCurrency(50)}</span>
-                  </div>
-                )}
+                
                 <div className="flex justify-between text-lg font-medium text-text-primary pt-2 border-t border-cream-beige">
                   <span>Total</span>
                   <span className="text-caramel-gold">
-                    {formatCurrency(orderData.totals.total + (orderData.paymentInfo.method === 'cod' ? 50 : 0))}
+                    {formatCurrency(orderData.totals.total)}
                   </span>
                 </div>
               </div>
