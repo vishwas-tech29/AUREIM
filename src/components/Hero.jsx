@@ -13,20 +13,8 @@ const Hero = () => {
 
   return (
     <section className="relative hero-container pt-16 sm:pt-20">
-      {/* Background Image - Chocolate */}
-      <div className="absolute inset-0 z-0">
-        <LazyImage
-          src="/images/products/aureim-product-1.jpeg"
-          alt="AUREIM luxury chocolate background"
-          className="w-full h-full object-cover opacity-25 scale-110"
-        />
-      </div>
-      
-      {/* Background Gradient with Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cream-primary via-cream-soft to-cream-blush z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(43,24,16,0.15),transparent_50%)] animate-pulse" style={{animationDuration: '4s'}} />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(212,165,116,0.1),transparent_50%)] animate-pulse" style={{animationDuration: '6s'}} />
-      </div>
+      {/* Clean background - no image or gradients */}
+      <div className="absolute inset-0 bg-white z-0"></div>
 
       {/* Content */}
       <div className="relative z-10 hero-content">

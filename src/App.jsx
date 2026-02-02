@@ -21,7 +21,6 @@ import WhatsAppModal from './components/WhatsAppModal'
 import FloatingCartButton from './components/FloatingCartButton'
 import HomeCartSection from './components/HomeCartSection'
 import { products } from './data/products'
-import { preloadImages, criticalImages } from './utils/imagePreloader'
 import { 
   generateOrderId, 
   saveOrderToStorage, 
@@ -32,7 +31,6 @@ import { formatOrderForWhatsApp } from './utils/whatsappNotification'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { loadOrdersFromUrl } from './utils/orderSync'
-import { loadSyncedOrders, autoSyncNewOrder, showSyncInstructions } from './utils/crossDeviceSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
 
@@ -370,79 +368,10 @@ function App() {
     }
   }
 
-  const handleTestWhatsApp = async () => {
-    console.log('🧪 Testing WhatsApp automation...')
-    showToast('🧪 Testing WhatsApp automation...', 'info')
-    
-    try {
-      const result = await testWhatsAppAutomation(autoSendOrderToWhatsApp)
-      if (result.success) {
-        showToast('✅ WhatsApp test successful! Check your WhatsApp.', 'success')
-        console.log('✅ WhatsApp test successful:', result)
-      } else {
-        showToast('❌ WhatsApp test failed. Check console.', 'error')
-        console.error('❌ WhatsApp test failed:', result)
-      }
-    } catch (error) {
-      showToast('❌ WhatsApp test error. Check console.', 'error')
-      console.error('❌ WhatsApp test error:', error)
-    }
-  }
-
-  const handleCreateTestOrder = () => {
-    console.log('🧪 Creating test order...')
-    
-    // Create a test order
-    const testOrder = createTestOrder()
-    console.log('📋 Test order created:', testOrder)
-    
-    // Save it to localStorage
-    const saveResult = saveOrderToStorage(testOrder)
-    console.log('💾 Save result:', saveResult)
-    
-    // Verify it was saved
-    const savedOrders = JSON.parse(localStorage.getItem('aureim_orders') || '[]')
-    console.log('🔍 Orders in localStorage:', savedOrders.length)
-    
-    if (saveResult) {
-      showToast(`✅ Test order ${testOrder.orderId} created successfully!`, 'success')
-      
-      // Trigger the payment success flow
-      handlePaymentSuccess(testOrder)
-    } else {
-      showToast('❌ Failed to create test order', 'error')
-    }
-  }
-
-  const handleDebugOrders = () => {
-    console.log('🔍 Starting order system debug...')
-    debugOrderSystem()
-    
-    const stats = getOrderStats()
-    if (stats) {
-      showToast(`📊 Debug: ${stats.totalOrders} orders, ₹${stats.totalRevenue} revenue`, 'info')
-    } else {
-      showToast('❌ Debug: No order data found', 'error')
-    }
-  }
-
-  const handleAddTestOrders = () => {
-    console.log('📦 Adding multiple test orders...')
-    const orders = addMultipleTestOrders(5)
-    showToast(`✅ Added ${orders.length} test orders to dashboard`, 'success')
-  }
-
-  const handleClearOrders = () => {
-    if (window.confirm('⚠️ This will delete ALL orders. Are you sure?')) {
-      clearDebugOrders()
-      showToast('🗑️ All orders cleared', 'success')
-    }
-  }
-
   const cartTotal = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
-    <div className="min-h-screen bg-cream-soft">
+    <div className="min-h-screen bg-white">
       <Navigation 
         cartCount={cartTotal} 
         onCartClick={handleCartClick}
@@ -572,47 +501,6 @@ function App() {
           type={toast.type}
           onClose={() => setToast({ show: false, message: '', type: 'success' })}
         />
-      )}
-      
-      {/* Development Test Buttons - Only show in development */}
-      {(window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) && (
-        <div className="fixed bottom-4 left-4 flex flex-col gap-2 z-50">
-          <button
-            onClick={handleTestWhatsApp}
-            className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
-            title="Test WhatsApp Automation"
-          >
-            🧪 Test WhatsApp
-          </button>
-          <button
-            onClick={handleCreateTestOrder}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
-            title="Create Test Order"
-          >
-            📋 Create Order
-          </button>
-          <button
-            onClick={handleDebugOrders}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
-            title="Debug Order System"
-          >
-            🔍 Debug Orders
-          </button>
-          <button
-            onClick={handleAddTestOrders}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
-            title="Add 5 Test Orders"
-          >
-            📦 Add 5 Orders
-          </button>
-          <button
-            onClick={handleClearOrders}
-            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-full shadow-lg text-xs font-medium transition-all duration-300 hover:scale-105"
-            title="Clear All Orders"
-          >
-            🗑️ Clear All
-          </button>
-        </div>
       )}
     </div>
   )

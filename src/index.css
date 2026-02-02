@@ -9,8 +9,8 @@
   }
   
   body {
-    @apply bg-cream-primary text-text-primary font-sans antialiased;
-    background-color: #FDF9F4;
+    @apply bg-white text-text-primary font-sans antialiased;
+    background-color: #ffffff;
     color: #0F0A07;
     font-feature-settings: "kern" 1, "liga" 1;
   }
