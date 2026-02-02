@@ -32,10 +32,7 @@ import {
 import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
-import { createTestOrder, testWhatsAppAutomation } from './utils/testOrder'
-import { debugOrderSystem, addMultipleTestOrders, clearAllOrders as clearDebugOrders, getOrderStats } from './utils/debugOrders'
 import { loadOrdersFromUrl } from './utils/orderSync'
-import { autoSyncNewOrder, loadSyncedOrders, showSyncInstructions } from './utils/crossDeviceSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
 
