@@ -20,7 +20,6 @@ import ReviewPage from './components/ReviewPage'
 import WhatsAppModal from './components/WhatsAppModal'
 import FloatingCartButton from './components/FloatingCartButton'
 import HomeCartSection from './components/HomeCartSection'
-import LazyImage from './components/LazyImage'
 import { products } from './data/products'
 import { preloadImages, criticalImages } from './utils/imagePreloader'
 import { 
@@ -29,10 +28,11 @@ import {
   calculateTax,
   calculateShipping
 } from './utils/excelExport'
-import { sendBusinessNotification, sendCustomerConfirmation, formatOrderForWhatsApp } from './utils/whatsappNotification'
+import { formatOrderForWhatsApp } from './utils/whatsappNotification'
 import { sendBrowserNotification, initializeNotifications } from './utils/browserNotification'
 import { autoSendOrderToWhatsApp, autoSendCustomerConfirmation, setupOrderTracking } from './utils/automatedWhatsApp'
 import { loadOrdersFromUrl } from './utils/orderSync'
+import { loadSyncedOrders, autoSyncNewOrder, showSyncInstructions } from './utils/crossDeviceSync'
 import { notifyAdminOfOrder } from './utils/centralOrderSystem'
 import './index.css'
 
@@ -199,8 +199,8 @@ function App() {
     saveOrderToStorage(orderData)
     
     try {
-      // � CROSS-DEVICE SYNC - Sync order to all devices automatically
-      console.log('� Starting cross-device sync...')
+      // 🔄 CROSS-DEVICE SYNC - Sync order to all devices automatically
+      console.log('🔄 Starting cross-device sync...')
       autoSyncNewOrder(orderData).then(syncResult => {
         console.log('📱➡️💻 Cross-device sync result:', syncResult)
         if (syncResult.success) {
@@ -212,7 +212,7 @@ function App() {
               showSyncInstructions(orderData, {
                 adminUrl: syncResult.adminUrl,
                 syncUrl: syncResult.syncUrl,
-                whatsappUrl: `https://wa.me/919000429689?text=${encodeURIComponent('� Admin link copied! Open on desktop to see order.')}`
+                whatsappUrl: `https://wa.me/919000429689?text=${encodeURIComponent('Admin link copied! Open on desktop to see order.')}`
               })
             }, 2000)
           }
@@ -233,7 +233,7 @@ function App() {
           
           // Also send customer confirmation automatically
           autoSendCustomerConfirmation(orderData).then(customerResult => {
-            console.log('� Customer confirmation result:', customerResult)
+            console.log('📱 Customer confirmation result:', customerResult)
             if (customerResult.success) {
               console.log('✅ Customer confirmation sent automatically')
               showToast(`📱 Customer confirmation sent automatically`, 'success')
@@ -256,9 +256,9 @@ function App() {
       })
       
       // Send comprehensive admin notifications (backup system)
-      console.log('� Starting backup notification system...')
+      console.log('🔄 Starting backup notification system...')
       notifyAdminOfOrder(orderData).then(result => {
-        console.log('� Backup notification result:', result)
+        console.log('📋 Backup notification result:', result)
         if (result.success) {
           console.log('✅ Backup admin notification result:', result)
           
